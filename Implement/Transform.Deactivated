@@ -17,11 +17,11 @@ Transform::Transform()
     position.Y = 0;
 }
 
-void Transform::Move(float XA, float YA)
+/*void Transform::Move(float XA, float YA)
 {
     position.X += XA;
     position.Y += YA;
-}
+}*/
 
 void Transform::SetPosition(float XA, float YA)
 {

@@ -5,7 +5,7 @@
 
 class Input : public Component
 {
-    public:
+public:
     enum Control
     {
         UP = SDLK_w,
@@ -16,9 +16,25 @@ class Input : public Component
         START = SDLK_ESCAPE,
         QUIT = SDLK_F12
     };
-    Transform* transform;
-    void Init(Entity*);
-    const char* GetName() {return "Input";}
-    void Update();
-    void Render();
+    Transform *transform;
+
+    void Init(Entity *Instance)
+    {
+        Active = true;
+        transform = Instance->transform;
+        Debug::log("Initializing Input", Debug::INFO);
+    }
+
+    const char *GetName() { return "Input"; }
+
+    void Update()
+    {
+        transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
+        transform->velocity.X = Game::key.keycode.X_Axis * 2;
+    }
+
+    void Render()
+    {
+        /*Not Implemented*/
+    }
 };
