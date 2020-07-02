@@ -39,16 +39,16 @@ void Entity::Update()
 {
     //std::cout << "X: " << transform->velocity.X << "Y: " << transform->velocity.Y << std::endl;
     transform->Update();
+    m_mySprite->destRect.x = (transform->position.X);
+    m_mySprite->destRect.y = (transform->position.Y);
+    m_mySprite->destRect.h = m_mySprite->srcRect.h;
+    m_mySprite->destRect.w = m_mySprite->srcRect.w;
     for (int i = 0; i < m_NumComponents; i++)
     {
         if (myComponents[i]->Active){
             myComponents[i]->Update();
         }
     }
-    m_mySprite->destRect.x = (transform->position.X);
-    m_mySprite->destRect.y = (transform->position.Y);
-    m_mySprite->destRect.h = m_mySprite->srcRect.h;
-    m_mySprite->destRect.w = m_mySprite->srcRect.w;
 }
 
 void Entity::SetPosition(int x, int y)
