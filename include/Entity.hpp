@@ -52,6 +52,7 @@ public:
     int ID;
 
 private:
+    Sprite *m_mySprite;
     static const int m_MaxComponents = 10;
     Component *myComponents[m_MaxComponents];
     int m_NumComponents = 0;

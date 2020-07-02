@@ -1,5 +1,6 @@
 #include "../include/Scene.hpp"
 #include "../include/TextureMngr.hpp"
+#include "../include/Camera.hpp"
 
 int lvl1[20][25]{
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -55,7 +56,7 @@ void Scene::LoadMap(int mapcode[20][25])
         }
     }
 }
-void Scene::DrawMap()
+void Scene::DrawMap(Camera *camera)
 {
     int type = 0;
     for (int row = 0; row < 20; row++)
@@ -63,8 +64,8 @@ void Scene::DrawMap()
         for (int col = 0; col < 25; col++)
         {
             type = map[row][col];
-            destRect.x = col * destRect.w;
-            destRect.y = row * destRect.h;
+            destRect.x = col * destRect.w - camera->transform.position.X;
+            destRect.y = row * destRect.h - camera->transform.position.Y;
             switch (type)
             {
             case 0:

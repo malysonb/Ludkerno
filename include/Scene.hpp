@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.hpp"
+#include "Camera.hpp"
 class Scene
 {
     public:
@@ -7,7 +8,7 @@ class Scene
     ~Scene();
 
     void LoadMap(int mapcode[20][25]);
-    void DrawMap();
+    void DrawMap(Camera *camera);
 
     private:
     SDL_Rect srcRect, destRect;

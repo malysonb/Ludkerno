@@ -25,6 +25,13 @@ public:
         Debug::log("Initializing Input", Debug::INFO);
     }
 
+    void Init(Transform *Instance)
+    {
+        Active = true;
+        transform = Instance;
+        Debug::log("Initializing Input", Debug::INFO);
+    }
+
     const char *GetName() { return "Input"; }
 
     void Update()

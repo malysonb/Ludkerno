@@ -3,7 +3,7 @@
 #include "../include/Debug.hpp"
 #include "../include/Component.hpp"
 
-Sprite *sprite;
+//Sprite *sprite;
 
 /**
  * Instantiate an Entity.
@@ -15,10 +15,9 @@ Entity::Entity(const char *texturePath, int Size_x, int Size_y, int n_ofAnimatio
 {
     transform = new Transform();
     AddComponent<Sprite>();
-    sprite = getComponent<Sprite>();
-    sprite->Init(texturePath, Size_x, Size_y, n_ofAnimations);
-    transform->SetPosition(400, 300);
-    sprite->SetupAnimation(0, 3, 500);
+    m_mySprite = getComponent<Sprite>();
+    m_mySprite->Init(texturePath, Size_x, Size_y, n_ofAnimations);
+    m_mySprite->SetupAnimation(0, 1, 500);
 }
 
 Entity::~Entity()
@@ -28,35 +27,33 @@ Entity::~Entity()
 
 void Entity::SetSprite(const char *path)
 {
-    sprite->LoadSpritesheet(TextureMngr::LoadTexture(path));
+    m_mySprite->LoadSpritesheet(TextureMngr::LoadTexture(path));
 }
 
 Sprite *Entity::GetSprite()
 {
-    return sprite;
+    return getComponent<Sprite>();
 }
 
 void Entity::Update()
 {
     //std::cout << "X: " << transform->velocity.X << "Y: " << transform->velocity.Y << std::endl;
     transform->Update();
-    sprite->destRect.x = (transform->position.X - 16);
-    sprite->destRect.y = (transform->position.Y - 64);
-    sprite->destRect.h = sprite->srcRect.h * 2;
-    sprite->destRect.w = sprite->srcRect.w * 2;
-
     for (int i = 0; i < m_NumComponents; i++)
     {
         if (myComponents[i]->Active){
             myComponents[i]->Update();
         }
     }
+    m_mySprite->destRect.x = (transform->position.X);
+    m_mySprite->destRect.y = (transform->position.Y);
+    m_mySprite->destRect.h = m_mySprite->srcRect.h;
+    m_mySprite->destRect.w = m_mySprite->srcRect.w;
 }
 
 void Entity::SetPosition(int x, int y)
 {
-    xPos = x;
-    yPos = y;
+    transform->SetPosition(x,y);
 }
 
 //https://www.youtube.com/watch?v=pWZS1MtxI-A

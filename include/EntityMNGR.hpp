@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.hpp"
 #include "Entity.hpp"
+#include "Camera.hpp"
 
 class Obj
 {
@@ -100,11 +101,13 @@ struct List
             index--;
         }
     }
-    void Update()
+    void Update(Camera *camera)
     {
         Obj *s_index = Start;
-        for (int i = Length; i > 0; i--)
+        for (int i = 0; i < Length; i++)
         {
+            s_index->object->SetPosition(s_index->object->transform->position.X - camera->transform.velocity.X,
+                s_index->object->transform->position.Y - camera->transform.velocity.Y);
             s_index->object->Update();
             if(s_index->NextObj != nullptr)
             {
@@ -115,7 +118,7 @@ struct List
     void Render()
     {
         Obj *s_index = Start;
-        for (int i = Length; i > 0; i--)
+        for (int i = 0; i < Length; i++)
         {
             s_index->object->Render();
             if(s_index->NextObj != nullptr)
