@@ -18,20 +18,27 @@ public:
     template <typename newComp>
     void AddComponent()
     {
-        if (m_NumComponents < m_MaxComponents)
+        if (std::is_base_of<Component, newComp>::value)
         {
-            myComponents[m_NumComponents] = new newComp();
-            Debug::log("Added a new component!", Debug::INFO);
-            m_NumComponents++;
-            std::cout << "Theres is " << m_NumComponents << std::endl;
+            if (m_NumComponents < m_MaxComponents)
+            {
+                myComponents[m_NumComponents] = new newComp();
+                Debug::log("Added a new component!", Debug::INFO);
+                m_NumComponents++;
+            }
+            else
+            {
+                Debug::log("You reached the max components in this entity!", Debug::WARN);
+                Debug::log("You can't to add more components!", Debug::ERROR);
+            }
         }
         else
         {
-            Debug::log("You reached the max components in this entity!", Debug::WARN);
-            Debug::log("You can't to add more components!", Debug::ERROR);
+            Debug::log("This is not a component!", Debug::ERROR);
         }
+        
     }
-    
+
     template <typename comp>
     comp *getComponent()
     {

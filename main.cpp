@@ -26,7 +26,6 @@ int main()
             SDL_Delay(frameDelay - frameTime);
         }
     }
-    std::cout << "Encerrando.." << std::endl;
     game->Clear();
     return 0;
 }

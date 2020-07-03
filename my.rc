@@ -1,0 +1,25 @@
+id ICON "Assets/Default.ico"
+
+1 VERSIONINFO
+FILEVERSION     0,1,0,0
+PRODUCTVERSION  0,1,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904E4"
+    BEGIN
+      VALUE "CompanyName", "Radiko Studio"
+      VALUE "FileDescription", "Ludkerno Game Engine"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "main.exe"
+      VALUE "LegalCopyright", "Radiko Ludkerno Game Engine"
+      VALUE "OriginalFilename", "main.exe"
+      VALUE "ProductName", "Ludkerno Game"
+      VALUE "ProductVersion", "1.0-Alpha"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1252
+  END
+END

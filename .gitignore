@@ -1,1 +1,5 @@
-.vscode/*
+./.vscode/*
+*.exe
+build/Release/*
+build/Debug/*
+Implement/*.Deactivated

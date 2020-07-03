@@ -1,7 +1,6 @@
 #pragma once
 #include "Game.hpp"
 #include "Entity.hpp"
-#include "Camera.hpp"
 
 class Obj
 {
@@ -26,7 +25,7 @@ struct List
     Entity *Add(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)
     {
         Obj *temp = new Obj(texturePath, Size_x, Size_y, n_ofAnimations, Length);
-        
+
         if (Length == 0)
         {
             Start = temp;
@@ -40,6 +39,7 @@ struct List
         Length++;
         return temp->object;
     }
+
     void Remove(int id)
     {
         Obj *LastCalled = nullptr;
@@ -101,19 +101,19 @@ struct List
             index--;
         }
     }
-    void Update(Camera *camera)
+    void Update()
     {
         Obj *s_index = Start;
         for (int i = 0; i < Length; i++)
         {
-            s_index->object->SetPosition(s_index->object->transform->position.X - camera->transform.velocity.X,
-                s_index->object->transform->position.Y - camera->transform.velocity.Y);
+            s_index->object->SetPosition(s_index->object->transform->position.X - Game::camera->transform.velocity.X,
+                                         s_index->object->transform->position.Y - Game::camera->transform.velocity.Y);
             s_index->object->Update();
-            if(s_index->NextObj != nullptr)
+            if (s_index->NextObj != nullptr)
             {
                 s_index = s_index->NextObj;
             }
-        } 
+        }
     }
     void Render()
     {
@@ -121,10 +121,10 @@ struct List
         for (int i = 0; i < Length; i++)
         {
             s_index->object->Render();
-            if(s_index->NextObj != nullptr)
+            if (s_index->NextObj != nullptr)
             {
                 s_index = s_index->NextObj;
             }
-        } 
+        }
     }
 };

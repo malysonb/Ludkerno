@@ -4,6 +4,9 @@
 #include "../ThirdParty/x64/include/SDL2/SDL.h"
 #include "Key.hpp"
 
+class List;
+class Camera;
+
 class Game
 {
     SDL_Window *window;
@@ -11,6 +14,8 @@ class Game
 
 public:
     static Key key;
+    static List EntityManager;
+    static Camera *camera;
     static SDL_Event Event;
     static SDL_Renderer *renderer;
     Game();

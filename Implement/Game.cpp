@@ -3,15 +3,15 @@
 #include "../include/Debug.hpp"
 #include "../include/Scene.hpp"
 #include "../include/Entity.hpp"
+#include "../include/Camera.hpp"
 #include "../include/EntityMNGR.hpp"
 #include "../include/ComponentList.hpp"
-#include "../include/Camera.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::Event;
-List EntityManager;
+List Game::EntityManager;
 Key Game::key;
-Camera camera;
+Camera *Game::camera = nullptr;
 
 Scene* map1;
 
@@ -49,7 +49,8 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
         Debug::log("Cant initialize SDL!", Debug::ERROR);
         Game::Clear();
     }
-    camera.Init();
+    camera = new Camera();
+    camera->Init();
     Entity *Test = EntityManager.Add("Assets/anim.png",32,32,1);
     Test->SetPosition(0,0);
     Entity *Player = EntityManager.Add("Assets/Array.png",16,32,4);
@@ -73,16 +74,17 @@ void Game::HandleEvents()
     }
     key.UpdateInputs(Event);
 }
-int count = 0;
+
 void Game::Update()
 {
-    camera.Update();
-    EntityManager.Update(&camera);
+    camera->Update();
+    EntityManager.Update();
 }
+
 void Game::Render()
 {
     SDL_RenderClear(renderer);
-    map1->DrawMap(&camera);
+    map1->DrawMap();
     EntityManager.Render();
     SDL_RenderPresent(renderer);
 }
@@ -92,7 +94,7 @@ void Game::Clear()
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
-    Debug::log("Game closed!", Debug::INFO);
+    Debug::log("Subsystem finalized!", Debug::INFO);
 }
 
 bool Game::IsRunning(){ return Running; };
