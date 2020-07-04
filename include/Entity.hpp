@@ -6,13 +6,13 @@
 class Entity
 {
 public:
-    Entity(const char *TexturePath, int s_x, int s_y, int n_ofAnimations);
+    Entity();
     ~Entity();
 
     void Update();
     void Render();
 
-    void SetSprite(const char *);
+    void SetSprite(const char *TexturePath, int s_x, int s_y, int n_ofAnimations);
     void SetPosition(int x, int y);
 
     template <typename newComp>

@@ -6,15 +6,18 @@
 
 class List;
 class Camera;
+struct Vector2;
 
 class Game
 {
     SDL_Window *window;
     bool Running = false;
-
 public:
     static Key key;
     static List EntityManager;
+    static Vector2 matrix;
+    static Vector2 camVelocity;
+    static Vector2 WindowSize;
     static Camera *camera;
     static SDL_Event Event;
     static SDL_Renderer *renderer;
@@ -26,5 +29,6 @@ public:
     void Render();
     void Clear();
     int GetID();
+    void pollEvents();
     bool IsRunning();
 };

@@ -2,9 +2,80 @@
 #include "../Game.hpp"
 #include "../Component.hpp"
 
+struct Vector2
+{
+    float X = 0, Y = 0;
+    Vector2()
+    {
+        X = 0;
+        Y = 0;
+    }
+    Vector2(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+    Vector2 operator+(Vector2& vector2)
+    {
+        Vector2 result;
+        result.X = this->X + vector2.X;
+        result.Y = this->Y + vector2.Y;
+        return result;
+    }
+    Vector2 operator-(Vector2& vector2)
+    {
+        Vector2 result;
+        result.X = this->X - vector2.X;
+        result.Y = this->Y - vector2.Y;
+        return result;
+    }
+    void operator-=(Vector2& vector2)
+    {
+        this->X - vector2.X;
+        this->Y - vector2.Y;
+    }
+
+    bool operator==(Vector2& vector2)
+    {
+        if(this->X == vector2.X && this->Y == vector2.Y)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    bool operator!=(Vector2& vector2)
+    {
+        if(this->X != vector2.X && this->Y != vector2.Y)
+        {
+            return true;
+        }
+        else return false;
+    }
+    bool operator>(Vector2& vector2)
+    {
+        if(this->X > vector2.X && this->Y > vector2.Y)
+        {
+            return true;
+        }
+        else return false;
+    }
+    bool operator>=(Vector2& vector2)
+    {
+        if(this->X >= vector2.X && this->Y >= vector2.Y)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    static Vector2 Identity;
+
+};
+
 class Transform : public Component
 {
-    public:
+public:
     Transform()
     {
         Active = true;
@@ -16,17 +87,11 @@ class Transform : public Component
         scale.Y = 1;
     }
 
-    struct Vector2
-    {
-        float X = 0, Y = 0;
-    };
-
     Vector2 position, scale, velocity;
 
     void Update()
     {
-        position.X += velocity.X;
-        position.Y += velocity.Y;
+        position = position + velocity;
     }
 
     void Render()
@@ -34,7 +99,7 @@ class Transform : public Component
         /* Not Implemented */
     }
 
-    const char* GetName() {return "Transform";}
+    const char *GetName() { return "Transform"; }
 
     void SetPosition(float XA, float YA)
     {
@@ -47,5 +112,4 @@ class Transform : public Component
         scale.X = XA;
         scale.Y = YA;
     }
-
 };

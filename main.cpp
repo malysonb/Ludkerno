@@ -5,7 +5,6 @@ Game *game = nullptr;
 
 int main()
 {
-    SDL_SetMainReady();
     const int FPS = 60;
     const int frameDelay = 1000/FPS;
     Uint32 frameStart;

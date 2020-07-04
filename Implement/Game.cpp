@@ -12,6 +12,11 @@ SDL_Event Game::Event;
 List Game::EntityManager;
 Key Game::key;
 Camera *Game::camera = nullptr;
+Vector2 Game::matrix;
+Vector2 Game::camVelocity;
+Vector2 Game::WindowSize;
+
+Entity *Player = nullptr;
 
 Scene* map1;
 
@@ -31,8 +36,10 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
         renderer = SDL_CreateRenderer(window, 0, 0);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        //SDL_RenderSetScale(renderer, AspectRatio,AspectRatio);
-        SDL_RenderSetLogicalSize(renderer, 400, 300);
+        //SDL_RenderSetScale(renderer, 2, 2);
+        SDL_RenderSetLogicalSize(renderer, Wx/2, Wy/2);
+        WindowSize = {Wx/2, Wy/2};
+        SDL_SetMainReady();
         if (window)
         {
             Debug::log("Window created!", Debug::INFO);
@@ -51,12 +58,16 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     }
     camera = new Camera();
     camera->Init();
-    Entity *Test = EntityManager.Add("Assets/anim.png",32,32,1);
+    matrix = camera->startMatrix;
+    Entity *Test = EntityManager.Add();
+    Test->SetSprite("Assets/anim.png",32,32,1);
     Test->SetPosition(0,0);
-    Entity *Player = EntityManager.Add("Assets/Array.png",16,32,4);
-    Player->SetPosition(200,150);
+    Player = EntityManager.Add();
+    Player->SetSprite("Assets/Array.png",16,32,4);
+    Player->SetPosition(0,0);
     Player->AddComponent<Input>();
     Player->getComponent<Input>()->Init(Player);
+    Player->getComponent<Sprite>()->SetupAnimation(0,3,500);
     map1 = new Scene();
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
 }
@@ -77,6 +88,9 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+    camera->FollowPoint(Player->transform);
+    matrix = matrix - camera->transform.velocity;
+    camVelocity = camera->transform.velocity;
     camera->Update();
     EntityManager.Update();
 }
