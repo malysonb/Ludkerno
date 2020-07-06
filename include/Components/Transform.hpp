@@ -4,73 +4,25 @@
 
 struct Vector2
 {
+
+    enum Vector{ AX, AY };
+
     float X = 0, Y = 0;
-    Vector2()
-    {
-        X = 0;
-        Y = 0;
-    }
-    Vector2(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-    Vector2 operator+(Vector2& vector2)
-    {
-        Vector2 result;
-        result.X = this->X + vector2.X;
-        result.Y = this->Y + vector2.Y;
-        return result;
-    }
-    Vector2 operator-(Vector2& vector2)
-    {
-        Vector2 result;
-        result.X = this->X - vector2.X;
-        result.Y = this->Y - vector2.Y;
-        return result;
-    }
-    void operator-=(Vector2& vector2)
-    {
-        this->X - vector2.X;
-        this->Y - vector2.Y;
-    }
+    Vector2();
 
-    bool operator==(Vector2& vector2)
-    {
-        if(this->X == vector2.X && this->Y == vector2.Y)
-        {
-            return true;
-        }
-        else return false;
-    }
+    Vector2(int x, int y);
 
-    bool operator!=(Vector2& vector2)
-    {
-        if(this->X != vector2.X && this->Y != vector2.Y)
-        {
-            return true;
-        }
-        else return false;
-    }
-    bool operator>(Vector2& vector2)
-    {
-        if(this->X > vector2.X && this->Y > vector2.Y)
-        {
-            return true;
-        }
-        else return false;
-    }
-    bool operator>=(Vector2& vector2)
-    {
-        if(this->X >= vector2.X && this->Y >= vector2.Y)
-        {
-            return true;
-        }
-        else return false;
-    }
+    Vector2 operator+(Vector2& vector2);
+    Vector2 operator-(Vector2& vector2);
+    Vector2 operator/(Vector2& vector2);
+    Vector2 operator/(float value);
+    void operator-=(Vector2& vector2);
+    bool operator==(Vector2& vector2);
+    bool operator!=(Vector2& vector2);
+    bool operator>(Vector2& vector2);
+    bool operator>=(Vector2& vector2);
 
     static Vector2 Identity;
-
 };
 
 class Transform : public Component
@@ -91,6 +43,7 @@ public:
 
     void Update()
     {
+        position = position - Game::camVelocity;
         position = position + velocity;
     }
 
@@ -102,6 +55,24 @@ public:
     const char *GetName() { return "Transform"; }
 
     void SetPosition(float XA, float YA)
+    {
+        position = position - Game::matrix;
+    }
+
+    Vector2 GetPosition()
+    {
+        Vector2 temp;
+        temp.X = position.X - Game::matrix.X;
+        temp.Y = position.Y - Game::matrix.Y;
+        return temp;
+    }
+
+    Vector2 GetScreenPosition()
+    {
+        return position;
+    }
+
+    void SetScreenPosition(float XA, float YA)
     {
         position.X = XA;
         position.Y = YA;

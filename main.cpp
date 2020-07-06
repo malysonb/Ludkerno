@@ -9,8 +9,8 @@ int main()
     const int frameDelay = 1000/FPS;
     Uint32 frameStart;
     int frameTime;
-
     game = new Game();
+
     game->EngineInit("Ludkerno", 800, 600);
 
     while(game->IsRunning())

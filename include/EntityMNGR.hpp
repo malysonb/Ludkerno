@@ -2,21 +2,7 @@
 #include "Game.hpp"
 #include "Entity.hpp"
 
-class Obj
-{
-public:
-    Entity *object;
-    Obj *NextObj = nullptr;
-    Obj(int ID)
-    {
-        object = new Entity();
-        object->ID = ID;
-    }
-    ~Obj()
-    {
-        delete object;
-    }
-};
+class Obj;
 
 struct List
 {
@@ -27,4 +13,5 @@ struct List
     void Clear();
     void Update();
     void Render();
+    Entity *GetByID(int id);
 };

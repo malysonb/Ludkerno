@@ -64,8 +64,8 @@ void Scene::DrawMap()
         for (int col = 0; col < 25; col++)
         {
             type = map[row][col];
-            destRect.x = col * destRect.w - Game::camera->transform.position.X;
-            destRect.y = row * destRect.h - Game::camera->transform.position.Y;
+            destRect.x = col * destRect.w - Game::camera->relativePosition.X;
+            destRect.y = row * destRect.h - Game::camera->relativePosition.Y;
             switch (type)
             {
             case 0:

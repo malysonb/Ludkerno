@@ -7,7 +7,6 @@
             "args": [
                 "-g",
                 "${file}",
-                "-s",
                 "./Implement/*.cpp",
                 "-L./ThirdParty/x64/lib",
                 "-lSDL2main",

@@ -38,6 +38,14 @@ public:
     {
         transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
         transform->velocity.X = Game::key.keycode.X_Axis * 2;
+        if(transform->position.X >= Game::camera->middle.X)
+        {
+            Game::camera->Move(Vector2::AX, transform->velocity.X);
+        }
+        if(transform->position.Y >= Game::camera->middle.Y)
+        {
+            Game::camera->Move(Vector2::AY, transform->velocity.Y);
+        }
     }
 
     void Render()

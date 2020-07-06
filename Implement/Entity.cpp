@@ -19,6 +19,7 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+    delete transform;
     Debug::log("Entities also dies...", Debug::INFO);
 }
 
@@ -40,7 +41,7 @@ Vector2 Vector2::Identity;
 void Entity::Update()
 {  
     transform->Update();
-    transform->position = transform->position - Game::camVelocity;
+    //transform->position = transform->position - Game::camVelocity;
     if(m_mySprite != nullptr)
     {
         m_mySprite->destRect.x = (transform->position.X);

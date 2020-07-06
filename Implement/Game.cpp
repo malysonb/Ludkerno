@@ -6,6 +6,7 @@
 #include "../include/Camera.hpp"
 #include "../include/EntityMNGR.hpp"
 #include "../include/ComponentList.hpp"
+#include "../include/Screen.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::Event;
@@ -15,6 +16,7 @@ Camera *Game::camera = nullptr;
 Vector2 Game::matrix;
 Vector2 Game::camVelocity;
 Vector2 Game::WindowSize;
+Screen Game::screen;
 
 Entity *Player = nullptr;
 
@@ -58,10 +60,10 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     }
     camera = new Camera();
     camera->Init();
-    matrix = camera->startMatrix;
+    matrix = Vector2::Identity;
     Entity *Test = EntityManager.Add();
     Test->SetSprite("Assets/anim.png",32,32,1);
-    Test->SetPosition(0,0);
+    Test->SetPosition(100,100);
     Player = EntityManager.Add();
     Player->SetSprite("Assets/Array.png",16,32,4);
     Player->SetPosition(0,0);
@@ -75,6 +77,7 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
 void Game::HandleEvents()
 {
     SDL_PollEvent(&Event);
+    key.UpdateInputs(Event);
     switch (Event.type)
     {
     case SDL_QUIT:
@@ -83,16 +86,15 @@ void Game::HandleEvents()
     default:
         break;
     }
-    key.UpdateInputs(Event);
 }
 
 void Game::Update()
 {
-    camera->FollowPoint(Player->transform);
-    matrix = matrix - camera->transform.velocity;
-    camVelocity = camera->transform.velocity;
+    matrix = matrix - camera->relativeVelocity;
+    camVelocity = camera->relativeVelocity;
     camera->Update();
     EntityManager.Update();
+    //std::cout << "X: " << Game::matrix.X << " Y: " << Game::matrix.Y << std::endl;
 }
 
 void Game::Render()

@@ -1,6 +1,22 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Camera.hpp"
 
+class Obj
+{
+public:
+    Entity *object;
+    Obj *NextObj = nullptr;
+    Obj(int ID)
+    {
+        object = new Entity();
+        object->ID = ID;
+    }
+    ~Obj()
+    {
+        delete object;
+    }
+};
+
 Entity *List::Add()
 {
     Obj *temp = new Obj(Length);
@@ -23,6 +39,7 @@ void List::Remove(int id)
 {
     Obj *LastCalled = nullptr;
     Obj *s_Index = Start;
+    bool deleted = false;
     for (int i = 0; i < Length; i++)
     {
         if (s_Index->object->ID == id)
@@ -32,6 +49,7 @@ void List::Remove(int id)
                 Start = s_Index->NextObj;
                 delete s_Index;
                 Length--;
+                deleted = true;
                 break;
             }
             else if (i == Length - 1 && Length > 1)
@@ -42,6 +60,7 @@ void List::Remove(int id)
                     End = LastCalled;
                     delete s_Index;
                     Length--;
+                    deleted = true;
                     break;
                 }
             }
@@ -50,6 +69,7 @@ void List::Remove(int id)
                 LastCalled->NextObj = s_Index->NextObj;
                 delete s_Index;
                 Length--;
+                deleted = true;
                 break;
             }
         }
@@ -59,7 +79,8 @@ void List::Remove(int id)
             s_Index = s_Index->NextObj;
         }
     }
-    Debug::log("ENTITY NOT FOUND! IS HAPPENING MEMORY LEAK?", Debug::WARN);
+    if(deleted == false)
+        Debug::log("ENTITY NOT FOUND! IS HAPPENING MEMORY LEAK?", Debug::WARN);
 }
 
 void List::Clear()
@@ -87,8 +108,6 @@ void List::Update()
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
     {
-        /*s_index->object->SetPosition(Game::matrix.X + s_index->object->transform->position.X,
-                                     Game::matrix.Y + s_index->object->transform->position.Y);*/
         s_index->object->Update();
         if (s_index->NextObj != nullptr)
         {
@@ -108,4 +127,22 @@ void List::Render()
             s_index = s_index->NextObj;
         }
     }
+}
+
+Entity *List::GetByID(int id)
+{
+    Obj *s_index = Start;
+    for (int i = 0; i < Length; i++)
+    {
+        if(id == s_index->object->ID)
+        {
+            return s_index->object;
+        }
+        else if (s_index->NextObj != nullptr)
+        {
+            s_index = s_index->NextObj;
+        }
+    }
+    Debug::log("CANT FIND THIS ENTITY!", Debug::WARN);
+    return nullptr;
 }
