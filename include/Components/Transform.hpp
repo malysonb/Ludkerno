@@ -66,7 +66,6 @@ public:
         temp.Y = position.Y - Game::matrix.Y;
         return temp;
     }
-
     Vector2 GetScreenPosition()
     {
         return position;

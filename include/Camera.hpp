@@ -38,32 +38,4 @@ public:
             else relativeVelocity.Y = 0;
         }
     }
-
-    /*void Move(int X, int Y)
-    {
-        if (relativePosition.X + X >= Game::matrix.X && X != 0)
-        {
-            relativeVelocity.X = X;
-        }
-        else if (Game::matrix.X > 0)
-        {
-            relativeVelocity.X = 0;
-        }
-        else
-        {
-            relativeVelocity.X = 0;
-        }
-        if (relativePosition.Y + Y >= Game::matrix.Y && Y != 0)
-        {
-            relativeVelocity.Y = Y;
-        }
-        else if (Game::matrix.Y > 0)
-        {
-            relativeVelocity.Y = 0;
-        }
-        else
-        {
-            relativeVelocity.Y = 0;
-        }
-    }*/
 };

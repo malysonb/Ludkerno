@@ -44,8 +44,8 @@ void Entity::Update()
     //transform->position = transform->position - Game::camVelocity;
     if(m_mySprite != nullptr)
     {
-        m_mySprite->destRect.x = (transform->position.X);
-        m_mySprite->destRect.y = (transform->position.Y);
+        m_mySprite->destRect.x = (transform->position.X) - m_mySprite->OriginPoint.X;
+        m_mySprite->destRect.y = (transform->position.Y) - m_mySprite->OriginPoint.Y;
         m_mySprite->destRect.h = m_mySprite->srcRect.h * transform->scale.Y;
         m_mySprite->destRect.w = m_mySprite->srcRect.w * transform->scale.X;
     }
@@ -59,8 +59,6 @@ void Entity::Update()
 
 void Entity::SetPosition(int x, int y)
 {
-    x = x - Game::matrix.X;
-    y = y - Game::matrix.Y;
     transform->SetPosition(x,y);
 }
 

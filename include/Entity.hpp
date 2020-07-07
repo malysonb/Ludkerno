@@ -16,13 +16,15 @@ public:
     void SetPosition(int x, int y);
 
     template <typename newComp>
-    void AddComponent()
+    void AddComponent(Entity *Owner = nullptr)
     {
         if (std::is_base_of<Component, newComp>::value)
         {
             if (m_NumComponents < m_MaxComponents)
             {
-                myComponents[m_NumComponents] = new newComp();
+                Component *temp = new newComp();
+                temp->Base = Owner;
+                myComponents[m_NumComponents] = temp;
                 Debug::log("Added a new component!", Debug::INFO);
                 m_NumComponents++;
             }
@@ -36,20 +38,20 @@ public:
         {
             Debug::log("This is not a component!", Debug::ERROR);
         }
-        
     }
 
     template <typename comp>
     comp *getComponent()
     {
-        for (int i = 0; i < m_NumComponents; i++)
-        {
-            if (dynamic_cast<comp *>(myComponents[i]))
+        if (this != nullptr)
+            for (int i = 0; i < m_NumComponents; i++)
             {
-                Debug::log("Found Component!", Debug::INFO);
-                return (comp *)myComponents[i];
+                if (dynamic_cast<comp *>(myComponents[i]))
+                {
+                    Debug::log("Found Component!", Debug::INFO);
+                    return (comp *)myComponents[i];
+                }
             }
-        }
         Debug::log("Can't find component!", Debug::ERROR);
         return nullptr;
     }

@@ -31,7 +31,7 @@ public:
     void SetAnimation(int Anim_Index)
     {
         if (Anim_Index >= n_ofAnims || Anim_Index < 0)
-            Debug::log("Array index out of bounds!", Debug::ERROR);
+            Debug::log("Array index out of bounds! at sprite set animation", Debug::ERROR);
         else
         {
             m_CurrentAnim = Anim_Index;
@@ -42,7 +42,7 @@ public:
     void SetupAnimation(int animIndex, int finalFrame, int speed)
     {
         if (animIndex >= n_ofAnims || animIndex < 0)
-            Debug::log("Array index out of bounds!", Debug::ERROR);
+            Debug::log("Array index out of bounds! at sprite setup animation", Debug::ERROR);
         else
         {
             sheet_Dimension[animIndex][0] = finalFrame;
@@ -97,7 +97,7 @@ public:
 
     const char *GetName() { return "Sprite"; }
 
-    Transform OriginPoint;
+    Vector2 OriginPoint;
 
     int n_ofAnims = 0;
 

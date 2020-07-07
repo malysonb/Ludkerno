@@ -30,6 +30,10 @@ public:
     void Update();
     void Render();
     void Clear();
+    void Setup();
+    void Loop();
     int GetID();
     bool IsRunning();
+
+    static int Rand(int min, int max);
 };

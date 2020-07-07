@@ -6,37 +6,44 @@
 class Input : public Component
 {
 public:
-    enum Control
-    {
-        UP = SDLK_w,
-        DOWN = SDLK_s,
-        LEFT = SDLK_a,
-        RIGHT = SDLK_d,
-        ACTION = SDLK_e,
-        START = SDLK_ESCAPE,
-        QUIT = SDLK_F12
-    };
     Transform *transform;
 
-    void Init(Entity *Instance)
+    void Init()
     {
         Active = true;
-        transform = Instance->transform;
-        Debug::log("Initializing Input", Debug::INFO);
-    }
-
-    void Init(Transform *Instance)
-    {
-        Active = true;
-        transform = Instance;
+        transform = Base->transform;
         Debug::log("Initializing Input", Debug::INFO);
     }
 
     const char *GetName() { return "Input"; }
-
+    bool able = true;
+    bool onTop = false;
     void Update()
     {
-        transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
+        if(transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(50))
+        {
+            able = true;
+            onTop = false;
+            transform->velocity.Y = 0;
+            transform->SetScreenPosition(transform->GetScreenPosition().X ,Game::screen.DynamicVPosition(50));
+        }
+        if(transform->GetScreenPosition().Y < Game::screen.DynamicVPosition(50) && able == false && onTop)
+        {
+            transform->velocity.Y = 5;
+        }
+        if(transform->GetScreenPosition().Y <= Game::screen.DynamicVPosition(30))
+        {
+            onTop = true;
+        }
+        if(Game::key.keycode.UP && able == true)
+        {
+            if(onTop == false)
+            {
+                transform->velocity.Y = -5;
+                able = false;
+            }   
+        }
+        /*transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
         transform->velocity.X = Game::key.keycode.X_Axis * 2;
         if(transform->position.X >= Game::camera->middle.X)
         {
@@ -45,7 +52,7 @@ public:
         if(transform->position.Y >= Game::camera->middle.Y)
         {
             Game::camera->Move(Vector2::AY, transform->velocity.Y);
-        }
+        }*/
     }
 
     void Render()

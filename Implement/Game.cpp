@@ -1,4 +1,6 @@
 #include <iostream>
+#include <time.h>
+#include <chrono>
 #include "../include/Game.hpp"
 #include "../include/Debug.hpp"
 #include "../include/Scene.hpp"
@@ -18,8 +20,6 @@ Vector2 Game::camVelocity;
 Vector2 Game::WindowSize;
 Screen Game::screen;
 
-Entity *Player = nullptr;
-
 Scene* map1;
 
 Game::Game()
@@ -28,16 +28,35 @@ Game::Game()
 Game::~Game()
 {
 }
+
+int Game::Rand(int min, int max)
+{
+    srand(std::chrono::system_clock::now().time_since_epoch().count());
+    return rand() % (max - min) + min;
+}
+
+void Game::Setup()
+{
+    Entity* Player = EntityManager.Add();
+    Player->SetSprite("Assets/Dino.png",32,16,1);
+    Player->GetSprite()->SetupAnimation(0,1,200);
+    Player->GetSprite()->OriginPoint = {15,16};
+    Player->transform->SetScreenPosition(screen.DynamicHPosition(15),screen.DynamicVPosition(50));
+    Player->AddComponent<Input>(Player);
+    Player->getComponent<Input>()->Init();
+    Entity* CactusGenerator = EntityManager.Add();
+    CactusGenerator->AddComponent<Generator>();
+    CactusGenerator->getComponent<Generator>()->Init();
+}
+
 void Game::EngineInit(const char* title, int Wx, int Wy)
 {
-    //float AspectRatio = (float)Wx/(float)Wy; 
-    //std::cout << "AspectRatio: " << AspectRatio << std::endl;
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
         renderer = SDL_CreateRenderer(window, 0, 0);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
         SDL_RenderSetLogicalSize(renderer, Wx/2, Wy/2);
         WindowSize = {Wx/2, Wy/2};
@@ -61,17 +80,8 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     camera = new Camera();
     camera->Init();
     matrix = Vector2::Identity;
-    Entity *Test = EntityManager.Add();
-    Test->SetSprite("Assets/anim.png",32,32,1);
-    Test->SetPosition(100,100);
-    Player = EntityManager.Add();
-    Player->SetSprite("Assets/Array.png",16,32,4);
-    Player->SetPosition(0,0);
-    Player->AddComponent<Input>();
-    Player->getComponent<Input>()->Init(Player);
-    Player->getComponent<Sprite>()->SetupAnimation(0,3,500);
-    map1 = new Scene();
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
+    Setup();
 }
 
 void Game::HandleEvents()
@@ -100,7 +110,7 @@ void Game::Update()
 void Game::Render()
 {
     SDL_RenderClear(renderer);
-    map1->DrawMap();
+    //map1->DrawMap();
     EntityManager.Render();
     SDL_RenderPresent(renderer);
 }
