@@ -73,9 +73,20 @@ bool Vector2::operator>(Vector2 &vector2)
     else
         return false;
 }
+
 bool Vector2::operator>=(Vector2 &vector2)
 {
     if (this->X >= vector2.X && this->Y >= vector2.Y)
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Vector2::operator<=(Vector2 &vector2)
+{
+    if (this->X <= vector2.X && this->Y <= vector2.Y)
     {
         return true;
     }

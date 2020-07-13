@@ -2,3 +2,4 @@
 #include "Components/Sprite.hpp"
 #include "Components/Transform.hpp"
 #include "Components/Generator.hpp"
+#include "Components/Collider.hpp"

@@ -44,6 +44,8 @@ void Game::Setup()
     Player->transform->SetScreenPosition(screen.DynamicHPosition(15),screen.DynamicVPosition(50));
     Player->AddComponent<Input>(Player);
     Player->getComponent<Input>()->Init();
+    Player->AddComponent<Collider>(Player);
+    Player->getComponent<Collider>()->Init();
     Entity* CactusGenerator = EntityManager.Add();
     CactusGenerator->AddComponent<Generator>();
     CactusGenerator->getComponent<Generator>()->Init();

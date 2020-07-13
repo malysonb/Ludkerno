@@ -48,11 +48,10 @@ public:
             {
                 if (dynamic_cast<comp *>(myComponents[i]))
                 {
-                    Debug::log("Found Component!", Debug::INFO);
                     return (comp *)myComponents[i];
                 }
             }
-        Debug::log("Can't find component!", Debug::ERROR);
+        //Debug::log("Can't find component!", Debug::ERROR);
         return nullptr;
     }
     Sprite *GetSprite();

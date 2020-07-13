@@ -1,5 +1,6 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Camera.hpp"
+#include "../include/Components/Collider.hpp"
 
 class Obj
 {
@@ -79,7 +80,7 @@ void List::Remove(int id)
             s_Index = s_Index->NextObj;
         }
     }
-    if(deleted == false)
+    if (deleted == false)
         Debug::log("ENTITY NOT FOUND! IS HAPPENING MEMORY LEAK?", Debug::WARN);
 }
 
@@ -103,6 +104,19 @@ void List::Clear()
     }
 }
 
+void List::CheckCollision()
+{
+    Obj *s_index = Start;
+    for (int i = 0; i < Length; i++)
+    {
+        
+        if (s_index->NextObj != nullptr)
+        {
+            s_index = s_index->NextObj;
+        }
+    }
+}
+
 void List::Update()
 {
     Obj *s_index = Start;
@@ -114,6 +128,7 @@ void List::Update()
             s_index = s_index->NextObj;
         }
     }
+    CheckCollision();
 }
 
 void List::Render()
@@ -134,7 +149,7 @@ Entity *List::GetByID(int id)
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
     {
-        if(id == s_index->object->ID)
+        if (id == s_index->object->ID)
         {
             return s_index->object;
         }

@@ -4,31 +4,33 @@
 class Collider : public Component
 {
 private:
-    SDL_Rect m_BoxCollider;
 public:
-
+    SDL_Rect m_BoxCollider;
+    Component *LastCollider = nullptr;
     bool isColliding = false;
+    int ID;
+    int L, R, T, B;
 
-    void Init(int x, int y, int h, int w)
+    void Init()
     {
         if(!Active)
         {
             Active = true;
-            m_BoxCollider.x = x;
-            m_BoxCollider.y = y;
-            m_BoxCollider.h = h;
-            m_BoxCollider.w = w;
+            m_BoxCollider = Base->GetSprite()->destRect;
+            L = m_BoxCollider.x;
+            R = m_BoxCollider.x + m_BoxCollider.w;
+            T = m_BoxCollider.y;
+            B = m_BoxCollider.y + m_BoxCollider.h;
         }
         else
         {
-            Debug::log("",Debug::WARN);
+            Debug::log("you cant to initialize again",Debug::WARN);
         }
-        
     }
 
     void Update()
     {
-        /* TODO */
+
     }
 
     void Render()

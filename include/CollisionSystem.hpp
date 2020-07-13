@@ -1,18 +1,19 @@
 #pragma once
 #include "Game.hpp"
 #include "Entity.hpp"
+#include "Components/Collider.hpp"
 
 class Obj;
 
-struct List
+struct CollisionSystem
 {
+    private:
+    public:
     int Length = 0;
     Obj *Start = nullptr, *End = nullptr;
-    Entity *Add();
+    Collider *Add();
     void Remove(int id);
     void Clear();
     void Update();
-    void CheckCollision();
-    void Render();
-    Entity *GetByID(int id);
+    Collider *GetByID(int id);
 };

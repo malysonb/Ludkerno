@@ -5,6 +5,7 @@
 #include "../Entity.hpp"
 #include "../EntityMNGR.hpp"
 #include "Cactus.hpp"
+#include "Collider.hpp"
 
 class Generator : public Component
 {
@@ -27,6 +28,8 @@ public:
             cactus->transform->SetScreenPosition(Game::screen.DynamicHPosition(101), Game::screen.DynamicVPosition(50));
             cactus->AddComponent<Cactus>(cactus);
             cactus->getComponent<Cactus>()->Init();
+            cactus->AddComponent<Collider>(cactus);
+            cactus->getComponent<Collider>()->Init();
             cactus->Update();
             cactus->Render();
             WaitTime = Game::Rand(500, 2000);

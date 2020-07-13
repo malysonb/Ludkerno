@@ -2,6 +2,8 @@
 #include "../Game.hpp"
 #include "../Component.hpp"
 #include "../Entity.hpp"
+#include "Cactus.hpp"
+#include "Collider.hpp"
 
 class Input : public Component
 {
@@ -42,6 +44,10 @@ public:
                 transform->velocity.Y = -5;
                 able = false;
             }   
+        }
+        if(Base->getComponent<Collider>()->isColliding)
+        {
+            std::cout << "AAAAAAAAAAAAA" << std::endl;
         }
         /*transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
         transform->velocity.X = Game::key.keycode.X_Axis * 2;

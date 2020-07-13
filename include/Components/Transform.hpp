@@ -21,6 +21,7 @@ struct Vector2
     bool operator!=(Vector2& vector2);
     bool operator>(Vector2& vector2);
     bool operator>=(Vector2& vector2);
+    bool operator<=(Vector2& vector2);
 
     static Vector2 Identity;
 };
