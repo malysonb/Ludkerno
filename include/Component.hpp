@@ -1,4 +1,10 @@
 #pragma once
+/**
+ * @author Malyson Breno de Souza
+ * @version 1.0
+ * @date 23/07/2020
+ * Component template to you guys make your owns
+ */
 #include "Game.hpp"
 #include "Debug.hpp"
 

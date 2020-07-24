@@ -1,30 +1,14 @@
 #pragma once
-#include "../Game.hpp"
-#include "../Component.hpp"
+/**
+ * @author Malyson Breno de Souza
+ * @version 1.0
+ * Transform code for every entity.
+ */
+#include "Game.hpp"
+#include "Component.hpp"
+#include "Vector2.hpp"
 
-struct Vector2
-{
-
-    enum Vector{ AX, AY };
-
-    float X = 0, Y = 0;
-    Vector2();
-
-    Vector2(int x, int y);
-
-    Vector2 operator+(Vector2& vector2);
-    Vector2 operator-(Vector2& vector2);
-    Vector2 operator/(Vector2& vector2);
-    Vector2 operator/(float value);
-    void operator-=(Vector2& vector2);
-    bool operator==(Vector2& vector2);
-    bool operator!=(Vector2& vector2);
-    bool operator>(Vector2& vector2);
-    bool operator>=(Vector2& vector2);
-    bool operator<=(Vector2& vector2);
-
-    static Vector2 Identity;
-};
+struct Vector2;
 
 class Transform : public Component
 {
@@ -34,16 +18,19 @@ public:
         Active = true;
         position.X = 0;
         position.Y = 0;
+        Acceleration.X = 0;
+        Acceleration.Y = 0;
         velocity.X = 0;
         velocity.Y = 0;
         scale.X = 1;
         scale.Y = 1;
     }
 
-    Vector2 position, scale, velocity;
+    Vector2 position, scale, velocity, Acceleration;
 
     void Update()
     {
+        velocity = velocity + Acceleration;
         position = position - Game::camVelocity;
         position = position + velocity;
     }

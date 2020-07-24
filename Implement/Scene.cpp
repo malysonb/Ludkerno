@@ -1,37 +1,19 @@
+#include "../include/Game.hpp"
+#include "../include/Camera.hpp"
 #include "../include/Scene.hpp"
 #include "../include/TextureMngr.hpp"
-#include "../include/Camera.hpp"
-
-int lvl1[20][25]{
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 Scene::Scene()
 {
-    dirt = TextureMngr::LoadTexture("Assets/dirt.png");
-    grass = TextureMngr::LoadTexture("Assets/grass.png");
-    water = TextureMngr::LoadTexture("Assets/water.png");
+}
 
-    LoadMap(lvl1);
+Scene::~Scene()
+{
+}
 
+void Scene::Init()
+{
+    //TileMap = TextureMngr::LoadTexture("Assets/dirt.png");
     srcRect.x = 0;
     srcRect.y = 0;
     destRect.x = 0;
@@ -42,43 +24,47 @@ Scene::Scene()
     destRect.w = srcRect.w;
 }
 
-Scene::~Scene()
+void Scene::LoadMap(int sX, int sY, int **MapCode)
 {
-}
-
-void Scene::LoadMap(int mapcode[20][25])
-{
-    for (int row = 0; row < 20; row++)
+    map = new int *[sY];
+    for (int row = 0; row < sY; row++)
     {
-        for (int col = 0; col < 25; col++)
+        map[row] = new int[sX];
+        for (int col = 0; col < sX; col++)
         {
-            map[row][col] = mapcode[row][col];
+            map[row][col] = MapCode[row][col];
         }
     }
+    canDraw = true;
 }
-void Scene::DrawMap()
+
+void Scene::DrawMap(int layer)
 {
-    int type = 0;
-    for (int row = 0; row < 20; row++)
+    if (canDraw)
     {
-        for (int col = 0; col < 25; col++)
+        int type = 0;
+        for (int row = 0; row < 20; row++)
         {
-            type = map[row][col];
-            destRect.x = col * destRect.w - Game::camera->relativePosition.X;
-            destRect.y = row * destRect.h - Game::camera->relativePosition.Y;
-            switch (type)
+            for (int col = 0; col < 25; col++)
             {
-            case 0:
-                TextureMngr::Draw(water, srcRect, destRect);
-                break;
-            case 1:
-                TextureMngr::Draw(grass, srcRect, destRect);
-                break;
-            case 2:
-                TextureMngr::Draw(dirt, srcRect, destRect);
-                break;
-            default:
-                break;
+                type = map[row][col];
+                srcRect.x = 32 * type;
+                destRect.x = col * destRect.w - Game::camera->relativePosition.X;
+                destRect.y = row * destRect.h - Game::camera->relativePosition.Y;
+                switch (type)
+                {
+                case 0:
+                    TextureMngr::Draw(TileMap, srcRect, destRect);
+                    break;
+                case 1:
+                    TextureMngr::Draw(TileMap, srcRect, destRect);
+                    break;
+                case 2:
+                    TextureMngr::Draw(TileMap, srcRect, destRect);
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }

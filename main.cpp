@@ -1,5 +1,6 @@
 #include <iostream>
-#include "include/Game.hpp"
+#include "Ludkerno.hpp"
+#include "GameCode/Cena.hpp"
 
 Game *game = nullptr;
 
@@ -12,6 +13,7 @@ int main()
     game = new Game();
 
     game->EngineInit("Ludkerno", 800, 600);
+    game->LoadScene(new cena);
 
     while(game->IsRunning())
     {

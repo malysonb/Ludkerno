@@ -1,7 +1,13 @@
 #pragma once
+/**
+ * @author Malyson Breno de Souza
+ * @version 1.0
+ * @date 23/07/2020
+ * A simple entity code with ECS.
+ */
 #include "Game.hpp"
 #include "Components/Sprite.hpp"
-#include "Components/Transform.hpp"
+#include "Transform.hpp"
 
 class Entity
 {
@@ -25,7 +31,7 @@ public:
                 Component *temp = new newComp();
                 temp->Base = Owner;
                 myComponents[m_NumComponents] = temp;
-                Debug::log("Added a new component!", Debug::INFO);
+                //Debug::log("Added a new component!", Debug::INFO);
                 m_NumComponents++;
             }
             else

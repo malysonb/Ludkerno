@@ -1,26 +1,23 @@
 #include "../include/EntityMNGR.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Components/Collider.hpp"
+#include "../include/Entity.hpp"
 
-class Obj
+Obj::Obj(int ID)
 {
-public:
-    Entity *object;
-    Obj *NextObj = nullptr;
-    Obj(int ID)
-    {
-        object = new Entity();
-        object->ID = ID;
-    }
-    ~Obj()
-    {
-        delete object;
-    }
-};
+    object = new Entity();
+    object->ID = ID;
+}
+Obj::~Obj()
+{
+    delete object;
+}
+Entity *Obj::GetEntity()
+{
+    return object;
+}
 
 Entity *List::Add()
 {
-    Obj *temp = new Obj(Length);
+    Obj *temp = new Obj(IDs);
 
     if (Length == 0)
     {
@@ -33,6 +30,7 @@ Entity *List::Add()
         End = temp;
     }
     Length++;
+    IDs++;
     return temp->object;
 }
 
@@ -81,7 +79,7 @@ void List::Remove(int id)
         }
     }
     if (deleted == false)
-        Debug::log("ENTITY NOT FOUND! IS HAPPENING MEMORY LEAK?", Debug::WARN);
+        Debug::log("ENTITY NOT FOUND!", Debug::WARN);
 }
 
 void List::Clear()
@@ -104,19 +102,6 @@ void List::Clear()
     }
 }
 
-void List::CheckCollision()
-{
-    Obj *s_index = Start;
-    for (int i = 0; i < Length; i++)
-    {
-        
-        if (s_index->NextObj != nullptr)
-        {
-            s_index = s_index->NextObj;
-        }
-    }
-}
-
 void List::Update()
 {
     Obj *s_index = Start;
@@ -128,7 +113,6 @@ void List::Update()
             s_index = s_index->NextObj;
         }
     }
-    CheckCollision();
 }
 
 void List::Render()
@@ -158,6 +142,6 @@ Entity *List::GetByID(int id)
             s_index = s_index->NextObj;
         }
     }
-    Debug::log("CANT FIND THIS ENTITY!", Debug::WARN);
+    //Debug::log("CANT FIND THIS ENTITY!", Debug::WARN);
     return nullptr;
 }

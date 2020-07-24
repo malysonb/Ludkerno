@@ -1,11 +1,6 @@
 #pragma once
-#include "../Game.hpp"
-#include "../Screen.hpp"
-#include "../Component.hpp"
-#include "../Entity.hpp"
-#include "../EntityMNGR.hpp"
+#include "../Ludkerno.hpp"
 #include "Cactus.hpp"
-#include "Collider.hpp"
 
 class Generator : public Component
 {
@@ -30,17 +25,14 @@ public:
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);
             cactus->getComponent<Collider>()->Init();
-            cactus->Update();
-            cactus->Render();
             WaitTime = Game::Rand(500, 2000);
-            std::cout << WaitTime << std::endl;
             m_lasttime = SDL_GetTicks();
             for (int i = 0; i < Game::EntityManager.Length; i++)
             {
                 Entity *temp = Game::EntityManager.GetByID(i);
                 if (temp->getComponent<Cactus>() != nullptr)
                 {
-                    if (temp->transform->GetScreenPosition().X < -32)
+                    if (temp->transform->GetScreenPosition().X < -16)
                     {
                         Game::EntityManager.Remove(i);
                     }

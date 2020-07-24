@@ -1,9 +1,14 @@
 #pragma once
+/**
+ * @author Malyson Breno de Souza
+ * @version 1.0
+ * @date 23/07/2020
+ * "This is my favorite code."
+ */
 #include "../Game.hpp"
 #include "../Component.hpp"
-#include "Transform.hpp"
-#include "../Debug.hpp"
 #include "../TextureMngr.hpp"
+#include "../Vector2.hpp"
 
 class Sprite : public Component
 {
@@ -54,7 +59,7 @@ public:
         Active = true;
         m_Point.x = Size_x / 2;
         m_Point.y = Size_y / 2;
-        Debug::log("Initializing Sprite", Debug::INFO);
+        //Debug::log("Initializing Sprite", Debug::INFO);
         LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
         h_px = Size_y;
         v_px = Size_x;

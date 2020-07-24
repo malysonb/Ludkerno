@@ -9,6 +9,7 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/ComponentList.hpp"
 #include "../include/Screen.hpp"
+#include "../include/CollisionSystem.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::Event;
@@ -19,8 +20,9 @@ Vector2 Game::matrix;
 Vector2 Game::camVelocity;
 Vector2 Game::WindowSize;
 Screen Game::screen;
+CollisionSystem collisionSystem;
 
-Scene* map1;
+Scene* ActualScene;
 
 Game::Game()
 {
@@ -37,18 +39,16 @@ int Game::Rand(int min, int max)
 
 void Game::Setup()
 {
-    Entity* Player = EntityManager.Add();
-    Player->SetSprite("Assets/Dino.png",32,16,1);
-    Player->GetSprite()->SetupAnimation(0,1,200);
-    Player->GetSprite()->OriginPoint = {15,16};
-    Player->transform->SetScreenPosition(screen.DynamicHPosition(15),screen.DynamicVPosition(50));
-    Player->AddComponent<Input>(Player);
-    Player->getComponent<Input>()->Init();
-    Player->AddComponent<Collider>(Player);
-    Player->getComponent<Collider>()->Init();
-    Entity* CactusGenerator = EntityManager.Add();
-    CactusGenerator->AddComponent<Generator>();
-    CactusGenerator->getComponent<Generator>()->Init();
+    
+}
+
+void Game::LoadScene(Scene *scene)
+{
+    EntityManager.Clear();
+    ActualScene = scene;
+    ActualScene->Init();
+    ActualScene->Setup();
+    Debug::log("Loaded a new scene!",Debug::INFO);
 }
 
 void Game::EngineInit(const char* title, int Wx, int Wy)
@@ -83,7 +83,7 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     camera->Init();
     matrix = Vector2::Identity;
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
-    Setup();
+    //Setup();
 }
 
 void Game::HandleEvents()
@@ -106,13 +106,16 @@ void Game::Update()
     camVelocity = camera->relativeVelocity;
     camera->Update();
     EntityManager.Update();
+    collisionSystem.Update();
     //std::cout << "X: " << Game::matrix.X << " Y: " << Game::matrix.Y << std::endl;
 }
 
 void Game::Render()
 {
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-    //map1->DrawMap();
+    if(ActualScene != nullptr)
+        ActualScene->DrawMap();
     EntityManager.Render();
     SDL_RenderPresent(renderer);
 }

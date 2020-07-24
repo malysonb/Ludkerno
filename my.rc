@@ -9,13 +9,13 @@ BEGIN
     BLOCK "080904E4"
     BEGIN
       VALUE "CompanyName", "Radiko Studio"
-      VALUE "FileDescription", "Ludkerno Game Engine"
+      VALUE "FileDescription", "Dino Game - Ludkerno Game Engine"
       VALUE "FileVersion", "1.0"
       VALUE "InternalName", "main.exe"
       VALUE "LegalCopyright", "Radiko Ludkerno Game Engine"
       VALUE "OriginalFilename", "main.exe"
-      VALUE "ProductName", "Ludkerno Game"
-      VALUE "ProductVersion", "1.0-Alpha"
+      VALUE "ProductName", "Dino Game"
+      VALUE "ProductVersion", "1.0 - Alpha"
     END
   END
   BLOCK "VarFileInfo"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Game.hpp"
-#include "Components/Transform.hpp"
+#include "Transform.hpp"
 #include "Screen.hpp"
 
 class Camera

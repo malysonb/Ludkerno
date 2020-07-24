@@ -1,12 +1,14 @@
 #pragma once
 #define SDL_MAIN_HANDLED
 #define VERSION "v0.1.1 Alpha"
-#include "../ThirdParty/x64/include/SDL2/SDL.h"
+#include "../ThirdParty/x86/include/SDL2/SDL.h"
 #include "Key.hpp"
 
 class List;
+
 class Camera;
 class Screen;
+class Scene;
 struct Vector2;
 
 class Game
@@ -14,6 +16,7 @@ class Game
     SDL_Window *window;
     bool Running = false;
 public:
+    static const int DeltaTime = 1000/60;
     static Key key;
     static List EntityManager;
     static Vector2 matrix;
@@ -36,4 +39,5 @@ public:
     bool IsRunning();
 
     static int Rand(int min, int max);
+    static void LoadScene(Scene *scene);
 };
