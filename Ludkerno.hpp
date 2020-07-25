@@ -7,6 +7,7 @@
 #include "include/Transform.hpp"
 #include "include/Entity.hpp"
 #include "include/EntityMNGR.hpp"
+#include "include/SceneMngr.hpp"
 #include "include/Screen.hpp"
 #include "include/Camera.hpp"
 #include "include/Key.hpp"

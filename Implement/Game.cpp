@@ -10,10 +10,14 @@
 #include "../include/ComponentList.hpp"
 #include "../include/Screen.hpp"
 #include "../include/CollisionSystem.hpp"
+#include "../include/PkgMngr.hpp"
+#include "../include/SceneMngr.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
+PkgMngr Game::pkgMngr;
 SDL_Event Game::Event;
 List Game::EntityManager;
+SceneMngr Game::sceneMngr;
 Key Game::key;
 Camera *Game::camera = nullptr;
 Vector2 Game::matrix;
@@ -23,6 +27,8 @@ Screen Game::screen;
 CollisionSystem collisionSystem;
 
 Scene* ActualScene;
+
+bool notStarted = true;
 
 Game::Game()
 {
@@ -44,11 +50,15 @@ void Game::Setup()
 
 void Game::LoadScene(Scene *scene)
 {
-    EntityManager.Clear();
     ActualScene = scene;
     ActualScene->Init();
-    ActualScene->Setup();
+    notStarted = true;
     Debug::log("Loaded a new scene!",Debug::INFO);
+}
+
+void Game::teste(Scene *scene)
+{
+    LoadScene(scene);
 }
 
 void Game::EngineInit(const char* title, int Wx, int Wy)
@@ -84,6 +94,10 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     matrix = Vector2::Identity;
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
     //Setup();
+    #ifdef Release
+    pkgMngr.Init();
+    #endif
+    LoadScene(sceneMngr.GetScene(0));
 }
 
 void Game::HandleEvents()
@@ -102,8 +116,15 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+    if(notStarted)
+    {
+        Game::EntityManager.Clear();
+        ActualScene->Setup();
+        notStarted = false;
+    }
     matrix = matrix - camera->relativeVelocity;
     camVelocity = camera->relativeVelocity;
+    ActualScene->Update();
     camera->Update();
     EntityManager.Update();
     collisionSystem.Update();

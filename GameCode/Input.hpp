@@ -1,11 +1,14 @@
 #pragma once
 #include "../Ludkerno.hpp"
+#include "Cena.hpp"
+#include "Cactus.hpp"
+#include "Generator.hpp"
 
 class Input : public Component
 {
 public:
     Transform *transform;
-    PlatformPhysics* PF;
+    PlatformPhysics *PF;
     void Init()
     {
         Active = true;
@@ -13,35 +16,48 @@ public:
         Debug::log("Initializing Input", Debug::INFO);
         PF = Base->getComponent<PlatformPhysics>();
     }
-
+    bool died = false;
     const char *GetName() { return "Input"; }
     bool able = true;
     bool onTop = false;
     int v = 0;
     void Update()
     {
-        if(transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(50))
+        if (died)
+        {
+            if (Game::key.keycode.START)
+            {
+                Game::sceneMngr.setScene(0);
+            }
+        }
+        if (transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(50))
         {
             able = true;
             onTop = false;
             PF->isOnGround = true;
-            transform->SetScreenPosition(transform->GetScreenPosition().X ,Game::screen.DynamicVPosition(50));
-        }
-        else{
-            PF->isOnGround = false;
-        }
-        if(Game::key.keycode.UP)
-        {
-            PF->ApplyForce(-10,Vector2::AY); 
+            transform->SetScreenPosition(transform->GetScreenPosition().X, Game::screen.DynamicVPosition(50));
         }
         else
         {
-            PF->ApplyForce(0,Vector2::AY); 
+            PF->isOnGround = false;
         }
-        if(Base->getComponent<Collider>()->isColliding)
+        if (Game::key.keycode.UP)
+        {
+            PF->ApplyForce(-10, Vector2::AY);
+        }
+        else
+        {
+            PF->ApplyForce(0, Vector2::AY);
+        }
+        if (Base->getComponent<Collider>()->isColliding)
         {
             v++;
             std::cout << "colidiu: " << v << std::endl;
+            Base->getComponent<PlatformPhysics>()->Disable();
+            Base->transform->Acceleration.Y = 0;
+            Base->transform->velocity.Y = 0;
+            Base->GetSprite()->SetupAnimation(0, 0, 500);
+            died = true;
         }
         /*transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
         transform->velocity.X = Game::key.keycode.X_Axis * 2;

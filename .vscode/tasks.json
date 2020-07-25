@@ -9,6 +9,8 @@
                 "${file}",
                 "./Implement/*.cpp",
                 "-L./ThirdParty/x64/lib",
+                "-lz",
+                "-lminizip",
                 "-lSDL2main",
                 "-lSDL2",
                 "-lSDL2_image",

@@ -18,6 +18,8 @@ public:
     {
         Base->transform->Acceleration.Y = (isOnGround ? ForceY*gravity : gravity)/mass;
         Base->transform->velocity.Y = isOnGround ? 0 : Base->transform->velocity.Y;
+        Base->transform->velocity.Y = Base->transform->velocity.Y <= -10 ? -10 : Base->transform->velocity.Y;
+        Base->transform->velocity.Y = Base->transform->velocity.Y >= 4 ? 4 : Base->transform->velocity.Y;
     }
     void Render()
     {

@@ -5,10 +5,11 @@
 #include "Key.hpp"
 
 class List;
-
+class PkgMngr;
 class Camera;
 class Screen;
 class Scene;
+class SceneMngr;
 struct Vector2;
 
 class Game
@@ -17,11 +18,13 @@ class Game
     bool Running = false;
 public:
     static const int DeltaTime = 1000/60;
+    static PkgMngr pkgMngr;
     static Key key;
     static List EntityManager;
     static Vector2 matrix;
     static Vector2 camVelocity;
     static Vector2 WindowSize;
+    static SceneMngr sceneMngr;
     static Screen screen;
     static Camera *camera;
     static SDL_Event Event;
@@ -40,4 +43,5 @@ public:
 
     static int Rand(int min, int max);
     static void LoadScene(Scene *scene);
+    static void teste(Scene *scene);
 };

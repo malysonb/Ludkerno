@@ -11,10 +11,8 @@ int main()
     Uint32 frameStart;
     int frameTime;
     game = new Game();
-
+    Game::sceneMngr.insertScene(new cena);
     game->EngineInit("Ludkerno", 800, 600);
-    game->LoadScene(new cena);
-
     while(game->IsRunning())
     {
         frameStart = SDL_GetTicks();

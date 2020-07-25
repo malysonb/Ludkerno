@@ -22,7 +22,11 @@ class Cactus : public Component
     }
     void Render()
     {
-
+        
+    }
+    void Disable()
+    {
+        Base->transform->velocity.X = 0;
     }
     const char* GetName() {return "Cactus";}
 };

@@ -84,11 +84,11 @@ void List::Remove(int id)
 
 void List::Clear()
 {
-    int IDs[Length];
+    int Is[Length];
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
     {
-        IDs[i] = s_index->object->ID;
+        Is[i] = s_index->object->ID;
         if (s_index->NextObj != nullptr)
         {
             s_index = s_index->NextObj;
@@ -97,9 +97,10 @@ void List::Clear()
     int index = Length - 1;
     while (Length > 0)
     {
-        Remove(IDs[index]);
+        Remove(Is[index]);
         index--;
     }
+    IDs = 0;
 }
 
 void List::Update()

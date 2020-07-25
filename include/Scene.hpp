@@ -15,6 +15,7 @@ class Scene
     void DrawMap(int layer = 0);
     virtual void Setup() = 0;
     void Init();
+    virtual void Update() = 0;
 
     private:
     SDL_Rect srcRect, destRect;

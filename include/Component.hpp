@@ -18,6 +18,10 @@ public:
     virtual void Update() = 0;
     virtual void Render() = 0;
     virtual const char* GetName() = 0;
+    virtual void Disable()
+    {
+        Active = false;
+    }
     Entity *Base;
 private:
 };

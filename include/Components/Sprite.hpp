@@ -12,6 +12,11 @@
 
 class Sprite : public Component
 {
+#ifdef Release
+    bool release_v = true;
+#else
+    bool release_v = false;
+#endif
 public:
     SDL_Rect srcRect, destRect;
     int v_px, h_px;
@@ -27,7 +32,7 @@ public:
     }
 
     ///Load Spritesheet
-    void LoadSpritesheet(SDL_Texture * newSprite)
+    void LoadSpritesheet(SDL_Texture *newSprite)
     {
         sprite = newSprite;
     }
@@ -60,7 +65,10 @@ public:
         m_Point.x = Size_x / 2;
         m_Point.y = Size_y / 2;
         //Debug::log("Initializing Sprite", Debug::INFO);
-        LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
+        if (release_v)
+            LoadSpritesheet(TextureMngr::LoadTexture_RW(texturePath));
+        else
+            LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
         h_px = Size_y;
         v_px = Size_x;
         n_ofAnims = n_ofAnimations;
