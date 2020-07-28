@@ -52,7 +52,6 @@ public:
         if (Base->getComponent<Collider>()->isColliding)
         {
             v++;
-            std::cout << "colidiu: " << v << std::endl;
             Base->getComponent<PlatformPhysics>()->Disable();
             Base->transform->Acceleration.Y = 0;
             Base->transform->velocity.Y = 0;

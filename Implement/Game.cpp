@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <string>
 #include <chrono>
 #include "../include/Game.hpp"
 #include "../include/Debug.hpp"
@@ -13,7 +14,9 @@
 #include "../include/PkgMngr.hpp"
 #include "../include/SceneMngr.hpp"
 
-SDL_Renderer* Game::renderer = nullptr;
+int Game::FrameRate = 1;
+
+SDL_Renderer *Game::renderer = nullptr;
 PkgMngr Game::pkgMngr;
 SDL_Event Game::Event;
 List Game::EntityManager;
@@ -26,7 +29,7 @@ Vector2 Game::WindowSize;
 Screen Game::screen;
 CollisionSystem collisionSystem;
 
-Scene* ActualScene;
+Scene *ActualScene;
 
 bool notStarted = true;
 
@@ -45,7 +48,6 @@ int Game::Rand(int min, int max)
 
 void Game::Setup()
 {
-    
 }
 
 void Game::LoadScene(Scene *scene)
@@ -53,7 +55,7 @@ void Game::LoadScene(Scene *scene)
     ActualScene = scene;
     ActualScene->Init();
     notStarted = true;
-    Debug::log("Loaded a new scene!",Debug::INFO);
+    Debug::log("Loaded a new scene!", Debug::INFO);
 }
 
 void Game::teste(Scene *scene)
@@ -61,7 +63,7 @@ void Game::teste(Scene *scene)
     LoadScene(scene);
 }
 
-void Game::EngineInit(const char* title, int Wx, int Wy)
+void Game::EngineInit(const char *title, int Wx, int Wy)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
@@ -70,22 +72,26 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
         renderer = SDL_CreateRenderer(window, 0, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
-        SDL_RenderSetLogicalSize(renderer, Wx/2, Wy/2);
-        WindowSize = {Wx/2, Wy/2};
+        SDL_RenderSetLogicalSize(renderer, Wx / 2, Wy / 2);
+        WindowSize = {Wx / 2, Wy / 2};
         SDL_SetMainReady();
         if (window)
         {
             Debug::log("Window created!", Debug::INFO);
             Running = true;
         }
-        else Debug::log("Can't to create a window!", Debug::ERROR);
-        if (renderer){
+        else
+            Debug::log("Can't to create a window!", Debug::ERROR);
+        if (renderer)
+        {
             Debug::log("Render initialized", Debug::INFO);
             Running = true;
         }
-        else Debug::log("Can't to initialize a scene render!", Debug::ERROR);
+        else
+            Debug::log("Can't to initialize a scene render!", Debug::ERROR);
     }
-    else{
+    else
+    {
         Debug::log("Cant initialize SDL!", Debug::ERROR);
         Game::Clear();
     }
@@ -93,11 +99,12 @@ void Game::EngineInit(const char* title, int Wx, int Wy)
     camera->Init();
     matrix = Vector2::Identity;
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
-    //Setup();
-    #ifdef Release
+//Setup();
+#ifdef Release
     pkgMngr.Init();
-    #endif
+#endif
     LoadScene(sceneMngr.GetScene(0));
+    //Loop();
 }
 
 void Game::HandleEvents()
@@ -116,7 +123,9 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    if(notStarted)
+    std::string fps = std::to_string(FrameRate);
+    SDL_SetWindowTitle(window, fps.c_str());
+    if (notStarted)
     {
         Game::EntityManager.Clear();
         ActualScene->Setup();
@@ -135,7 +144,7 @@ void Game::Render()
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-    if(ActualScene != nullptr)
+    if (ActualScene != nullptr)
         ActualScene->DrawMap();
     EntityManager.Render();
     SDL_RenderPresent(renderer);
@@ -149,4 +158,4 @@ void Game::Clear()
     Debug::log("Subsystem finalized!", Debug::INFO);
 }
 
-bool Game::IsRunning(){ return Running; };
+bool Game::IsRunning() { return Running; };

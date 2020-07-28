@@ -28,7 +28,11 @@ public:
     }
     ~Sprite()
     {
-        free(sheet_Dimension);
+        for(int i = 0; i < n_ofAnims; i++)
+        {
+            delete(sheet_Dimension[i]);
+        }
+        delete(sheet_Dimension);
     }
 
     ///Load Spritesheet

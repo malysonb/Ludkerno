@@ -5,7 +5,7 @@ class Cactus : public Component
 {
     private:
     public:
-    int speed = -5;
+    int speed = -300;
     void Init()
     {
         Active = true;
@@ -18,7 +18,7 @@ class Cactus : public Component
 
     void Update()
     {
-        Base->transform->velocity.X = speed;
+        Base->transform->velocity.X = speed * 1/Game::FrameRate;
     }
     void Render()
     {

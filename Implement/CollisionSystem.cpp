@@ -51,6 +51,6 @@ bool CollisionSystem::CheckCollision(Collider* A, Collider* B)
     {
         return false;
     }
-    std::cout << A->Base->ID << " -> " << B->Base->ID << std::endl;
+    //std::cout << A->Base->ID << " -> " << B->Base->ID << std::endl;
     return true;
 }

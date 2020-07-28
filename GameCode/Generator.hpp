@@ -7,7 +7,7 @@ class Generator : public Component
 private:
     Uint32 m_currenttime = 0;
     Uint32 m_lasttime = 0;
-    Uint32 WaitTime = 1500;
+    Uint32 WaitTime = 100;
 
 public:
     void Init()
@@ -18,7 +18,7 @@ public:
     void Update()
     {
         m_currenttime = SDL_GetTicks();
-        if (m_currenttime > m_lasttime + WaitTime)
+        if (m_currenttime > m_lasttime + (WaitTime * 1000/Game::FrameRate))
         {
             Entity *cactus = Game::EntityManager.Add();
             cactus->transform->SetScreenPosition(Game::screen.DynamicHPosition(101), Game::screen.DynamicVPosition(50));
@@ -26,7 +26,7 @@ public:
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);
             cactus->getComponent<Collider>()->Init();
-            WaitTime = Game::Rand(400, 1000);
+            WaitTime = Game::Rand(40, 90);
             m_lasttime = SDL_GetTicks();
             for (int i = 0; i < Game::EntityManager.Length; i++)
             {

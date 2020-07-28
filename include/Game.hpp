@@ -17,7 +17,7 @@ class Game
     SDL_Window *window;
     bool Running = false;
 public:
-    static const int DeltaTime = 1000/60;
+    static int FrameRate;
     static PkgMngr pkgMngr;
     static Key key;
     static List EntityManager;
