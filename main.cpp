@@ -20,7 +20,8 @@ int main()
         game->Update();
         game->Render();
         frameTime = SDL_GetTicks() - frameStart;
-        Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) + 1 : Game::FrameRate;
+        Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
+        Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
         if (frameDelay > frameTime)
         {
             SDL_Delay(frameDelay - frameTime);

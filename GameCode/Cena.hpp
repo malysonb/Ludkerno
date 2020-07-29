@@ -8,6 +8,7 @@ class cena : public Scene
 {
 private:
 public:
+    bool finalized = false;
     Entity *Player;
     Entity *CactusGenerator;
     void Setup()
@@ -40,6 +41,10 @@ public:
                 if(iterator->getComponent<Cactus>() != nullptr)
                 {
                     iterator->getComponent<Cactus>()->Disable();
+                }
+                if(iterator->getComponent<Collider>() != nullptr)
+                {
+                    iterator->getComponent<Collider>()->Disable();
                 }
                 if(temp->NextObj != nullptr)
                 {
