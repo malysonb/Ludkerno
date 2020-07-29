@@ -9,3 +9,4 @@ But you can compile on linux by the way, you just need to install SDL2 and SDL2_
 
 This source code comes with a little demo game:
 [Download](https://github.com/malysonb/Ludkerno/releases/tag/0.2.1-Alpha) the Dino bootleg Example.
+![Dino!](/GameCode/Splash/dino.png)
