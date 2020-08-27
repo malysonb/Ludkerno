@@ -25,6 +25,13 @@ Vector2 Vector2::operator-(Vector2 &vector2)
     result.Y = this->Y - vector2.Y;
     return result;
 }
+Vector2 Vector2::operator*(int value)
+{
+    Vector2 result;
+    result.X = this->X * value;
+    result.Y = this->Y * value;
+    return result;
+}
 Vector2 Vector2::operator/(Vector2 &vector2)
 {
     Vector2 result;
@@ -41,8 +48,8 @@ Vector2 Vector2::operator/(float value)
 }
 void Vector2::operator-=(Vector2 &vector2)
 {
-    this->X - vector2.X;
-    this->Y - vector2.Y;
+    this->X -= vector2.X;
+    this->Y -= vector2.Y;
 }
 
 bool Vector2::operator==(Vector2 &vector2)

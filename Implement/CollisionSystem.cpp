@@ -14,7 +14,7 @@ void CollisionSystem::Update()
     Obj *iterator = Game::EntityManager.Start;
     while (iterator != nullptr)
     {
-        iterator->object->getComponent<Collider>() == nullptr ? : iterator->object->getComponent<Collider>()->isColliding = false;
+        iterator->object->getComponent<Collider>() == nullptr ? 0 : iterator->object->getComponent<Collider>()->isColliding = false;
         Obj *temp = Game::EntityManager.Start;
         while (temp != nullptr)
         {

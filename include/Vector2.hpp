@@ -19,6 +19,7 @@ struct Vector2
     Vector2 operator-(Vector2& vector2);
     Vector2 operator/(Vector2& vector2);
     Vector2 operator/(float value);
+    Vector2 operator*(int value);
     void operator-=(Vector2& vector2);
     bool operator==(Vector2& vector2);
     bool operator!=(Vector2& vector2);

@@ -49,14 +49,13 @@ public:
     template <typename comp>
     comp *getComponent()
     {
-        if (this != nullptr)
-            for (int i = 0; i < m_NumComponents; i++)
+        for (int i = 0; i < m_NumComponents; i++)
+        {
+            if (dynamic_cast<comp *>(myComponents[i]))
             {
-                if (dynamic_cast<comp *>(myComponents[i]))
-                {
-                    return (comp *)myComponents[i];
-                }
+                return (comp *)myComponents[i];
             }
+        }
         //Debug::log("Can't find component!", Debug::ERROR);
         return nullptr;
     }

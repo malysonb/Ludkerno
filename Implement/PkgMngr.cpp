@@ -3,15 +3,15 @@
 
 void PkgMngr::Init()
 {
-    size = 0;
+    /*size = 0;
     Assets_images = unzOpen("Assets/Sprites.rpk");
     if (Assets_images == nullptr)
     {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing File!", "'Sprites.rpk' not found!\nSome weird stuff may happen", NULL);
-    }
+    }*/
 }
 
-Uint8 *PkgMngr::ReadOneFile(const char *filename)
+/*Uint8 *PkgMngr::ReadOneFile(const char *filename)
 {
     Uint8 *Buffer;
     int iterator;
@@ -37,4 +37,9 @@ Uint8 *PkgMngr::ReadOneFile(const char *filename)
     Buffer = new Uint8[size];
     iterator = unzReadCurrentFile(Assets_images, Buffer, size);
     return Buffer;
+}*/
+
+char *PkgMngr::ReadOneFile(const char* filename)
+{
+    return 0;
 }

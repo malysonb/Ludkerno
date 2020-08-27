@@ -18,5 +18,5 @@ public:
     unzFile Assets_images;
     unz_file_info info;
     void Init();
-    Uint8 *ReadOneFile(const char *filename);
+    char *ReadOneFile(const char *filename);
 };

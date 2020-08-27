@@ -38,7 +38,7 @@ void Scene::LoadMap(int sX, int sY, int **MapCode)
     canDraw = true;
 }
 
-void Scene::DrawMap(int layer)
+void Scene::DrawMap()
 {
     if (canDraw)
     {

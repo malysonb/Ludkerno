@@ -25,12 +25,18 @@ public:
         scale.X = 1;
         scale.Y = 1;
     }
+    ~Transform()
+    {
+        
+    }
 
     Vector2 position, scale, velocity, Acceleration;
 
     void Update()
     {
-        velocity = velocity + Acceleration;
+        //Acceleration = Acceleration * 1/Game::FrameRate;
+        //velocity = velocity * Game::FrameRate;
+        velocity = velocity * 1/Game::FrameRate;
         position = position - Game::camVelocity;
         position = position + velocity;
     }
@@ -44,6 +50,8 @@ public:
 
     void SetPosition(float XA, float YA)
     {
+        position.X = XA;
+        position.Y = YA;
         position = position - Game::matrix;
     }
 

@@ -1,5 +1,5 @@
-./.vscode/*
-*.exe
+./*.exe
+./*.o
 build/Release/*
 build/Debug/*
 build/*

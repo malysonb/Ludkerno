@@ -50,7 +50,18 @@ public:
         {
             m_CurrentAnim = Anim_Index;
             m_final_Frame = sheet_Dimension[m_CurrentAnim][0];
+            if(m_CurrentFrame > m_final_Frame)
+            {
+                m_CurrentFrame = 0;
+            }
+            m_CurrentTime = m_LastTime;
+            m_changed = true;
         }
+    }
+
+    int getCurrentAnim()
+    {
+        return m_CurrentAnim;
     }
 
     void SetupAnimation(int animIndex, int finalFrame, int speed)
@@ -85,8 +96,8 @@ public:
 
     void SetOrigin(float x, float y)
     {
-        m_Point.x = x;
-        m_Point.y = y;
+        OriginPoint.X = x;
+        OriginPoint.Y = y;
     }
 
     void Update() override
@@ -95,7 +106,7 @@ public:
         srcRect.w = v_px;
         m_final_Frame = sheet_Dimension[m_CurrentAnim][0];
         m_CurrentTime = SDL_GetTicks();
-        if (m_CurrentTime > m_LastTime + sheet_Dimension[m_CurrentAnim][1])
+        if (m_CurrentTime > m_LastTime + sheet_Dimension[m_CurrentAnim][1] || m_changed == true)
         {
             if (m_CurrentFrame <= m_final_Frame)
             {
@@ -104,12 +115,25 @@ public:
                 m_CurrentFrame = m_CurrentFrame == m_final_Frame ? 0 : m_CurrentFrame + 1;
             }
             m_LastTime = m_CurrentTime;
+            m_changed = false;
+        }
+    }
+
+    void flipHorizontally(bool isFlipped)
+    {
+        if(isFlipped)
+        {
+            flipped = SDL_FLIP_HORIZONTAL;
+        }
+        else
+        {
+            flipped = SDL_FLIP_NONE;
         }
     }
 
     void Render() override
     {
-        SDL_RenderCopy(Game::renderer, sprite, &srcRect, &destRect);
+        SDL_RenderCopyEx(Game::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
     }
 
     const char *GetName() { return "Sprite"; }
@@ -119,8 +143,10 @@ public:
     int n_ofAnims = 0;
 
 private:
+    SDL_RendererFlip flipped = SDL_FLIP_NONE;
     SDL_Point m_Point;
     SDL_Texture *sprite;
+    bool m_changed = false;
     int m_CurrentAnim = 0;
     int m_CurrentFrame = 0;
     int m_final_Frame = 0;

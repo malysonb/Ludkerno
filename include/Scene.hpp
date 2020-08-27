@@ -12,7 +12,7 @@ class Scene
     ~Scene();
 
     void LoadMap(int sX, int sY, int **MapCode);
-    void DrawMap(int layer = 0);
+    void DrawMap();
     virtual void Setup() = 0;
     void Init();
     virtual void Update() = 0;

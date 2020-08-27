@@ -72,8 +72,8 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
         renderer = SDL_CreateRenderer(window, 0, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
-        SDL_RenderSetLogicalSize(renderer, Wx / 2, Wy / 2);
-        WindowSize = {Wx / 2, Wy / 2};
+        SDL_RenderSetLogicalSize(renderer, 426, 240);
+        WindowSize = {426, 240};
         SDL_SetMainReady();
         if (window)
         {
@@ -142,7 +142,7 @@ void Game::Update()
 
 void Game::Render()
 {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     if (ActualScene != nullptr)
         ActualScene->DrawMap();
