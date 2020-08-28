@@ -16,3 +16,6 @@ Release_x86:
 	cp ./ThirdParty/x86/bin/SDL2_image.dll ./Build/Release_x86/SDL2_image.dll
 	cp ./ThirdParty/x86/bin/libpng16-16.dll ./Build/Release_x86/libpng16-16.dll
 	cp ./ThirdParty/x86/bin/libRPK.dll ./Build/Release_x86/libRPK.dll
+
+Checkup:
+	
