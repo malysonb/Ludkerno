@@ -31,21 +31,11 @@ Scene *ActualScene;
 
 bool notStarted = true;
 
-Game::Game()
-{
-}
-Game::~Game()
-{
-}
 
 int Game::Rand(int min, int max)
 {
-    srand(std::chrono::system_clock::now().time_since_epoch().count());
+    srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
     return rand() % (max - min) + min;
-}
-
-void Game::Setup()
-{
 }
 
 void Game::LoadScene(Scene *scene)
@@ -54,11 +44,6 @@ void Game::LoadScene(Scene *scene)
     ActualScene->Init();
     notStarted = true;
     Debug::log("Loaded a new scene!", Debug::INFO);
-}
-
-void Game::teste(Scene *scene)
-{
-    LoadScene(scene);
 }
 
 void Game::EngineInit(const char *title, int Wx, int Wy)
