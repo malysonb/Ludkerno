@@ -5,4 +5,6 @@ build/Debug/*
 build/*
 ThirdParty/MSVC
 ThirdParty/x86
+ThirdParty/x64
+ThirdParty/temp
 Implement/*.Deactivated
