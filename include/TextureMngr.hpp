@@ -1,6 +1,11 @@
 #pragma once
 #include "Game.hpp"
-#include "../ThirdParty/x64/include/SDL2/SDL_image.h"
+
+#ifdef SDL_Image_Path
+#include SDL_Image_Path
+#else
+#include "../ThirdParty/x86/include/SDL2/SDL_image.h"
+#endif
 
 class TextureMngr{
     public:

@@ -94,10 +94,10 @@ public:
         }
     }
 
-    void SetOrigin(float x, float y)
+    void SetOrigin(int x, int y)
     {
-        OriginPoint.X = x;
-        OriginPoint.Y = y;
+        OriginPoint.X = static_cast<float>(x);
+        OriginPoint.Y = static_cast<float>(y);
     }
 
     void Update() override

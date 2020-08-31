@@ -12,7 +12,7 @@ int main()
     int frameTime = SDL_GetTicks();
     game = new Game();
     Game::sceneMngr.insertScene(new PlatformScene);
-    game->EngineInit("Ludkerno", 1360, 768);
+    game->EngineInit("Ludkerno", 852, 480);
     while (game->IsRunning())
     {
         frameStart = SDL_GetTicks();

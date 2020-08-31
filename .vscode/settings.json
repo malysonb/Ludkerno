@@ -77,5 +77,6 @@
         "queue": "cpp",
         "xiosbase": "cpp"
     },
-    "c-cpp-compile-run.cpp-flags": "-Wall -Wextra ./Implement/*.cpp -L./ThirdParty/x64/lib -lSDL2main -lSDL2 -lSDL2_image"
+    "c-cpp-compile-run.cpp-flags": "-Wall -Wextra ./Implement/*.cpp -L./ThirdParty/x64/lib -lSDL2main -lSDL2 -lSDL2_image",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

@@ -12,8 +12,9 @@ public:
     Entity* GetEntity();
 };
 
-struct List
+class List
 {
+    public:
     int Length = 0;
     int IDs = 0;
     Obj *Start = nullptr, *End = nullptr;

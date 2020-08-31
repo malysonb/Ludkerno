@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(Ludkerno VERSION 0.3.0)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/ThirdParty)
+
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(RPK REQUIRED)
+
+if(WIN32)
+    message(STATUS "WIN32 DETECTED")
+    if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
+        message(STATUS "MSVC COMPILER DETECTED!")
+        add_definitions(-DMSVCcompiler)
+        add_definitions(-DSDL_Path="../ThirdParty/MSVC/include/SDL.h")
+        add_definitions(-DSDL_Image_Path="../ThirdParty/MSVC/include/SDL_image.h")
+        link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/lib/x86)
+        include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/include)
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES GNU)
+        message(STATUS "GCC COMPILER DETECTED")
+        add_definitions(-DGCCcompiler)
+        add_definitions(-DSDL_Path="../ThirdParty/x86/include/SDL2/SDL.h")
+        add_definitions(-DSDL_Image_Path="../ThirdParty/x86/include/SDL2/SDL_image.h")
+        link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/x86/lib)
+        include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/x86/include)
+    endif()  
+endif()
+
+
+
+file(GLOB implements "Implement/*.cpp")
+
+add_executable(Ludkerno main.cpp ${implements})
+add_definitions(-DRelease=true)
+target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image RPK)
+
+

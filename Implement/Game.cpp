@@ -11,13 +11,11 @@
 #include "../include/ComponentList.hpp"
 #include "../include/Screen.hpp"
 #include "../include/CollisionSystem.hpp"
-#include "../include/PkgMngr.hpp"
 #include "../include/SceneMngr.hpp"
 
 int Game::FrameRate = 1;
 
 SDL_Renderer *Game::renderer = nullptr;
-PkgMngr Game::pkgMngr;
 SDL_Event Game::Event;
 List Game::EntityManager;
 SceneMngr Game::sceneMngr;
@@ -101,7 +99,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
 //Setup();
 #ifdef Release
-    pkgMngr.Init();
+    
 #endif
     LoadScene(sceneMngr.GetScene(0));
     //Loop();

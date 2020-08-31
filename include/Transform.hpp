@@ -35,8 +35,9 @@ public:
     void Update()
     {
         //Acceleration = Acceleration * 1/Game::FrameRate;
-        //velocity = velocity * Game::FrameRate;
-        velocity = velocity * 1/Game::FrameRate;
+        //velocity = velocity * Game::FrameRate; 
+
+        velocity = velocity * 1/ static_cast<float>(Game::FrameRate);
         position = position - Game::camVelocity;
         position = position + velocity;
     }
@@ -67,15 +68,15 @@ public:
         return position;
     }
 
-    void SetScreenPosition(float XA, float YA)
+    void SetScreenPosition(int XA, int YA)
     {
-        position.X = XA;
-        position.Y = YA;
+        position.X = static_cast<float>(XA);
+        position.Y = static_cast<float>(YA);
     }
 
-    void SetSize(float XA, float YA)
+    void SetSize(int XA, int YA)
     {
-        scale.X = XA;
-        scale.Y = YA;
+        scale.X = static_cast<float>(XA);
+        scale.Y = static_cast<float>(YA);
     }
 };

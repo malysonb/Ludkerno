@@ -17,10 +17,10 @@ public:
     void Update()
     {
         gravity = gravity * Game::FrameRate;
-        gravity = 600 * 1/Game::FrameRate;
+        gravity = (600 * 1/Game::FrameRate);
         ForceY += (mass/gravity);
         ForceY >= 240 ? ForceY = 240 : ForceY;
-        Base->transform->velocity.Y = ForceY;
+        Base->transform->velocity.Y = static_cast<float>(ForceY);
     }
     void Render()
     {
@@ -34,11 +34,11 @@ public:
     {
         if (Axis == Vector2::AY)
         {
-            ForceY = (intensity);
+            ForceY = intensity;
         }
         if (Axis == Vector2::AX)
         {
-            ForceX = (intensity);
+            ForceX = intensity;
         }
     }
 };

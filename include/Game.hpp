@@ -1,11 +1,14 @@
 #pragma once
 #define SDL_MAIN_HANDLED
 #define VERSION "v0.1.1 Alpha"
+#ifdef SDL_Path
+#include SDL_Path
+#else
 #include "../ThirdParty/x86/include/SDL2/SDL.h"
+#endif
 #include "Key.hpp"
 
 class List;
-class PkgMngr;
 class Camera;
 class Screen;
 class Scene;
@@ -18,7 +21,6 @@ class Game
     bool Running = false;
 public:
     static int FrameRate;
-    static PkgMngr pkgMngr;
     static Key key;
     static List EntityManager;
     static Vector2 matrix;

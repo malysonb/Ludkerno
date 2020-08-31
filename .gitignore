@@ -1,6 +1,8 @@
-./*.exe
-./*.o
+*.exe
+*.o
 build/Release/*
 build/Debug/*
 build/*
+ThirdParty/MSVC
+ThirdParty/x86
 Implement/*.Deactivated

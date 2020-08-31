@@ -52,7 +52,7 @@ public:
             isGrounded = true;
             Base->getComponent<PlatformPhysics>()->isOnGround = true;
             Base->transform->velocity.Y = 0;
-            Base->transform->SetScreenPosition(Base->transform->GetScreenPosition().X, Game::screen.DynamicVPosition(100));
+            Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Game::screen.DynamicVPosition(100));
         }
     }
     void Render()

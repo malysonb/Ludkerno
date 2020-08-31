@@ -1,5 +1,6 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Entity.hpp"
+#include <vector>
 
 Obj::Obj(int ID)
 {
@@ -84,7 +85,7 @@ void List::Remove(int id)
 
 void List::Clear()
 {
-    int Is[Length];
+    std::vector<int> Is(Length);
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
     {
