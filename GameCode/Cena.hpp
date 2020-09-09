@@ -14,7 +14,7 @@ public:
     void Setup()
     {
         Player = Game::EntityManager.Add();
-        Player->SetSprite("Assets/dino.png", 16, 16, 1);
+        Player->SetSprite("./Assets/dino.png", 16, 16, 1);
         Player->GetSprite()->SetupAnimation(0, 1, 100);
         Player->GetSprite()->OriginPoint = {8, 16};
         Player->transform->SetScreenPosition(Game::screen.DynamicHPosition(15), Game::screen.DynamicVPosition(50));
@@ -34,10 +34,10 @@ public:
         if(Player->getComponent<Input>()->died)
         {
             CactusGenerator->getComponent<Generator>()->Disable();
-            Obj* temp = Game::EntityManager.Start;
-            for(int i = 0; i < Game::EntityManager.Length; i++)
+            //Obj* temp = Game::EntityManager.SceneEntities.front();
+            for(int i = 0; i <static_cast<int>(Game::EntityManager.SceneEntities.size()) ; i++)
             {
-                Entity* iterator = temp->object;
+                Entity* iterator = Game::EntityManager.SceneEntities[i]->GetEntity();
                 if(iterator->getComponent<Cactus>() != nullptr)
                 {
                     iterator->getComponent<Cactus>()->Disable();
@@ -46,11 +46,8 @@ public:
                 {
                     iterator->getComponent<Collider>()->Disable();
                 }
-                if(temp->NextObj != nullptr)
-                {
-                    temp = temp->NextObj;
-                }
             }
         }
+        SDL_SetRenderDrawColor(Game::renderer,255,255,255,255);
     }
 };

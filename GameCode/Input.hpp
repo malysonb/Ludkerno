@@ -15,6 +15,8 @@ public:
         transform = Base->transform;
         Debug::log("Initializing Input", Debug::INFO);
         PF = Base->getComponent<PlatformPhysics>();
+        PF->mass = 100;
+        PF->gravity = 10;
     }
     bool died = false;
     const char *GetName() { return "Input"; }
@@ -35,19 +37,19 @@ public:
             able = true;
             onTop = false;
             PF->isOnGround = true;
-            transform->SetScreenPosition(transform->GetScreenPosition().X, Game::screen.DynamicVPosition(50));
+            transform->SetScreenPosition(static_cast<int>(transform->GetScreenPosition().X), Game::screen.DynamicVPosition(50));
         }
         else
         {
             PF->isOnGround = false;
         }
-        if (Game::key.keycode.UP)
+        if (Game::key.keycode.UP && PF->isOnGround)
         {
-            PF->ApplyForce(-10, Vector2::AY);
+            PF->ApplyForce(-250, Vector2::AY);
         }
-        else
+        if (Game::key.keycode.DOWN)
         {
-            PF->ApplyForce(0, Vector2::AY);
+            PF->ApplyForce(400, Vector2::AY);
         }
         if (Base->getComponent<Collider>()->isColliding)
         {

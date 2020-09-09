@@ -10,7 +10,7 @@ class Cactus : public Component
     {
         Active = true;
         int myFrame = Game::Rand(0,4);
-        Base->SetSprite("Assets/cactus.png",16,32,4);
+        Base->SetSprite("./Assets/cactus.png",16,32,4);
         Base->getComponent<Sprite>()->SetupAnimation(myFrame,0,500);
         Base->getComponent<Sprite>()->SetAnimation(myFrame);
         Base->getComponent<Sprite>()->OriginPoint = {8, 32};
@@ -18,7 +18,7 @@ class Cactus : public Component
 
     void Update()
     {
-        Base->transform->velocity.X = speed * 1/Game::FrameRate;
+        Base->transform->velocity.X = static_cast<float>(speed);
     }
     void Render()
     {

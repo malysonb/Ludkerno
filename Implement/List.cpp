@@ -16,7 +16,7 @@ Entity *Obj::GetEntity()
     return object;
 }
 
-Entity *List::Add()
+/*Entity *List::Add()
 {
     Obj *temp = new Obj(IDs);
 
@@ -33,9 +33,18 @@ Entity *List::Add()
     Length++;
     IDs++;
     return temp->object;
+}*/
+
+Entity *List::Add()
+{
+    Obj *temp = new Obj(IDs);
+    SceneEntities.push_back(temp);
+    Length++;
+    IDs++;
+    return temp->object;
 }
 
-void List::Remove(int id)
+/*void List::Remove(int id)
 {
     Obj *LastCalled = nullptr;
     Obj *s_Index = Start;
@@ -81,9 +90,20 @@ void List::Remove(int id)
     }
     if (deleted == false)
         Debug::log("ENTITY NOT FOUND!", Debug::WARN);
+}*/
+
+void List::Remove(int id)
+{
+    for (int i = 0; i < SceneEntities.size(); i++)
+    {
+        if (id == SceneEntities[i]->object->ID)
+        {
+            SceneEntities.erase(SceneEntities.begin() + i);
+        }
+    }
 }
 
-void List::Clear()
+/*void List::Clear()
 {
     std::vector<int> Is(Length);
     Obj *s_index = Start;
@@ -102,9 +122,16 @@ void List::Clear()
         index--;
     }
     IDs = 0;
+}*/
+
+void List::Clear()
+{
+    SceneEntities.clear();
+    Length = 0;
+    IDs = 0;
 }
 
-void List::Update()
+/*void List::Update()
 {
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
@@ -115,9 +142,17 @@ void List::Update()
             s_index = s_index->NextObj;
         }
     }
+}*/
+
+void List::Update()
+{
+    for (int i = 0; i < SceneEntities.size(); i++)
+    {
+        SceneEntities[i]->object->Update();
+    }
 }
 
-void List::Render()
+/*void List::Render()
 {
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
@@ -128,9 +163,17 @@ void List::Render()
             s_index = s_index->NextObj;
         }
     }
+}*/
+
+void List::Render()
+{
+    for (int i = 0; i < SceneEntities.size(); i++)
+    {
+        SceneEntities[i]->object->Render();
+    }
 }
 
-Entity *List::GetByID(int id)
+/*Entity *List::GetByID(int id)
 {
     Obj *s_index = Start;
     for (int i = 0; i < Length; i++)
@@ -145,5 +188,17 @@ Entity *List::GetByID(int id)
         }
     }
     //Debug::log("CANT FIND THIS ENTITY!", Debug::WARN);
+    return nullptr;
+}*/
+
+Entity *List::GetByID(int id)
+{
+    for (int i = 0; i < SceneEntities.size(); i++)
+    {
+        if(id == SceneEntities[i]->object->ID)
+        {
+            return SceneEntities[i]->object;
+        }
+    }
     return nullptr;
 }

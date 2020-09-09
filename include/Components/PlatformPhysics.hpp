@@ -9,6 +9,7 @@ public:
     int ForceX = 0, ForceY = 0;
     int gravity = 10;
     int mass = 40;
+    int V_Limit = 500;
 
     void Init()
     {
@@ -16,10 +17,10 @@ public:
     }
     void Update()
     {
-        gravity = gravity * Game::FrameRate;
-        gravity = (600 * 1/Game::FrameRate);
+        float value = gravity/(1/static_cast<float>(Game::FrameRate));
+        gravity = (static_cast<int>(value) * 1/Game::FrameRate);
         ForceY += (mass/gravity);
-        ForceY >= 240 ? ForceY = 240 : ForceY;
+        ForceY >= V_Limit ? ForceY = V_Limit : ForceY;
         Base->transform->velocity.Y = static_cast<float>(ForceY);
     }
     void Render()

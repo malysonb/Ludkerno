@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Ludkerno.hpp"
 #include "GameCode/PlatformScene.hpp"
+#include "GameCode/Cena.hpp"
 
 Game *game = nullptr;
 
@@ -11,7 +12,7 @@ int main()
     Uint32 frameStart;
     int frameTime = SDL_GetTicks();
     game = new Game();
-    Game::sceneMngr.insertScene(new PlatformScene);
+    Game::sceneMngr.insertScene(new cena);
     game->EngineInit("Ludkerno", 852, 480);
     while (game->IsRunning())
     {
