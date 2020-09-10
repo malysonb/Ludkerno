@@ -17,10 +17,15 @@ public:
     }
     void Update()
     {
-        float value = gravity/(1/static_cast<float>(Game::FrameRate));
-        gravity = (static_cast<int>(value) * 1/Game::FrameRate);
-        ForceY += (mass/gravity);
+        int G = gravity, M = mass;
+        M = mass * 60;
+        G = gravity * 60;
+        M = M / Game::FrameRate;
+        G = G / Game::FrameRate;
+        ForceY += (M/G);
         ForceY >= V_Limit ? ForceY = V_Limit : ForceY;
+        //printf("ForceY: %d\n",ForceY);
+
         Base->transform->velocity.Y = static_cast<float>(ForceY);
     }
     void Render()

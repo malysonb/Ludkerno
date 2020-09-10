@@ -11,8 +11,9 @@ int main()
     const int frameDelay = 1000 / FPS;
     Uint32 frameStart;
     int frameTime = SDL_GetTicks();
+    Uint32 lastframe = SDL_GetTicks();
     game = new Game();
-    Game::sceneMngr.insertScene(new cena);
+    Game::sceneMngr.insertScene(new PlatformScene);
     game->EngineInit("Ludkerno", 852, 480);
     while (game->IsRunning())
     {
@@ -23,10 +24,10 @@ int main()
         frameTime = SDL_GetTicks() - frameStart;
         Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
         Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
-        if (frameDelay > frameTime)
+        /*if (frameDelay > frameTime)
         {
             SDL_Delay(frameDelay - frameTime);
-        }
+        }*/
     }
     game->Clear();
     return 0;

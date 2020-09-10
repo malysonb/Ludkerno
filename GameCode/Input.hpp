@@ -23,6 +23,7 @@ public:
     bool able = true;
     bool onTop = false;
     int v = 0;
+    int ForceJump = -250;
     void Update()
     {
         if (died)
@@ -45,7 +46,7 @@ public:
         }
         if (Game::key.keycode.UP && PF->isOnGround)
         {
-            PF->ApplyForce(-250, Vector2::AY);
+            PF->ApplyForce(ForceJump, Vector2::AY);
         }
         if (Game::key.keycode.DOWN)
         {

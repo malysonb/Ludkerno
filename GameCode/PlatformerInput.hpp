@@ -25,12 +25,12 @@ public:
             if (Game::key.keycode.LEFT && !Game::key.keycode.RIGHT)
             {
                 Base->GetSprite()->flipHorizontally(true);
-                Base->transform->velocity.X = -120;
+                Base->transform->velocity.X = (-120 * 60)/static_cast<float>(Game::FrameRate);
             }
             if (Game::key.keycode.RIGHT && !Game::key.keycode.LEFT)
             {
                 Base->GetSprite()->flipHorizontally(false);
-                Base->transform->velocity.X = 120;
+                Base->transform->velocity.X = (120 * 60)/static_cast<float>(Game::FrameRate);
             }
         }
         else

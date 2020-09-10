@@ -26,8 +26,8 @@ public:
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);
             cactus->getComponent<Collider>()->Init();
-            int range = Game::Rand(7,10);
-            float res = (range*100)/(1/static_cast<float>(Game::FrameRate));
+            int range = Game::Rand(8,10);
+            float res = (range*100)*static_cast<float>(Game::FrameRate);
             WaitTime = static_cast<int>(res);
             m_lasttime = SDL_GetTicks();
             for (int i = 0; i < static_cast<int>(Game::EntityManager.SceneEntities.size()); i++)

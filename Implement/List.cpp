@@ -94,7 +94,7 @@ Entity *List::Add()
 
 void List::Remove(int id)
 {
-    for (int i = 0; i < SceneEntities.size(); i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
         if (id == SceneEntities[i]->object->ID)
         {
@@ -146,7 +146,7 @@ void List::Clear()
 
 void List::Update()
 {
-    for (int i = 0; i < SceneEntities.size(); i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
         SceneEntities[i]->object->Update();
     }
@@ -167,7 +167,7 @@ void List::Update()
 
 void List::Render()
 {
-    for (int i = 0; i < SceneEntities.size(); i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
         SceneEntities[i]->object->Render();
     }
@@ -193,7 +193,7 @@ void List::Render()
 
 Entity *List::GetByID(int id)
 {
-    for (int i = 0; i < SceneEntities.size(); i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
         if(id == SceneEntities[i]->object->ID)
         {
