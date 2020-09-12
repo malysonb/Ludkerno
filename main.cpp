@@ -14,7 +14,7 @@ int main()
     Uint32 lastframe = SDL_GetTicks();
     game = new Game();
     Game::sceneMngr.insertScene(new PlatformScene);
-    game->EngineInit("Ludkerno", 852, 480);
+    game->EngineInit("Ludkerno", 854, 480);
     while (game->IsRunning())
     {
         frameStart = SDL_GetTicks();

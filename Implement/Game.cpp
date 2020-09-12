@@ -93,7 +93,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
 void Game::HandleEvents()
 {
     SDL_PollEvent(&Event);
-    key.UpdateInputs(Event);
+    key.UpdateInputs();
     switch (Event.type)
     {
     case SDL_QUIT:
@@ -106,8 +106,8 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    std::string fps = std::to_string(FrameRate);
-    SDL_SetWindowTitle(window, fps.c_str());
+    //std::string fps = std::to_string(FrameRate);
+    //SDL_SetWindowTitle(window, fps.c_str());
     if (notStarted)
     {
         Game::EntityManager.Clear();

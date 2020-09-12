@@ -6,18 +6,22 @@ class Key
 public:
     enum Control
     {
-        UP = SDLK_w,
-        DOWN = SDLK_s,
-        LEFT = SDLK_a,
-        RIGHT = SDLK_d,
-        ACTION = SDLK_e,
-        START = SDLK_ESCAPE,
-        QUIT = SDLK_F12
+        UP = SDL_SCANCODE_W,
+        DOWN = SDL_SCANCODE_S,
+        LEFT = SDL_SCANCODE_A,
+        RIGHT = SDL_SCANCODE_D,
+        ACTION = SDL_SCANCODE_E,
+        START = SDL_SCANCODE_RETURN,
+        QUIT = SDL_SCANCODE_F12
     };
     struct key_Struct
     {
         float X_Axis = 0;
         float Y_Axis = 0;
+        int MouseX = 0;
+        int MouseY = 0;
+        bool LEFT_CLICK = false;
+        bool RIGHT_CLICK = false;
         bool UP = false;
         bool DOWN = false;
         bool LEFT = false;
@@ -28,10 +32,21 @@ public:
     };
 
     key_Struct keycode;
+    const Uint8 *pressed = SDL_GetKeyboardState(NULL);
 
-    void UpdateInputs(SDL_Event& event)
+    void UpdateInputs()
     {
-        if (event.type == SDL_KEYDOWN)
+        keycode.UP = pressed[UP];
+        keycode.LEFT = pressed[LEFT];
+        keycode.RIGHT = pressed[RIGHT];
+        keycode.DOWN = pressed[DOWN];
+        keycode.ACTION = pressed[ACTION];
+        keycode.START = pressed[START];
+        keycode.QUIT = pressed[QUIT];
+        keycode.LEFT_CLICK = SDL_BUTTON(SDL_BUTTON_LEFT);
+        keycode.RIGHT_CLICK = SDL_BUTTON(SDL_BUTTON_RIGHT);
+        SDL_GetGlobalMouseState(&keycode.MouseX, &keycode.MouseY);
+        /*if (event.type == SDL_KEYDOWN)
         {
             switch (event.key.keysym.sym)
             {
@@ -88,7 +103,7 @@ public:
             default:
                 break;
             }
-        }
+        }*/
         if(keycode.RIGHT == true)
         {
             keycode.X_Axis = 1;
