@@ -13,7 +13,8 @@
 #include "../include/CollisionSystem.hpp"
 #include "../include/SceneMngr.hpp"
 
-int Game::FrameRate = 1;
+float Game::FrameRate = 1;
+float Game::DeltaTime = 1;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::Event;
@@ -31,6 +32,10 @@ Scene *ActualScene;
 
 bool notStarted = true;
 
+Scene *Game::GetScene()
+{
+    return ActualScene;
+}
 
 int Game::Rand(int min, int max)
 {
@@ -51,8 +56,9 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_FULLSCREEN_DESKTOP);
         renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
         SDL_RenderSetLogicalSize(renderer, 426, 240);
@@ -108,6 +114,8 @@ void Game::Update()
 {
     //std::string fps = std::to_string(FrameRate);
     //SDL_SetWindowTitle(window, fps.c_str());
+    DeltaTime = 30/FrameRate <= 1 ? 1 : 30/FrameRate;
+
     if (notStarted)
     {
         Game::EntityManager.Clear();

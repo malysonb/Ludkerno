@@ -43,6 +43,7 @@ void Entity::Update()
 {
     //transform->position = transform->position - Game::camVelocity;
     transform->Update();
+    //printf("%f\n", transform->velocity.Y);
     for (int i = 0; i < m_NumComponents; i++)
     {
         if (myComponents[i]->Active)

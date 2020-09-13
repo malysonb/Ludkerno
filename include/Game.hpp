@@ -20,7 +20,8 @@ class Game
     SDL_Window *window;
     bool Running = false;
 public:
-    static int FrameRate;
+    static float FrameRate;
+    static float DeltaTime;
     static Key key;
     static List EntityManager;
     static Vector2 matrix;
@@ -39,6 +40,8 @@ public:
      * @param WindowHeight Sets the Height of the window.
      **/
     void EngineInit(const char * WindowTitle, int WindowWidth, int WindowHeight);
+
+    static Scene *GetScene();
 
     /**
      * Handles all the inputs like the Controllers, KeyBoard or Mouse.

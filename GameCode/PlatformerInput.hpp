@@ -6,13 +6,14 @@ class PlatformerInput : public Component
 public:
     bool isGrounded = false;
     int PowerJump = -150;
-    
+
     void Init()
     {
         Active = true;
         Base->AddComponent<PlatformPhysics>(Base);
         Base->getComponent<PlatformPhysics>()->Init();
         Base->getComponent<PlatformPhysics>()->isOnGround = false;
+        Base->getComponent<PlatformPhysics>()->mass = 5;
     }
     void Update()
     {
@@ -25,12 +26,12 @@ public:
             if (Game::key.keycode.LEFT && !Game::key.keycode.RIGHT)
             {
                 Base->GetSprite()->flipHorizontally(true);
-                Base->transform->velocity.X = (-120 * 60)/static_cast<float>(Game::FrameRate);
+                Base->transform->velocity.X = -2 * Game::DeltaTime;
             }
             if (Game::key.keycode.RIGHT && !Game::key.keycode.LEFT)
             {
                 Base->GetSprite()->flipHorizontally(false);
-                Base->transform->velocity.X = (120 * 60)/static_cast<float>(Game::FrameRate);
+                Base->transform->velocity.X = 2 * Game::DeltaTime;
             }
         }
         else
@@ -43,7 +44,7 @@ public:
         }
         if (Game::key.keycode.UP && isGrounded)
         {
-            Base->getComponent<PlatformPhysics>()->ApplyForce(-150, Vector2::AY);
+            Base->getComponent<PlatformPhysics>()->ApplyForce(-3, Vector2::AY);
             isGrounded = false;
             //Base->getComponent<PlatformPhysics>()->isOnGround = false;
         }
@@ -53,6 +54,31 @@ public:
             Base->getComponent<PlatformPhysics>()->isOnGround = true;
             Base->transform->velocity.Y = 0;
             Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Game::screen.DynamicVPosition(100));
+        }
+        bool cap = false;
+        for (int row = 0; row < Game::GetScene()->M_SceneRows; row++)
+        {
+            for (int col = 0; col < Game::GetScene()->M_SceneCols; col++)
+            {
+                if (Game::GetScene()->map[row][col] != 4)
+                {
+                    if (Base->transform->GetPosition().X >= (16 * col) && Base->transform->GetPosition().X <= ((16 * col) + 16))
+                    {
+                        if (Base->transform->GetPosition().Y -1 >= (16 * row) && Base->transform->GetPosition().Y <= (16 * row) + 16)
+                        {
+                            cap = true;
+                            isGrounded = true;
+                            Base->getComponent<PlatformPhysics>()->isOnGround = true;
+                            Base->transform->SetPosition(Base->transform->GetPosition().X, Base->transform->GetPosition().Y - Base->transform->velocity.Y);
+                        }
+                    }
+                }
+            }
+        }
+        if(!cap)
+        {
+            isGrounded = false;
+            Base->getComponent<PlatformPhysics>()->isOnGround = false;
         }
     }
     void Render()

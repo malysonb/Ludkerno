@@ -23,7 +23,7 @@ public:
     bool able = true;
     bool onTop = false;
     int v = 0;
-    int ForceJump = -250;
+    float ForceJump = -250;
     void Update()
     {
         if (died)

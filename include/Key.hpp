@@ -43,8 +43,8 @@ public:
         keycode.ACTION = pressed[ACTION];
         keycode.START = pressed[START];
         keycode.QUIT = pressed[QUIT];
-        keycode.LEFT_CLICK = SDL_BUTTON(SDL_BUTTON_LEFT);
-        keycode.RIGHT_CLICK = SDL_BUTTON(SDL_BUTTON_RIGHT);
+        keycode.LEFT_CLICK = static_cast<bool>(SDL_BUTTON(SDL_BUTTON_LEFT));
+        keycode.RIGHT_CLICK = static_cast<bool>(SDL_BUTTON(SDL_BUTTON_RIGHT));
         SDL_GetGlobalMouseState(&keycode.MouseX, &keycode.MouseY);
         /*if (event.type == SDL_KEYDOWN)
         {

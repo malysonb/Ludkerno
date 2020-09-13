@@ -38,7 +38,7 @@ public:
         //velocity = velocity * static_cast<float>(Game::FrameRate); 
         //printf("b4 conversion: %f\n",velocity.Y);
         //velocity = velocity * static_cast<float>(Game::FrameRate);
-        velocity = velocity / 60;
+        //velocity = velocity / 60;
         //printf("after conversion: %f\n",velocity.Y);
         position = position - Game::camVelocity;
         position = position + velocity;

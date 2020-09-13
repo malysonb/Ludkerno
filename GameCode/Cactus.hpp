@@ -18,9 +18,9 @@ class Cactus : public Component
 
     void Update()
     {
-        int S = speed * 60;
-        S = S / Game::FrameRate;
-        Base->transform->velocity.X = static_cast<float>(S);
+        float S = speed * Game::DeltaTime;
+        //S = S / Game::FrameRate;
+        Base->transform->velocity.X = S;
     }
     void Render()
     {
