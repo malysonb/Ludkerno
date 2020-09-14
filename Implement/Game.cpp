@@ -56,7 +56,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_FULLSCREEN_DESKTOP);
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
         renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

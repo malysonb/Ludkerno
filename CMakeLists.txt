@@ -31,7 +31,14 @@ if(WIN32)
             include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/x64/include)
             link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/x64/lib)
         endif()
-    endif()  
+    endif()
+else()
+    message(STATUS "Non windows environment yay.")
+    if (CMAKE_CXX_COMPILER_ID MATCHES GNU)
+        message(STATUS "GCC COMPILER DETECTED")
+        add_definitions(-DGCCcompiler)
+        link_directories(${CMAKE_SOURCE_DIR}/)
+        endif()
 endif()
 
 
@@ -40,6 +47,6 @@ file(GLOB implements "Implement/*.cpp")
 
 add_executable(Ludkerno main.cpp ${implements})
 add_definitions(-DRelease=true)
-target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image RPK)
+target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image ${CMAKE_SOURCE_DIR}/ThirdParty/libRPK.a)
 
 
