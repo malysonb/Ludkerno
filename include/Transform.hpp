@@ -40,8 +40,9 @@ public:
         //velocity = velocity * static_cast<float>(Game::FrameRate);
         //velocity = velocity / 60;
         //printf("after conversion: %f\n",velocity.Y);
-        position = position - Game::camVelocity;
+        //velocity = velocity - Game::camVelocity;
         position = position + velocity;
+        position = position - Game::camVelocity;
     }
 
     void Render()

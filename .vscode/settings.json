@@ -75,7 +75,16 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "xfacet": "cpp",
+        "xlocale": "cpp",
+        "xlocinfo": "cpp",
+        "xlocnum": "cpp",
+        "xmemory": "cpp",
+        "xstddef": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
     },
     "c-cpp-compile-run.cpp-flags": "-Wall -Wextra ./Implement/*.cpp -L./ThirdParty/x64/lib -lSDL2main -lSDL2 -lSDL2_image",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",

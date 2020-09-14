@@ -123,12 +123,11 @@ void Game::Update()
         notStarted = false;
     }
     matrix = matrix - camera->relativeVelocity;
-    camVelocity = camera->relativeVelocity;
     ActualScene->Update();
     camera->Update();
+    camVelocity = camera->relativeVelocity;
     EntityManager.Update();
     collisionSystem.Update();
-    //std::cout << "X: " << Game::matrix.X << " Y: " << Game::matrix.Y << std::endl;
 }
 
 void Game::Render()

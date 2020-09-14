@@ -9,7 +9,7 @@ public:
     float ForceX = 0, ForceY = 0;
     float gravity = 1;
     float mass = 1;
-    float V_Limit = 5;
+    float V_Limit = 10;
     bool forceApplied = false;
 
     void Init()

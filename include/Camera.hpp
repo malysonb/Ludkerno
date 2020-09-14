@@ -23,18 +23,21 @@ public:
         relativePosition = relativePosition + relativeVelocity;
     }
 
-    void Move(Vector2::Vector Axis, int velocity)
+    Vector2 &GetCameraPos()
+    {
+        return relativePosition;
+    }
+
+    void Move(Vector2::Vector Axis, float velocity)
     {
         if(Axis == Vector2::AX)
         {
-            if (relativePosition.X + velocity >= Game::matrix.X)
-                relativeVelocity.X = static_cast<float>(velocity);
-            else relativeVelocity.X = 0;
+            relativeVelocity.X = (velocity);
         }
         if(Axis == Vector2::AY)
         {
             if (relativePosition.Y + velocity >= Game::matrix.Y)
-                relativeVelocity.Y = static_cast<float>(velocity);
+                relativeVelocity.Y = (velocity);
             else relativeVelocity.Y = 0;
         }
     }

@@ -1,4 +1,5 @@
 if(WIN32)
+    message(STATUS "RPK for Windows!.")
     if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
         if(NOT EXISTS ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/lib/x86/RPK.lib)
             set(MyURL "https://github.com/malysonb/RadiPako/releases/download/v1.2.0.1/RPK_MSVC.zip")

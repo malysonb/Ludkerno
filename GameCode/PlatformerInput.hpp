@@ -64,21 +64,29 @@ public:
                 {
                     if (Base->transform->GetPosition().X >= (16 * col) && Base->transform->GetPosition().X <= ((16 * col) + 16))
                     {
-                        if (Base->transform->GetPosition().Y -1 >= (16 * row) && Base->transform->GetPosition().Y <= (16 * row) + 16)
+                        if (Base->transform->GetPosition().Y - 1 >= (16 * row) && Base->transform->GetPosition().Y <= (16 * row) + 16)
                         {
                             cap = true;
                             isGrounded = true;
                             Base->getComponent<PlatformPhysics>()->isOnGround = true;
-                            Base->transform->SetPosition(Base->transform->GetPosition().X, Base->transform->GetPosition().Y - Base->transform->velocity.Y);
+                            Base->transform->SetScreenPosition(Base->transform->GetScreenPosition().X, Base->transform->GetScreenPosition().Y - Base->transform->velocity.Y);
                         }
                     }
                 }
             }
         }
-        if(!cap)
+        if (!cap)
         {
             isGrounded = false;
             Base->getComponent<PlatformPhysics>()->isOnGround = false;
+        }
+        if (Base->transform->velocity.X != 0)
+        {
+            Game::camera->Move(Vector2::AX, Base->transform->velocity.X);
+        }
+        else
+        {
+            Game::camera->Move(Vector2::AX, 0);
         }
     }
     void Render()

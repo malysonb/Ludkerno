@@ -7,6 +7,8 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(RPK REQUIRED)
 
+file(GLOB implements "Implement/*.cpp")
+
 if(WIN32)
     message(STATUS "WIN32 DETECTED")
     if (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
@@ -16,21 +18,39 @@ if(WIN32)
         add_definitions(-DSDL_Image_Path="../ThirdParty/MSVC/include/SDL_image.h")
         if(CMAKE_SIZEOF_VOID_P EQUAL 4)
             link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/lib/x86)
+
         elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
-            link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/lib/x64)
+            link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/lib/x64)        
         endif()
+
+        add_executable(Ludkerno main.cpp ${implements})
+        target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image RPK)
         link_directories(${CMAKE_SOURCE_DIR}/Implement)
         include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/MSVC/include)
+
     elseif (CMAKE_CXX_COMPILER_ID MATCHES GNU)
         message(STATUS "GCC COMPILER DETECTED")
         add_definitions(-DGCCcompiler)
+        add_definitions(-static)
+        add_definitions(-mwindows)
+        add_definitions(-static-libgcc)
+        add_definitions(-s)
+        set(CMAKE_CXX_FLAGS_RELEASE -O2)
+        execute_process(COMMAND mkdir ${CMAKE_BINARY_DIR}/bin)
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
         if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+            execute_process(COMMAND cp ${CMAKE_SOURCE_DIR}/ThirdParty/x86/bin/libpng16-16.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libpng16-16.dll)
             include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/x86/include)
             link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/x86/lib)
+
         elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+            execute_process(COMMAND cp ${CMAKE_SOURCE_DIR}/ThirdParty/x64/bin/libpng16-16.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libpng16-16.dll)
             include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/ThirdParty/x64/include)
             link_directories(${CMAKE_SOURCE_DIR}/Implement ${CMAKE_SOURCE_DIR}/ThirdParty/x64/lib)
         endif()
+        
+        add_executable(Ludkerno main.cpp ${implements} my.o)
+        target_link_libraries(Ludkerno setupapi mingw32 SDL2main.a libSDL2.a m dinput8 dxguid dxerr8 user32 gdi32 winmm imm32 ole32 oleaut32 shell32 hid setupapi version uuid SDL2_image.a RPK)
     endif()
 else()
     message(STATUS "Non windows environment yay.")
@@ -41,12 +61,6 @@ else()
         endif()
 endif()
 
-
-
-file(GLOB implements "Implement/*.cpp")
-
-add_executable(Ludkerno main.cpp ${implements})
 add_definitions(-DRelease=true)
-target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image ${CMAKE_SOURCE_DIR}/ThirdParty/libRPK.a)
 
 
