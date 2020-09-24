@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Ludkerno.hpp"
 #include "GameCode/PlatformScene.hpp"
-#include "GameCode/Cena.hpp"
+//#include "GameCode/Cena.hpp"
 
 Game *game = nullptr;
 

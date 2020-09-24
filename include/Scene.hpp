@@ -19,6 +19,7 @@ class Scene
     virtual void Update() = 0;
     void Scene_SetTilemap(const char *filepath);
     void Scene_SetTilemap(const char *filename, int sheets_H, int sheets_V, int tile_X = 32, int tile_Y = 32);
+    Vector2 GetTileDim();
     int **map;
     int M_SceneCols, M_SceneRows;
     private:

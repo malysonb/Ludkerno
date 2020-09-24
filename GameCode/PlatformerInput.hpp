@@ -1,5 +1,6 @@
 #pragma once
 #include "../Ludkerno.hpp"
+#include "../include/Utils.hpp"
 
 class PlatformerInput : public Component
 {
@@ -62,9 +63,9 @@ public:
             {
                 if (Game::GetScene()->map[row][col] != 4)
                 {
-                    if (Base->transform->GetPosition().X >= (16 * col) && Base->transform->GetPosition().X <= ((16 * col) + 16))
+                    if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().X), (16 * col), (16 * col)+16))
                     {
-                        if (Base->transform->GetPosition().Y - 1 >= (16 * row) && Base->transform->GetPosition().Y <= (16 * row) + 16)
+                        if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().Y-1), (16 * row), (16 * row)+16))
                         {
                             cap = true;
                             isGrounded = true;
@@ -82,7 +83,8 @@ public:
         }
         if (Base->transform->velocity.X != 0)
         {
-            Game::camera->Move(Vector2::AX, Base->transform->velocity.X);
+            if(Base->transform->GetScreenPosition().X >= Game::screen.DynamicHPosition(50))
+                Game::camera->Move(Vector2::AX, Base->transform->velocity.X);
         }
         else
         {

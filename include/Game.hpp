@@ -4,7 +4,7 @@
 #ifdef SDL_Path
 #include SDL_Path
 #else
-#include <SDL2/SDL.h>
+#include "../ThirdParty/x86/include/SDL2/SDL.h"
 #endif
 #include "Key.hpp"
 
@@ -47,29 +47,26 @@ public:
      * Handles all the inputs like the Controllers, KeyBoard or Mouse.
      **/
     void HandleEvents();
+    
     /**
      * Triggers every Tick. 
      **/
     void Update();
+
     /**
      * Renders all the stuff on the screen.
      **/
     void Render();
+
     /**
      * Turns off the Engine.
      **/
     void Clear();
+
     /**
      * @returns True if the engine is running.
      **/
     bool IsRunning();
-
-    /**
-     * @param min The starter number.
-     * @param max The maximum number.
-     * @returns A random number in between this two.
-     **/
-    static int Rand(int min, int max);
 
     /**
      * Loads/Changes the Scene of the game.

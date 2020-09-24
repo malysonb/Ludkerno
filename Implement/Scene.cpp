@@ -93,3 +93,8 @@ void Scene::Scene_SetTilemap(const char *filename, int sheets_H, int sheets_V, i
     destRect.h = srcRect.h;
     destRect.w = srcRect.w;
 }
+
+Vector2 Scene::GetTileDim()
+{
+    return Vector2(M_tile->TileX, M_tile->TileX);
+}

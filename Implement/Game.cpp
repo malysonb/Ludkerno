@@ -37,11 +37,11 @@ Scene *Game::GetScene()
     return ActualScene;
 }
 
-int Game::Rand(int min, int max)
+/*int Game::Rand(int min, int max)
 {
     srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
     return rand() % (max - min) + min;
-}
+}*/
 
 void Game::LoadScene(Scene *scene)
 {

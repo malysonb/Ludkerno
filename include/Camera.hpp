@@ -36,9 +36,7 @@ public:
         }
         if(Axis == Vector2::AY)
         {
-            if (relativePosition.Y + velocity >= Game::matrix.Y)
-                relativeVelocity.Y = (velocity);
-            else relativeVelocity.Y = 0;
+            relativeVelocity.Y = (velocity);
         }
     }
 };

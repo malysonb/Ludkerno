@@ -34,13 +34,6 @@ public:
 
     void Update()
     {
-        //Acceleration = Acceleration * 1/Game::FrameRate;
-        //velocity = velocity * static_cast<float>(Game::FrameRate); 
-        //printf("b4 conversion: %f\n",velocity.Y);
-        //velocity = velocity * static_cast<float>(Game::FrameRate);
-        //velocity = velocity / 60;
-        //printf("after conversion: %f\n",velocity.Y);
-        //velocity = velocity - Game::camVelocity;
         position = position + velocity;
         position = position - Game::camVelocity;
     }
