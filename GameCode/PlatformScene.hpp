@@ -2,12 +2,30 @@
 #include "../Ludkerno.hpp"
 #include "PlatformerInput.hpp"
 
+int testmap[] = {6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+                 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2};
+
 class PlatformScene : public Scene
 {
     public:
     Entity* Player;
     void Setup()
     {
+        Scene_SetTilemap("./Assets/tileset.png",3,3,16,16);
+        LoadMap(35,15,testmap);
         Player = Game::EntityManager.Add();
         Player->SetSprite("./Assets/aliisheet.png",16,16,4);
         Player->GetSprite()->SetOrigin(8,16);
@@ -15,7 +33,7 @@ class PlatformScene : public Scene
         Player->GetSprite()->SetupAnimation(1,5,50);
         Player->AddComponent<PlatformerInput>(Player);
         Player->getComponent<PlatformerInput>()->Init();
-        Player->transform->SetScreenPosition(Game::screen.DynamicHPosition(50), Game::screen.DynamicVPosition(50));
+        Player->transform->SetScreenPosition(Game::screen.DynamicHPosition(50), Game::screen.DynamicVPosition(20));
     }
     void Update()
     {

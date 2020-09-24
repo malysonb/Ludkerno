@@ -26,10 +26,10 @@ void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_of
     m_mySprite = getComponent<Sprite>();
     m_mySprite->Init(texturePath, Size_x, Size_y, n_ofAnimations);
     m_mySprite->SetupAnimation(0, 1, 500);
-    m_mySprite->destRect.x = (transform->position.X) - m_mySprite->OriginPoint.X;
-    m_mySprite->destRect.y = (transform->position.Y) - m_mySprite->OriginPoint.Y;
-    m_mySprite->destRect.h = m_mySprite->srcRect.h * transform->scale.Y;
-    m_mySprite->destRect.w = m_mySprite->srcRect.w * transform->scale.X;
+    m_mySprite->destRect.x = static_cast<int>(transform->position.X) - static_cast<int>(m_mySprite->OriginPoint.X);
+    m_mySprite->destRect.y = static_cast<int>(transform->position.Y) - static_cast<int>(m_mySprite->OriginPoint.Y);
+    m_mySprite->destRect.h = m_mySprite->srcRect.h * static_cast<int>(transform->scale.Y);
+    m_mySprite->destRect.w = m_mySprite->srcRect.w * static_cast<int>(transform->scale.X);
 }
 
 Sprite *Entity::GetSprite()
@@ -43,6 +43,7 @@ void Entity::Update()
 {
     //transform->position = transform->position - Game::camVelocity;
     transform->Update();
+    //printf("%f\n", transform->velocity.Y);
     for (int i = 0; i < m_NumComponents; i++)
     {
         if (myComponents[i]->Active)
@@ -52,14 +53,14 @@ void Entity::Update()
     }
     if (m_mySprite != nullptr)
     {
-        m_mySprite->destRect.x = (transform->position.X) - m_mySprite->OriginPoint.X;
-        m_mySprite->destRect.y = (transform->position.Y) - m_mySprite->OriginPoint.Y;
-        m_mySprite->destRect.h = m_mySprite->srcRect.h * transform->scale.Y;
-        m_mySprite->destRect.w = m_mySprite->srcRect.w * transform->scale.X;
+        m_mySprite->destRect.x = static_cast<int>(transform->position.X) - static_cast<int>(m_mySprite->OriginPoint.X);
+        m_mySprite->destRect.y = static_cast<int>(transform->position.Y) - static_cast<int>(m_mySprite->OriginPoint.Y);
+        m_mySprite->destRect.h = m_mySprite->srcRect.h * static_cast<int>(transform->scale.Y);
+        m_mySprite->destRect.w = m_mySprite->srcRect.w * static_cast<int>(transform->scale.X);
     }
 }
 
-void Entity::SetPosition(int x, int y)
+void Entity::SetPosition(float x, float y)
 {
     transform->SetPosition(x, y);
 }

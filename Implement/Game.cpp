@@ -11,13 +11,12 @@
 #include "../include/ComponentList.hpp"
 #include "../include/Screen.hpp"
 #include "../include/CollisionSystem.hpp"
-#include "../include/PkgMngr.hpp"
 #include "../include/SceneMngr.hpp"
 
-int Game::FrameRate = 1;
+float Game::FrameRate = 1;
+float Game::DeltaTime = 1;
 
 SDL_Renderer *Game::renderer = nullptr;
-PkgMngr Game::pkgMngr;
 SDL_Event Game::Event;
 List Game::EntityManager;
 SceneMngr Game::sceneMngr;
@@ -33,22 +32,16 @@ Scene *ActualScene;
 
 bool notStarted = true;
 
-Game::Game()
+Scene *Game::GetScene()
 {
-}
-Game::~Game()
-{
+    return ActualScene;
 }
 
-int Game::Rand(int min, int max)
+/*int Game::Rand(int min, int max)
 {
-    srand(std::chrono::system_clock::now().time_since_epoch().count());
+    srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
     return rand() % (max - min) + min;
-}
-
-void Game::Setup()
-{
-}
+}*/
 
 void Game::LoadScene(Scene *scene)
 {
@@ -58,18 +51,14 @@ void Game::LoadScene(Scene *scene)
     Debug::log("Loaded a new scene!", Debug::INFO);
 }
 
-void Game::teste(Scene *scene)
-{
-    LoadScene(scene);
-}
-
 void Game::EngineInit(const char *title, int Wx, int Wy)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
-        renderer = SDL_CreateRenderer(window, 0, 0);
+        renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
         SDL_RenderSetLogicalSize(renderer, 426, 240);
@@ -101,7 +90,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     std::cout << "LUDKERNO STARTED! " << VERSION << std::endl;
 //Setup();
 #ifdef Release
-    pkgMngr.Init();
+    
 #endif
     LoadScene(sceneMngr.GetScene(0));
     //Loop();
@@ -110,7 +99,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
 void Game::HandleEvents()
 {
     SDL_PollEvent(&Event);
-    key.UpdateInputs(Event);
+    key.UpdateInputs();
     switch (Event.type)
     {
     case SDL_QUIT:
@@ -123,8 +112,10 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    std::string fps = std::to_string(FrameRate);
-    SDL_SetWindowTitle(window, fps.c_str());
+    //std::string fps = std::to_string(FrameRate);
+    //SDL_SetWindowTitle(window, fps.c_str());
+    DeltaTime = 30/FrameRate <= 1 ? 1 : 30/FrameRate;
+
     if (notStarted)
     {
         Game::EntityManager.Clear();
@@ -132,12 +123,11 @@ void Game::Update()
         notStarted = false;
     }
     matrix = matrix - camera->relativeVelocity;
-    camVelocity = camera->relativeVelocity;
     ActualScene->Update();
     camera->Update();
+    camVelocity = camera->relativeVelocity;
     EntityManager.Update();
     collisionSystem.Update();
-    //std::cout << "X: " << Game::matrix.X << " Y: " << Game::matrix.Y << std::endl;
 }
 
 void Game::Render()

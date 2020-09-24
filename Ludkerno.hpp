@@ -1,4 +1,5 @@
 #pragma once
+#include "include/Utils.hpp"
 #include "include/Game.hpp"
 #include "include/Vector2.hpp"
 #include "include/Debug.hpp"

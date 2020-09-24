@@ -11,15 +11,16 @@ struct Vector2
     enum Vector{ AX, AY };
 
     float X = 0, Y = 0;
+
     Vector2();
 
-    Vector2(int x, int y);
+    Vector2(float x,float  y);
 
     Vector2 operator+(Vector2& vector2);
     Vector2 operator-(Vector2& vector2);
     Vector2 operator/(Vector2& vector2);
     Vector2 operator/(float value);
-    Vector2 operator*(int value);
+    Vector2 operator*(float value);
     void operator-=(Vector2& vector2);
     bool operator==(Vector2& vector2);
     bool operator!=(Vector2& vector2);

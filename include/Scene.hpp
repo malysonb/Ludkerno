@@ -5,22 +5,27 @@
  * Simple scene template to you make your own scenes.
  */
 #include "Game.hpp"
+#include "Tilemap.hpp"
 class Scene
 {
     public:
     Scene();
     ~Scene();
 
-    void LoadMap(int sX, int sY, int **MapCode);
+    void LoadMap(int sX, int sY, int *MapCode);
     void DrawMap();
     virtual void Setup() = 0;
     void Init();
     virtual void Update() = 0;
-
-    private:
-    SDL_Rect srcRect, destRect;
-    SDL_Texture* TileMap;
-    int canDraw = false;
+    void Scene_SetTilemap(const char *filepath);
+    void Scene_SetTilemap(const char *filename, int sheets_H, int sheets_V, int tile_X = 32, int tile_Y = 32);
+    Vector2 GetTileDim();
     int **map;
+    int M_SceneCols, M_SceneRows;
+    private:
+    SDL_Texture* Scene_TileMap;
+    Tilemap* M_tile;
+    SDL_Rect srcRect, destRect;
+    int canDraw = false;
 
 };

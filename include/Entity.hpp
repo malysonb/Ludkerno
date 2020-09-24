@@ -19,7 +19,7 @@ public:
     void Render();
 
     void SetSprite(const char *TexturePath, int s_x, int s_y, int n_ofAnimations);
-    void SetPosition(int x, int y);
+    void SetPosition(float x, float y);
 
     template <typename newComp>
     void AddComponent(Entity *Owner = nullptr)

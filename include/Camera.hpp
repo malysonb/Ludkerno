@@ -15,27 +15,28 @@ public:
 
     void Init()
     {
-        middle.X = Game::screen.DynamicHPosition(50);
-        middle.Y = Game::screen.DynamicVPosition(50);
+        middle.X = static_cast<float>(Game::screen.DynamicHPosition(50));
+        middle.Y = static_cast<float>(Game::screen.DynamicVPosition(50));
     }
     void Update()
     {
         relativePosition = relativePosition + relativeVelocity;
     }
 
+    Vector2 &GetCameraPos()
+    {
+        return relativePosition;
+    }
+
     void Move(Vector2::Vector Axis, float velocity)
     {
         if(Axis == Vector2::AX)
         {
-            if (relativePosition.X + velocity >= Game::matrix.X)
-                relativeVelocity.X = velocity;
-            else relativeVelocity.X = 0;
+            relativeVelocity.X = (velocity);
         }
         if(Axis == Vector2::AY)
         {
-            if (relativePosition.Y + velocity >= Game::matrix.Y)
-                relativeVelocity.Y = velocity;
-            else relativeVelocity.Y = 0;
+            relativeVelocity.Y = (velocity);
         }
     }
 };

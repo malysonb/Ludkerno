@@ -26,16 +26,18 @@ public:
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);
             cactus->getComponent<Collider>()->Init();
-            WaitTime = Game::Rand(24000, 60000);
+            int range = Utils::Rand(8,10);
+            float res = (range*100)*static_cast<float>(Game::FrameRate);
+            WaitTime = static_cast<int>(res);
             m_lasttime = SDL_GetTicks();
-            for (int i = 0; i < Game::EntityManager.Length; i++)
+            for (int i = 0; i < static_cast<int>(Game::EntityManager.SceneEntities.size()); i++)
             {
-                Entity *temp = Game::EntityManager.GetByID(i);
-                if (temp->getComponent<Cactus>() != nullptr)
+                Entity *temp = Game::EntityManager.SceneEntities[i]->object;
+                if (temp != nullptr && temp->getComponent<Cactus>() != nullptr)
                 {
                     if (temp->transform->GetScreenPosition().X < -16)
                     {
-                        Game::EntityManager.Remove(i);
+                        Game::EntityManager.Remove(temp->ID);
                     }
                 }
             }

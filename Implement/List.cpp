@@ -1,5 +1,6 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Entity.hpp"
+#include <vector>
 
 Obj::Obj(int ID)
 {
@@ -18,17 +19,7 @@ Entity *Obj::GetEntity()
 Entity *List::Add()
 {
     Obj *temp = new Obj(IDs);
-
-    if (Length == 0)
-    {
-        Start = temp;
-        End = temp;
-    }
-    else if (Length > 0)
-    {
-        End->NextObj = temp;
-        End = temp;
-    }
+    SceneEntities.push_back(temp);
     Length++;
     IDs++;
     return temp->object;
@@ -36,113 +27,46 @@ Entity *List::Add()
 
 void List::Remove(int id)
 {
-    Obj *LastCalled = nullptr;
-    Obj *s_Index = Start;
-    bool deleted = false;
-    for (int i = 0; i < Length; i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        if (s_Index->object->ID == id)
+        if (id == SceneEntities[i]->object->ID)
         {
-            if (i == 0)
-            {
-                Start = s_Index->NextObj;
-                delete s_Index;
-                Length--;
-                deleted = true;
-                break;
-            }
-            else if (i == Length - 1 && Length > 1)
-            {
-                if (End == s_Index)
-                {
-                    LastCalled->NextObj = nullptr;
-                    End = LastCalled;
-                    delete s_Index;
-                    Length--;
-                    deleted = true;
-                    break;
-                }
-            }
-            else
-            {
-                LastCalled->NextObj = s_Index->NextObj;
-                delete s_Index;
-                Length--;
-                deleted = true;
-                break;
-            }
-        }
-        if (s_Index->NextObj != nullptr)
-        {
-            LastCalled = s_Index;
-            s_Index = s_Index->NextObj;
+            SceneEntities.erase(SceneEntities.begin() + i);
         }
     }
-    if (deleted == false)
-        Debug::log("ENTITY NOT FOUND!", Debug::WARN);
 }
 
 void List::Clear()
 {
-    int Is[Length];
-    Obj *s_index = Start;
-    for (int i = 0; i < Length; i++)
-    {
-        Is[i] = s_index->object->ID;
-        if (s_index->NextObj != nullptr)
-        {
-            s_index = s_index->NextObj;
-        }
-    }
-    int index = Length - 1;
-    while (Length > 0)
-    {
-        Remove(Is[index]);
-        index--;
-    }
+    SceneEntities.clear();
+    Length = 0;
     IDs = 0;
 }
 
 void List::Update()
 {
-    Obj *s_index = Start;
-    for (int i = 0; i < Length; i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        s_index->object->Update();
-        if (s_index->NextObj != nullptr)
-        {
-            s_index = s_index->NextObj;
-        }
+        SceneEntities[i]->object->Update();
     }
 }
 
 void List::Render()
 {
-    Obj *s_index = Start;
-    for (int i = 0; i < Length; i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        s_index->object->Render();
-        if (s_index->NextObj != nullptr)
-        {
-            s_index = s_index->NextObj;
-        }
+        SceneEntities[i]->object->Render();
     }
 }
 
 Entity *List::GetByID(int id)
 {
-    Obj *s_index = Start;
-    for (int i = 0; i < Length; i++)
+    for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        if (id == s_index->object->ID)
+        if(id == SceneEntities[i]->object->ID)
         {
-            return s_index->object;
-        }
-        else if (s_index->NextObj != nullptr)
-        {
-            s_index = s_index->NextObj;
+            return SceneEntities[i]->object;
         }
     }
-    //Debug::log("CANT FIND THIS ENTITY!", Debug::WARN);
     return nullptr;
 }

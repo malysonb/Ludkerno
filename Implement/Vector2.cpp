@@ -6,10 +6,10 @@ Vector2::Vector2()
     X = 0;
     Y = 0;
 }
-Vector2::Vector2(int x, int y)
+Vector2::Vector2(float x, float y)
 {
-    X = x;
-    Y = y;
+    this->X = x;
+    this->Y = y;
 }
 Vector2 Vector2::operator+(Vector2 &vector2)
 {
@@ -25,7 +25,7 @@ Vector2 Vector2::operator-(Vector2 &vector2)
     result.Y = this->Y - vector2.Y;
     return result;
 }
-Vector2 Vector2::operator*(int value)
+Vector2 Vector2::operator*(float value)
 {
     Vector2 result;
     result.X = this->X * value;
