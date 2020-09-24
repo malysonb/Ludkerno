@@ -15,15 +15,14 @@ public:
         transform = Base->transform;
         Debug::log("Initializing Input", Debug::INFO);
         PF = Base->getComponent<PlatformPhysics>();
-        PF->mass = 100;
-        PF->gravity = 10;
+        PF->mass = 5;
     }
     bool died = false;
     const char *GetName() { return "Input"; }
     bool able = true;
     bool onTop = false;
     int v = 0;
-    float ForceJump = -250;
+    float ForceJump = -2.2f;
     void Update()
     {
         if (died)
