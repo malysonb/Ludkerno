@@ -16,8 +16,8 @@ Feel free to add support to linux on cmakelist.
 Dependencies: [SDL2](https://www.libsdl.org/download-2.0.php), [SDL2_image](https://www.libsdl.org/projects/SDL_image/) and [RadiPako](https://github.com/malysonb/RadiPako).
 
 This source code comes with a little demo game:
-[Download]() the Dino bootleg Example.
+[Download](https://github.com/malysonb/Ludkerno/releases/download/v0.4.0/Dino_Bootleg.zip) the Dino bootleg Example.
 ![Dino!](/GameCode/Splash/dino.png)
 
-[Download]() the platformer Example.
+[Download](https://github.com/malysonb/Ludkerno/releases/download/v0.4.0/Platformer.zip) the platformer Example.
 ![Dino!](/GameCode/Splash/platformer.png)
