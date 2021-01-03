@@ -1,0 +1,9 @@
+digraph "Ludkerno/include/Components" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_8ddf9cddeec2fc2b3bcaefbbb8b0f1b1 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="include" fontname="Helvetica", fontsize="10", URL="dir_8ddf9cddeec2fc2b3bcaefbbb8b0f1b1.html"]
+  dir_1240f935f42ea930a325746c4ca87720 [shape=box, label="Components", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_1240f935f42ea930a325746c4ca87720.html"];
+  }
+}

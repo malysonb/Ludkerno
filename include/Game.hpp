@@ -4,7 +4,7 @@
 #ifdef SDL_Path
 #include SDL_Path
 #else
-#include "../ThirdParty/x86/include/SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #endif
 #include "Key.hpp"
 
@@ -17,9 +17,9 @@ struct Vector2;
 
 class Game
 {
-    SDL_Window *window;
     bool Running = false;
 public:
+    static SDL_Window *window;
     static float FrameRate;
     static float DeltaTime;
     static Key key;

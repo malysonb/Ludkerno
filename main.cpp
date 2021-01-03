@@ -11,9 +11,9 @@ int main()
     const int frameDelay = 1000 / FPS;
     Uint32 frameStart;
     int frameTime = SDL_GetTicks();
-    Uint32 lastframe = SDL_GetTicks();
+    //Uint32 lastframe = SDL_GetTicks();
     game = new Game();
-    Game::sceneMngr.insertScene(new cena);
+    Game::sceneMngr.insertScene(new PlatformScene);
     game->EngineInit("Ludkerno", 854, 480);
     while (game->IsRunning())
     {

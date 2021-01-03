@@ -96,5 +96,5 @@ void Scene::Scene_SetTilemap(const char *filename, int sheets_H, int sheets_V, i
 
 Vector2 Scene::GetTileDim()
 {
-    return Vector2(M_tile->TileX, M_tile->TileX);
+    return Vector2(static_cast<float>(M_tile->TileX), static_cast<float>(M_tile->TileX));
 }

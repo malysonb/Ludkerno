@@ -36,10 +36,12 @@ public:
     {
         /*Nothing to Renderize*/
     }
+
     const char *GetName()
     {
         return "PlatformPhysics";
     }
+    
     void ApplyForce(float intensity, Vector2::Vector Axis)
     {
         if (Axis == Vector2::AY)

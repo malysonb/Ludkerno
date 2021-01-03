@@ -10,6 +10,10 @@
 #include "../TextureMngr.hpp"
 #include "../Vector2.hpp"
 
+/**
+ * @brief 
+ * This is the Sprite component of an Entity.
+ */
 class Sprite : public Component
 {
 #ifdef Release
@@ -35,106 +39,23 @@ public:
         delete(sheet_Dimension);
     }
 
-    ///Load Spritesheet
-    void LoadSpritesheet(SDL_Texture *newSprite)
-    {
-        sprite = newSprite;
-    }
+    void LoadSpritesheet(SDL_Texture *newSprite);
 
-    ///SetAnimation based in the Spritesheet.
-    void SetAnimation(int Anim_Index)
-    {
-        if (Anim_Index >= n_ofAnims || Anim_Index < 0)
-            Debug::log("Array index out of bounds! at sprite set animation", Debug::ERROR);
-        else
-        {
-            m_CurrentAnim = Anim_Index;
-            m_final_Frame = sheet_Dimension[m_CurrentAnim][0];
-            if(m_CurrentFrame > m_final_Frame)
-            {
-                m_CurrentFrame = 0;
-            }
-            m_CurrentTime = m_LastTime;
-            m_changed = true;
-        }
-    }
+    void SetAnimation(int Anim_Index);
 
-    int getCurrentAnim()
-    {
-        return m_CurrentAnim;
-    }
+    int getCurrentAnim();
 
-    void SetupAnimation(int animIndex, int finalFrame, int speed)
-    {
-        if (animIndex >= n_ofAnims || animIndex < 0)
-            Debug::log("Array index out of bounds! at sprite setup animation", Debug::ERROR);
-        else
-        {
-            sheet_Dimension[animIndex][0] = finalFrame;
-            sheet_Dimension[animIndex][1] = speed;
-        }
-    }
-    void Init(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)
-    {
-        Active = true;
-        m_Point.x = Size_x / 2;
-        m_Point.y = Size_y / 2;
-        //Debug::log("Initializing Sprite", Debug::INFO);
-        if (release_v)
-            LoadSpritesheet(TextureMngr::LoadTexture_RW(texturePath));
-        else
-            LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
-        h_px = Size_y;
-        v_px = Size_x;
-        n_ofAnims = n_ofAnimations;
-        sheet_Dimension = new int *[n_ofAnimations];
-        for (int i = 0; i < n_ofAnimations; i++)
-        {
-            sheet_Dimension[i] = new int[2];
-        }
-    }
+    void SetupAnimation(int animIndex, int finalFrame, int speed);
 
-    void SetOrigin(int x, int y)
-    {
-        OriginPoint.X = static_cast<float>(x);
-        OriginPoint.Y = static_cast<float>(y);
-    }
+    void Init(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations);
 
-    void Update() override
-    {
-        srcRect.h = h_px;
-        srcRect.w = v_px;
-        m_final_Frame = sheet_Dimension[m_CurrentAnim][0];
-        m_CurrentTime = SDL_GetTicks();
-        if (m_CurrentTime > m_LastTime + sheet_Dimension[m_CurrentAnim][1] || m_changed == true)
-        {
-            if (m_CurrentFrame <= m_final_Frame)
-            {
-                srcRect.x = srcRect.w * m_CurrentFrame;
-                srcRect.y = srcRect.h * m_CurrentAnim;
-                m_CurrentFrame = m_CurrentFrame == m_final_Frame ? 0 : m_CurrentFrame + 1;
-            }
-            m_LastTime = m_CurrentTime;
-            m_changed = false;
-        }
-    }
+    void SetOrigin(int x, int y);
 
-    void flipHorizontally(bool isFlipped)
-    {
-        if(isFlipped)
-        {
-            flipped = SDL_FLIP_HORIZONTAL;
-        }
-        else
-        {
-            flipped = SDL_FLIP_NONE;
-        }
-    }
+    void Update() override;
 
-    void Render() override
-    {
-        SDL_RenderCopyEx(Game::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
-    }
+    void flipHorizontally(bool isFlipped);
+
+    void Render() override;
 
     const char *GetName() { return "Sprite"; }
 

@@ -1,0 +1,10 @@
+digraph "Ludkerno" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_eb0adba319f3c0e8cfc65768a22a3146 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_eb0adba319f3c0e8cfc65768a22a3146.html"];
+    dir_eb0adba319f3c0e8cfc65768a22a3146 [shape=plaintext label="Ludkerno"];
+    dir_8ddf9cddeec2fc2b3bcaefbbb8b0f1b1 [shape=box label="include" color="red" fillcolor="white" style="filled" URL="dir_8ddf9cddeec2fc2b3bcaefbbb8b0f1b1.html"];
+  }
+}

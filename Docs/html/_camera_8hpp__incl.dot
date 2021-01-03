@@ -1,0 +1,33 @@
+digraph "Ludkerno/include/Camera.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Ludkerno/include/Camera.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Game.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_game_8hpp.html",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="../ThirdParty/x86/include\l/SDL2/SDL.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Key.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_key_8hpp.html",tooltip=" "];
+  Node4 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Transform.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_transform_8hpp.html",tooltip=" "];
+  Node5 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Component.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_component_8hpp.html",tooltip=" "];
+  Node6 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Debug.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_debug_8hpp.html",tooltip=" "];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="iostream",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node7 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node5 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Vector2.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_vector2_8hpp.html",tooltip=" "];
+  Node10 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Screen.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_screen_8hpp.html",tooltip=" "];
+  Node11 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

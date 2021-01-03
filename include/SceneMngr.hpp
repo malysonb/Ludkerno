@@ -9,7 +9,6 @@ class SceneMngr
     int iterator;
     public:
     std::vector<Scene*> sceneVector;
-    //Scene **sceneVector;
     void setup(int number_of_scenes);
     void setScene(int index_of_the_scene);
     void insertScene(Scene *scene);
