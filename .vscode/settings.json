@@ -91,4 +91,5 @@
     "C_Cpp.default.includePath": ["ThirdParty/x86/include/"],
     "C_Cpp.default.forcedInclude": ["ThirdParty/x86/include/"],
     "C_Cpp.default.defines": [],
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
 }

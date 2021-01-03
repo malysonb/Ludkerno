@@ -16,6 +16,7 @@
 float Game::FrameRate = 1;
 float Game::DeltaTime = 1;
 
+SDL_Window *Game::window = nullptr;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::Event;
 List Game::EntityManager;
@@ -36,12 +37,6 @@ Scene *Game::GetScene()
 {
     return ActualScene;
 }
-
-/*int Game::Rand(int min, int max)
-{
-    srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
-    return rand() % (max - min) + min;
-}*/
 
 void Game::LoadScene(Scene *scene)
 {

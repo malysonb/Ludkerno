@@ -1,4 +1,5 @@
 #include "../include/TextureMngr.hpp"
+#include "../include/Debug.hpp"
 
 #ifdef MSVCcompiler
 #include "../include/RadiPako.h"
@@ -32,6 +33,10 @@ SDL_Texture* TextureMngr::LoadTexture_RW(const char* filename)
 {
     SDL_RWops* src;
     unsigned char* buff = RPK_GetFile_Uchar("./Assets/Sprites.rpk",filename);
+    if(buff == NULL)
+    {
+        Debug::log("This file doesn't exists!", Debug::ERROR);
+    }
     src = SDL_RWFromMem(buff, RPK_filesize);
     SDL_Surface* surface = IMG_Load_RW(src,1);
     SDL_Texture* Tex = SDL_CreateTextureFromSurface(Game::renderer, surface);

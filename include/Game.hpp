@@ -17,9 +17,9 @@ struct Vector2;
 
 class Game
 {
-    SDL_Window *window;
     bool Running = false;
 public:
+    static SDL_Window *window;
     static float FrameRate;
     static float DeltaTime;
     static Key key;

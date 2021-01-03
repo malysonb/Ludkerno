@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['r_123',['R',['../class_collider.html#a9fd9dda16e1c5773702dd41576f9b4e2',1,'Collider']]],
+  ['radipako_2eh_124',['RadiPako.h',['../_radi_pako_8h.html',1,'']]],
+  ['rand_125',['Rand',['../class_utils.html#a33a94f593999c70954023e649a1ea51c',1,'Utils']]],
+  ['relativeposition_126',['relativePosition',['../class_camera.html#ab87482fcb31044d1fea151ba1ed86789',1,'Camera']]],
+  ['relativevelocity_127',['relativeVelocity',['../class_camera.html#ae1d8e35cba6215c6610c99ebd555351f',1,'Camera']]],
+  ['remove_128',['Remove',['../class_list.html#a607414aa27619dab9714de4148ed3ec6',1,'List']]],
+  ['render_129',['Render',['../class_component.html#a0c67ccdaf754b96520e3428284a74a7f',1,'Component::Render()'],['../class_collider.html#a1296673c872ca0369ef1f928fdd59ce6',1,'Collider::Render()'],['../class_platform_physics.html#ad0df1ea6858906f4da82856f4941261c',1,'PlatformPhysics::Render()'],['../class_sprite.html#a344a52733ba84966caa79cf593f08c25',1,'Sprite::Render()'],['../class_entity.html#aaf9e8e81e77fe15e72f642bda6483ea3',1,'Entity::Render()'],['../class_list.html#a4cc5904e00726fa09656e3fa06ad2871',1,'List::Render()'],['../class_game.html#a0897730fc9fed789f6c0f11d21a0c14a',1,'Game::Render()'],['../class_transform.html#aff0bb59ec4e3b67259f6b168463d69f1',1,'Transform::Render()']]],
+  ['renderer_130',['renderer',['../class_game.html#ae5164c37c0dc74cfb56041174017bf57',1,'Game']]],
+  ['right_131',['RIGHT',['../struct_key_1_1key___struct.html#a02cf366c806d46420074e1e95a9d0ec7',1,'Key::key_Struct::RIGHT()'],['../class_key.html#a0e798c76b079dc15eb95245ea0507b3ea6f719a94e083dc1046f7bc6ee6d74551',1,'Key::RIGHT()']]],
+  ['right_5fclick_132',['RIGHT_CLICK',['../struct_key_1_1key___struct.html#ab5d329f1aec8b6298afe19d50731f0d8',1,'Key::key_Struct']]],
+  ['rpk_5fcreatefile_133',['RPK_CreateFile',['../_radi_pako_8h.html#a31247bc4f8811795c9f9256d3967464e',1,'RadiPako.h']]],
+  ['rpk_5fcreatepackage_134',['RPK_CreatePackage',['../_radi_pako_8h.html#a38eefb4f1c51dedc17b7951275ec9925',1,'RadiPako.h']]],
+  ['rpk_5ffilesize_135',['RPK_filesize',['../_radi_pako_8h.html#a5dfb2bee42dcdd04eab1930c370f9b33',1,'RadiPako.h']]],
+  ['rpk_5fgetfile_136',['RPK_GetFile',['../_radi_pako_8h.html#ace75419db7f06c47eb53d51a1b3cdbdf',1,'RadiPako.h']]],
+  ['rpk_5fgetfile_5fuchar_137',['RPK_GetFile_Uchar',['../_radi_pako_8h.html#ac80938bf3221c56ff47502d6a73c8a65',1,'RadiPako.h']]],
+  ['rpk_5fjointalotoffiles_138',['RPK_JointALotOfFiles',['../_radi_pako_8h.html#a7b1ad5a02b0a95b3e56a2e3aef22e7f5',1,'RadiPako.h']]],
+  ['rpk_5fjointfiles_139',['RPK_JointFiles',['../_radi_pako_8h.html#a539658def69e38b93915d48977b31d7b',1,'RadiPako.h']]],
+  ['rpkfile_140',['RpkFile',['../_radi_pako_8h.html#ac89d21663e5a837bf1dc8b65aa395a2e',1,'RadiPako.h']]]
+];

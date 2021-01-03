@@ -25,10 +25,6 @@ public:
         scale.X = 1;
         scale.Y = 1;
     }
-    ~Transform()
-    {
-        
-    }
 
     Vector2 position, scale, velocity, Acceleration;
 
@@ -68,6 +64,12 @@ public:
     {
         position.X = static_cast<float>(XA);
         position.Y = static_cast<float>(YA);
+    }
+
+    void SetScreenPosition(float XA, float YA)
+    {
+        position.X = XA;
+        position.Y = YA;
     }
 
     void SetSize(int XA, int YA)
