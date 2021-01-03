@@ -4,7 +4,7 @@
 #ifdef SDL_Path
 #include SDL_Path
 #else
-#include "../ThirdParty/x86/include/SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #endif
 #include "Key.hpp"
 
