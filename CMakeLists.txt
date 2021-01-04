@@ -7,7 +7,7 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(RPK REQUIRED)
 
-file(GLOB implements "Implement/*.cpp")
+file(GLOB implements "src/*.cpp")
 
 if(WIN32)
     message(STATUS "WIN32 DETECTED")
