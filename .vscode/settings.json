@@ -84,7 +84,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "__functional_03": "cpp"
     },
     "c-cpp-compile-run.cpp-flags": "-Wall -Wextra ./Implement/*.cpp -L./ThirdParty/x64/lib -lSDL2main -lSDL2 -lSDL2_image",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
@@ -92,4 +93,5 @@
     "C_Cpp.default.forcedInclude": ["ThirdParty/x86/include/"],
     "C_Cpp.default.defines": [],
     "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
 }

@@ -19,6 +19,7 @@ public:
     void Render();
 
     void SetSprite(const char *TexturePath, int s_x, int s_y, int n_ofAnimations);
+    void SetSprite(Sprite sprite);
     void SetPosition(float x, float y);
 
     template <typename newComp>

@@ -1,0 +1,48 @@
+
+Component
+{
+    name: "PlatformerInput"
+    setup
+    (
+        
+    ),
+    update
+    (
+
+    )
+}
+
+Entity
+{
+    name: "Jogador",
+    sprite: "alii",
+    addComponent: "PlatformerInput",
+    addComponent: "PlatformPhysics"
+}
+
+Scene
+{
+	name: "fase1",
+	setup
+	(
+		tilemap
+        (
+            path : "./Assets/tileset.png",
+            tilex : 3,
+            tiley : 3,
+            sizex : 16,
+            sizey : 16
+        ),
+        loadmap
+        (
+            sizex: 35,
+            sizey: 15,
+            path: "./assets/testmap.map"
+        ),
+        Spawn("Jogador"),
+        Set(SPosition, "Jogador", 50, 20)
+	)
+	update
+	(
+	)
+}

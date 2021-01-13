@@ -1,5 +1,6 @@
 #include "../include/SceneMngr.hpp"
 #include "../include/Game.hpp"
+#include "../include/Debug.hpp"
 
 /*void SceneMngr::setup(int number_of_scenes)
 {
@@ -16,5 +17,10 @@ void SceneMngr::insertScene(Scene *scene)
 }
 Scene *SceneMngr::GetScene(int index_of_the_scene)
 {
+    if(index_of_the_scene > sceneVector.size() || sceneVector.size() == 0)
+    {
+        Debug::log("index out of bound — GetScene(int)!", Debug::Level::ERROR);
+        return nullptr;
+    }
     return sceneVector[index_of_the_scene];
 }

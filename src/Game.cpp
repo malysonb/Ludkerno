@@ -40,6 +40,10 @@ Scene *Game::GetScene()
 
 void Game::LoadScene(Scene *scene)
 {
+    if (scene == NULL)
+    {
+        Debug::log("Scene not found!", Debug::ERROR);
+    }
     ActualScene = scene;
     ActualScene->Init();
     notStarted = true;
@@ -85,10 +89,8 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     std::string motd = "LUDKERNO RUNTIME ";
     motd += VERSION;
     Debug::log(motd, Debug::INFO);
-    //std::cout << "LUDKERNO RUNTIME STARTED! " << VERSION << std::endl;
-//Setup();
 #ifdef Release
-    
+
 #endif
     LoadScene(sceneMngr.GetScene(0));
     //Loop();
@@ -110,10 +112,13 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    //std::string fps = std::to_string(FrameRate);
-    //SDL_SetWindowTitle(window, fps.c_str());
-    DeltaTime = 30/FrameRate <= 1 ? 1 : 30/FrameRate;
-
+    DeltaTime = 30 / FrameRate <= 1 ? 1 : 30 / FrameRate;
+    if (ActualScene == nullptr)
+    {
+        Debug::log("No scene loaded!", Debug::Level::ERROR);
+        Running = false;
+        return;
+    }
     if (notStarted)
     {
         Game::EntityManager.Clear();
