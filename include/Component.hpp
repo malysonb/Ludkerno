@@ -9,7 +9,9 @@
 #include "Debug.hpp"
 
 class Entity;
-
+/**
+ * Component template to you guys make your owns
+ */
 class Component
 {
 public:
