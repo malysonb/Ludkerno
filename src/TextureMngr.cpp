@@ -1,7 +1,7 @@
 #include "../include/TextureMngr.hpp"
 #include "../include/Debug.hpp"
 
-#include "../include/RadiPako.hpp"
+#include "RadiPako.hpp"
 
 /*#ifdef MSVCcompiler
 #include "../include/RadiPako.h"
@@ -46,7 +46,7 @@ SDL_Texture* TextureMngr::LoadTexture_RW(const char* filename)
     {
         Debug::log("This file doesn't exists!", Debug::Level::ERROR);
     }
-    src = SDL_RWFromMem(buff, file->getSize());
+    src = SDL_RWFromMem(buff, unsigned (file->getSize()));
     SDL_Surface* surface = IMG_Load_RW(src,1);
     SDL_Texture* Tex = SDL_CreateTextureFromSurface(Game::renderer, surface);
     SDL_FreeSurface(surface);

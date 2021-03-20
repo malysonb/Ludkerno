@@ -4,10 +4,11 @@
 build/Release/*
 build/Debug/*
 build/*
-ThirdParty/MSVC
-ThirdParty/x86
-ThirdParty/x64
-ThirdParty/temp
+thirdParty/MSVC
+thirdParty/x86
+thirdParty/x64
+thirdParty/temp
 Implement/*.Deactivated
 */*.rpk
+*/RadiPako.*
 

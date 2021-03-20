@@ -1,7 +1,7 @@
 #include <iostream>
-#include "include/Interpreter.hpp"
+//#include "include/Interpreter.hpp"
 #include "Ludkerno.hpp"
-//#include "GameCode/PlatformScene.hpp"
+#include "GameCode/PlatformScene.hpp"
 //#include "GameCode/Cena.hpp"
 
 Game *game = nullptr;
@@ -14,8 +14,8 @@ int main()
     int frameTime = SDL_GetTicks();
     //Uint32 lastframe = SDL_GetTicks();
     game = new Game();
-    //Game::sceneMngr.insertScene(new PlatformScene);
-    Interpreter::ReadRPC();
+    Game::sceneMngr.insertScene(new PlatformScene);
+    //Interpreter::ReadRPC();
     game->EngineInit("Ludkerno", 854, 480);
     while (game->IsRunning())
     {
