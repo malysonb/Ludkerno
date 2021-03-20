@@ -1,0 +1,3 @@
+[submodule "RadiPako"]
+	path = RadiPako
+	url = https://github.com/malysonb/RadiPako.git
