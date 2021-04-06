@@ -52,7 +52,7 @@ void Game::LoadScene(Scene *scene)
 
 void Game::EngineInit(const char *title, int Wx, int Wy)
 {
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
@@ -80,7 +80,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy)
     }
     else
     {
-        Debug::log("Cant initialize SDL!", Debug::ERROR);
+        Debug::log(SDL_GetError(), Debug::ERROR);
         Game::Clear();
     }
     camera = new Camera();

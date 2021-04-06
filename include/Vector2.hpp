@@ -16,6 +16,12 @@ struct Vector2
 
     Vector2(float x,float  y);
 
+
+    float Length();
+    float DotProduct(Vector2 *vector2);
+    Vector2 Direction();
+    Vector2 Normal();
+
     Vector2 operator+(Vector2& vector2);
     Vector2 operator-(Vector2& vector2);
     Vector2 operator/(Vector2& vector2);

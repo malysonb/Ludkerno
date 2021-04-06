@@ -9,31 +9,6 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Components/Collider.hpp"
 
-/*void CollisionSystem::Update()
-{
-    Obj *iterator = Game::EntityManager.SceneEntities.front();
-    while (iterator != nullptr)
-    {
-        iterator->object->getComponent<Collider>() == nullptr ? 0 : iterator->object->getComponent<Collider>()->isColliding = false;
-        Obj *temp = Game::EntityManager.SceneEntities.front();
-        while (temp != nullptr)
-        {
-            Entity *A = iterator->object, *B = temp->object;
-            if (A->ID != B->ID)
-            {
-                Collider *Aa = A->getComponent<Collider>(),
-                         *Bb = B->getComponent<Collider>();
-                if(Aa != nullptr && Bb != nullptr)
-                {
-                    Aa->isColliding = Aa->isColliding == true ? true : CheckCollision(Aa, Bb);
-                }
-            }
-            temp = temp->NextObj;
-        }
-        iterator = iterator->NextObj;
-    }
-}*/
-
 void CollisionSystem::Update()
 {
     for (int x = 0; x < static_cast<int>(Game::EntityManager.SceneEntities.size()); x++)
