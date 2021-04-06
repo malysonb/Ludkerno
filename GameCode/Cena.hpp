@@ -47,6 +47,10 @@ public:
                     iterator->getComponent<Collider>()->Disable();
                 }
             }
+            if(Game::key.keycode.QUIT || Game::key.keycode.START)
+            {
+                Game::sceneMngr.setScene(0);
+            }
         }
         SDL_SetRenderDrawColor(Game::renderer,255,255,255,255);
     }

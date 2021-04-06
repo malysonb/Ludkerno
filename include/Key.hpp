@@ -12,7 +12,7 @@ public:
         RIGHT = SDL_SCANCODE_D,
         ACTION = SDL_SCANCODE_E,
         START = SDL_SCANCODE_RETURN,
-        QUIT = SDL_SCANCODE_F12
+        QUIT = SDL_SCANCODE_ESCAPE
     };
     struct key_Struct
     {

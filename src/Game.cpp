@@ -50,17 +50,17 @@ void Game::LoadScene(Scene *scene)
     Debug::log("Loaded a new scene!", Debug::INFO);
 }
 
-void Game::EngineInit(const char *title, int Wx, int Wy)
+void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Wx, Wy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
         renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
-        SDL_RenderSetLogicalSize(renderer, 426, 240);
+        SDL_RenderSetLogicalSize(renderer, Lx, Ly);
         WindowSize = {426, 240};
         SDL_SetMainReady();
         if (window)

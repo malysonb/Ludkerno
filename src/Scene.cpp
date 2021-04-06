@@ -47,23 +47,18 @@ void Scene::DrawMap()
 {
     if (canDraw)
     {
-        int type = 0;
+        int id = 0;
         for (int row = 0; row < M_SceneRows; row++)
         {
             for (int col = 0; col < M_SceneCols; col++)
             {
                 int coliterator = 0;
                 int rowiterator = 0;
-                type = map[row][col];
-                int temp = type;
-                while (temp >= M_tile->SheetH)
-                {
-                    coliterator += M_tile->SheetH;
-                    rowiterator++;
-                    temp -= M_tile->SheetH;
-                }
-                srcRect.x = M_tile->TileX * type - (coliterator * M_tile->TileX);
-                srcRect.y = M_tile->TileY * rowiterator;
+                id = map[row][col];
+                int x = (id % M_tile->SheetH);
+                int y = (id / M_tile->SheetH);
+                srcRect.x = M_tile->TileX * x;
+                srcRect.y = M_tile->TileY * y;
                 destRect.x = col * destRect.w - static_cast<int>(Game::camera->relativePosition.X);
                 destRect.y = row * destRect.h - static_cast<int>(Game::camera->relativePosition.Y);
                 TextureMngr::Draw(Scene_TileMap, srcRect, destRect);

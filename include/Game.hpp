@@ -39,7 +39,7 @@ public:
      * @param WindowWidth Sets the Width of the window.
      * @param WindowHeight Sets the Height of the window.
      **/
-    void EngineInit(const char * WindowTitle, int WindowWidth, int WindowHeight);
+    void EngineInit(const char * WindowTitle, int WindowWidth, int WindowHeight, int Lx = 426, int Ly = 240);
 
     static Scene *GetScene();
 
