@@ -7,8 +7,8 @@
 class Input : public Component
 {
 public:
-    Transform *transform;
-    PlatformPhysics *PF;
+    Transform *transform = nullptr;
+    PlatformPhysics *PF = nullptr;
     void Init()
     {
         Active = true;
@@ -25,13 +25,6 @@ public:
     float ForceJump = -2.2f;
     void Update()
     {
-        if (died)
-        {
-            if (Game::key.keycode.START)
-            {
-                Game::sceneMngr.setScene(0);
-            }
-        }
         if (transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(50))
         {
             able = true;
@@ -43,7 +36,7 @@ public:
         {
             PF->isOnGround = false;
         }
-        if (Game::key.keycode.UP && PF->isOnGround)
+        if ((Game::key.keycode.UP || Game::key.keycode.LEFT_CLICK) && PF->isOnGround)
         {
             PF->ApplyForce(ForceJump, Vector2::AY);
         }

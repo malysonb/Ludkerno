@@ -13,11 +13,23 @@ Entity::Entity()
 {
     transform = new Transform();
     m_mySprite = nullptr;
+    m_Origin = nullptr;
+    for (int i = 0; i < m_MaxComponents; i++)
+    {
+        myComponents[i] = nullptr;
+    }
+    
 }
 
 Entity::~Entity()
 {
-    delete transform;
+    if(transform)
+        delete transform;
+    for(int i = 0; i < m_NumComponents; i++)
+    {
+        if(myComponents[i])
+            delete myComponents[i];
+    }
 }
 
 void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)

@@ -33,6 +33,7 @@ public:
     {
         if(Player->getComponent<Input>()->died)
         {
+            Player->getComponent<Input>()->Disable();
             CactusGenerator->getComponent<Generator>()->Disable();
             //Obj* temp = Game::EntityManager.SceneEntities.front();
             for(int i = 0; i <static_cast<int>(Game::EntityManager.SceneEntities.size()) ; i++)
@@ -47,9 +48,10 @@ public:
                     iterator->getComponent<Collider>()->Disable();
                 }
             }
-            if(Game::key.keycode.QUIT || Game::key.keycode.START)
+            if(Game::key.keycode.QUIT || Game::key.keycode.START || Game::key.keycode.LEFT_CLICK)
             {
                 Game::sceneMngr.setScene(0);
+                return;
             }
         }
         SDL_SetRenderDrawColor(Game::renderer,255,255,255,255);

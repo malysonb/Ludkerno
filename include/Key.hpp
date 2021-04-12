@@ -12,7 +12,7 @@ public:
         RIGHT = SDL_SCANCODE_D,
         ACTION = SDL_SCANCODE_E,
         START = SDL_SCANCODE_RETURN,
-        QUIT = SDL_SCANCODE_ESCAPE
+        QUIT = SDL_SCANCODE_ESCAPE,
     };
     struct key_Struct
     {
@@ -43,9 +43,8 @@ public:
         keycode.ACTION = pressed[ACTION];
         keycode.START = pressed[START];
         keycode.QUIT = pressed[QUIT];
-        keycode.LEFT_CLICK = static_cast<bool>(SDL_BUTTON(SDL_BUTTON_LEFT));
-        keycode.RIGHT_CLICK = static_cast<bool>(SDL_BUTTON(SDL_BUTTON_RIGHT));
         SDL_GetGlobalMouseState(&keycode.MouseX, &keycode.MouseY);
+
         /*if (event.type == SDL_KEYDOWN)
         {
             switch (event.key.keysym.sym)

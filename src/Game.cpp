@@ -105,6 +105,28 @@ void Game::HandleEvents()
     case SDL_QUIT:
         Running = false;
         break;
+    case SDL_MOUSEBUTTONDOWN:
+        switch (Event.button.button)
+        {
+        case SDL_BUTTON_LEFT:
+            key.keycode.LEFT_CLICK = true;
+            break;
+        case SDL_BUTTON_RIGHT:
+            key.keycode.RIGHT_CLICK = true;
+            break;
+        }
+        break;
+    case SDL_MOUSEBUTTONUP:
+        switch (Event.button.button)
+        {
+        case SDL_BUTTON_LEFT:
+            key.keycode.LEFT_CLICK = false;
+            break;
+        case SDL_BUTTON_RIGHT:
+            key.keycode.RIGHT_CLICK = false;
+            break;
+        }
+        break;
     default:
         break;
     }

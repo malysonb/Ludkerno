@@ -23,7 +23,7 @@ if(WIN32)
             link_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/thirdParty/MSVC/lib/x64)        
         endif()
 
-        add_executable(Ludkerno main.cpp ${implements} ${RPK_SRC})
+        add_executable(Ludkerno main.cpp ${implements})
         target_include_directories(Ludkerno PRIVATE ${CMAKE_SOURCE_DIR}/include/)
         target_link_libraries(Ludkerno SDL2main SDL2 SDL2_image)
         link_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/include)

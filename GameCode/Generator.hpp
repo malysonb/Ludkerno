@@ -37,7 +37,7 @@ public:
                 {
                     if (temp->transform->GetScreenPosition().X < -16)
                     {
-                        Game::EntityManager.Remove(temp->ID);
+                        Game::EntityManager.RemoveID(temp->ID);
                     }
                 }
             }

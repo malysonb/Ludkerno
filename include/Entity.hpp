@@ -62,7 +62,7 @@ public:
     }
     Sprite *GetSprite();
 
-    Transform *transform;
+    Transform *transform = nullptr;
     int ID;
 
 private:

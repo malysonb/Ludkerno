@@ -32,11 +32,7 @@ public:
     }
     ~Sprite()
     {
-        for(int i = 0; i < n_ofAnims; i++)
-        {
-            delete(sheet_Dimension[i]);
-        }
-        delete(sheet_Dimension);
+        delete [] sheet_Dimension;
     }
 
     void LoadSpritesheet(SDL_Texture *newSprite);

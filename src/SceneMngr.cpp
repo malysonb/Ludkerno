@@ -17,7 +17,7 @@ void SceneMngr::insertScene(Scene *scene)
 }
 Scene *SceneMngr::GetScene(int index_of_the_scene)
 {
-    if(index_of_the_scene > sceneVector.size() || sceneVector.size() == 0)
+    if(index_of_the_scene > (int)sceneVector.size() || (int)sceneVector.size() == 0)
     {
         Debug::log("index out of bound — GetScene(int)!", Debug::Level::ERROR);
         return nullptr;

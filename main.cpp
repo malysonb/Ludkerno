@@ -38,15 +38,9 @@ int main()
     #else
         while (game->IsRunning())
         {
-            frameStart = SDL_GetTicks();
-            game->HandleEvents();
-            game->Update();
-            game->Render();
-            frameTime = SDL_GetTicks() - frameStart;
-            Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
-            Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
+            gameloop();
         }
-        game->Clear();
     #endif
+    game->Clear();
     return 0;
 }

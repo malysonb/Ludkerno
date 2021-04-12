@@ -7,7 +7,6 @@ class Obj
 {
 public:
     Entity *object;
-    Obj *NextObj = nullptr;
     Obj(int ID);
     ~Obj();
     Entity* GetEntity();
@@ -18,10 +17,11 @@ class List
     public:
     int Length = 0;
     int IDs = 0;
-    std::vector<Obj *> SceneEntities;
+    std::vector<Obj*> SceneEntities;
     //Obj *Start = nullptr, *End = nullptr;
     Entity *Add();
-    void Remove(int id);
+    void RemoveID(int id);
+    Obj *RemoveIndex(int index);
     void Clear();
     void Update();
     void Render();
