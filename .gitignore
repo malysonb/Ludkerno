@@ -11,4 +11,6 @@ thirdParty/temp
 Implement/*.Deactivated
 */*.rpk
 */RadiPako.*
+myProject/
+myProject/*
 
