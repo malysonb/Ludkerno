@@ -1,4 +1,5 @@
 #include "../include/Components/Sprite.hpp"
+#include "../include/Entity.hpp"
 
 void Sprite::LoadSpritesheet(SDL_Texture *newSprite)
 {
@@ -48,6 +49,7 @@ void Sprite::Init(const char *texturePath, int Size_x, int Size_y, int n_ofAnima
         LoadSpritesheet(TextureMngr::LoadTexture_RW(texturePath));
     else
         LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
+    baseTransform = Base->transform;
     h_px = Size_y;
     v_px = Size_x;
     n_ofAnims = n_ofAnimations;

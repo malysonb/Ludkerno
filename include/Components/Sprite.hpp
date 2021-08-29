@@ -9,6 +9,7 @@
 #include "../Component.hpp"
 #include "../TextureMngr.hpp"
 #include "../Vector2.hpp"
+#include "../Transform.hpp"
 
 /**
  * @brief 
@@ -25,10 +26,10 @@ public:
     SDL_Rect srcRect, destRect;
     int v_px, h_px;
     int **sheet_Dimension;
+    Transform *baseTransform;
 
     Sprite()
     {
-        /*TODO*/
     }
     ~Sprite()
     {
