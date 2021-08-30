@@ -1,5 +1,8 @@
+#include "../include/Game.hpp"
 #include "../include/Entity.hpp"
 #include "../include/Components/Collider.hpp"
+#include "../include/RenderPipeline.hpp"
+#include "../include/Object2D.hpp"
 
 //Sprite *sprite;
 
@@ -18,18 +21,18 @@ Entity::Entity()
     {
         myComponents[i] = nullptr;
     }
-    
+    Game::renderPipeline.add2Pipeline(this);
 }
 
 Entity::~Entity()
 {
-    if(transform)
-        delete transform;
+    delete transform;
     for(int i = 0; i < m_NumComponents; i++)
     {
         if(myComponents[i])
             delete myComponents[i];
     }
+    Game::renderPipeline.remove(this);
 }
 
 void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)

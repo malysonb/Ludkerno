@@ -6,10 +6,11 @@
  * A simple entity code with ECS.
  */
 #include "Game.hpp"
+#include "Object2D.hpp"
 #include "Components/Sprite.hpp"
 #include "Transform.hpp"
 
-class Entity
+class Entity : public Object2D
 {
 public:
     Entity();

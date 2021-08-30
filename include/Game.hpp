@@ -4,7 +4,7 @@
 #ifdef SDL_Path
 #include SDL_Path
 #else
-#include <SDL2/SDL.h>
+#include "SDL.h"
 #endif
 #include "Key.hpp"
 
@@ -13,6 +13,7 @@ class Camera;
 class Screen;
 class Scene;
 class SceneMngr;
+class RenderPipeline;
 struct Vector2;
 
 class Game
@@ -32,6 +33,7 @@ public:
     static Camera *camera;
     static SDL_Event Event;
     static SDL_Renderer *renderer;
+    static RenderPipeline renderPipeline;
 
     /**
      * Initiates the Engine.

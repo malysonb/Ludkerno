@@ -26,6 +26,11 @@ public:
         scale.Y = 1;
     }
 
+    ~Transform()
+    {
+        
+    }
+
     Vector2 position, scale, velocity, Acceleration;
 
     void Update()

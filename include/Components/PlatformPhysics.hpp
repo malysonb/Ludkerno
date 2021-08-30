@@ -12,6 +12,11 @@ public:
     float V_Limit = 10;
     bool forceApplied = false;
 
+    ~PlatformPhysics()
+    {
+
+    }
+
     void Init()
     {
         Active = true;

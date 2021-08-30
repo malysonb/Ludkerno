@@ -12,6 +12,7 @@
 #include "../include/Screen.hpp"
 #include "../include/CollisionSystem.hpp"
 #include "../include/SceneMngr.hpp"
+#include "../include/RenderPipeline.hpp"
 
 float Game::FrameRate = 1;
 float Game::DeltaTime = 1;
@@ -28,6 +29,8 @@ Vector2 Game::camVelocity;
 Vector2 Game::WindowSize;
 Screen Game::screen;
 CollisionSystem collisionSystem;
+RenderPipeline Game::renderPipeline;
+
 
 Scene *ActualScene;
 
@@ -45,7 +48,6 @@ void Game::LoadScene(Scene *scene)
         Debug::log("Scene not found!", Debug::ERROR);
     }
     ActualScene = scene;
-    ActualScene->Init();
     notStarted = true;
     Debug::log("Loaded a new scene!", Debug::INFO);
 }
@@ -144,6 +146,7 @@ void Game::Update()
     if (notStarted)
     {
         Game::EntityManager.Clear();
+        renderPipeline.Clear();
         ActualScene->Setup();
         notStarted = false;
     }
@@ -159,9 +162,10 @@ void Game::Render()
 {
     //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-    if (ActualScene != nullptr)
+    /*if (ActualScene != nullptr)
         ActualScene->DrawMap();
-    EntityManager.Render();
+    EntityManager.Render();*/
+    renderPipeline.Render();
     SDL_RenderPresent(renderer);
 }
 
@@ -173,4 +177,4 @@ void Game::Clear()
     Debug::log("Subsystem finalized!", Debug::INFO);
 }
 
-bool Game::IsRunning() { return Running; };
+bool Game::IsRunning() { return Running; }

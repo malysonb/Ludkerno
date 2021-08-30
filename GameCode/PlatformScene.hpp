@@ -24,15 +24,17 @@ class PlatformScene : public Scene
     Entity* Player;
     void Setup()
     {
-        Scene_SetTilemap("./Assets/tileset.png",3,3,16,16);
-        LoadMap(35,15,testmap);
+        TileLayer *layer = CreateLayer(35,15,testmap);
+        layer->SetTilemap("./Assets/tileset.png",3,3,16,16);
         Player = Game::EntityManager.Add();
         Player->SetSprite("./Assets/aliisheet.png",16,16,4);
         Player->GetSprite()->SetOrigin(8,16);
         Player->GetSprite()->SetupAnimation(0,1,1000);
         Player->GetSprite()->SetupAnimation(1,5,50);
+        Player->setLayer(-1);
         Player->AddComponent<PlatformerInput>(Player);
         Player->getComponent<PlatformerInput>()->Init();
+        std::cout << Player->toString() << std::endl;
         Player->transform->SetScreenPosition(Game::screen.DynamicHPosition(50), Game::screen.DynamicVPosition(20));
     }
     void Update()

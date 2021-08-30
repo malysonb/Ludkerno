@@ -1,6 +1,9 @@
 #pragma once
 #include "include/Utils.hpp"
 #include "include/Game.hpp"
+#include "include/Object.hpp"
+#include "include/Object2D.hpp"
+#include "include/RenderPipeline.hpp"
 #include "include/Vector2.hpp"
 #include "include/Debug.hpp"
 #include "include/TextureMngr.hpp"

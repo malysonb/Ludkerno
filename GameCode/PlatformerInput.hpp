@@ -57,11 +57,11 @@ public:
             Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Game::screen.DynamicVPosition(100));
         }
         bool cap = false;
-        for (int row = 0; row < Game::GetScene()->M_SceneRows; row++)
+        for (int row = 0; row < Game::GetScene()->layers[0]->rows; row++)
         {
-            for (int col = 0; col < Game::GetScene()->M_SceneCols; col++)
+            for (int col = 0; col < Game::GetScene()->layers[0]->cols; col++)
             {
-                if (Game::GetScene()->map[row][col] != 4)
+                if (Game::GetScene()->layers[0]->map[row][col] != 4)
                 {
                     if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().X), (16 * col), (16 * col)+16))
                     {

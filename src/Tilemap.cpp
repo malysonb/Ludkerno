@@ -16,7 +16,7 @@ Tilemap::Tilemap(const char *filename, int sheets_H, int sheets_V, int tile_X, i
     TileY = tile_Y;
 }
 
-Tilemap::Tilemap(const char *filename)
+Tilemap::Tilemap()
 {
     SheetH = 3;
     SheetV = 3;

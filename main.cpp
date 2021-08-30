@@ -16,13 +16,20 @@ int frameTime = SDL_GetTicks();
 
 void gameloop()
 {
-    frameStart = SDL_GetTicks();
-    game->HandleEvents();
-    game->Update();
-    game->Render();
-    frameTime = SDL_GetTicks() - frameStart;
-    Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
-    Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
+    try
+    {
+        frameStart = SDL_GetTicks();
+        game->HandleEvents();
+        game->Update();
+        game->Render();
+        frameTime = SDL_GetTicks() - frameStart;
+        Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
+        Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 int main()
@@ -30,7 +37,7 @@ int main()
     frameTime = SDL_GetTicks();
     //Uint32 lastframe = SDL_GetTicks();
     game = new Game();
-    Game::sceneMngr.insertScene(new PlatformScene);
+    Game::sceneMngr.insertScene(new cena);
     //Interpreter::ReadRPC();
     game->EngineInit("Ludkerno", 854, 480);
     #ifdef __EMSCRIPTEN__
