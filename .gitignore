@@ -5,6 +5,7 @@ build/Release/*
 build/Debug/*
 build/*
 thirdParty/SDL*
+thirdParty/x86*
 Implement/*.Deactivated
 */*.rpk
 */RadiPako.*

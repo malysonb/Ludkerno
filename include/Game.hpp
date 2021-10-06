@@ -1,12 +1,11 @@
 #pragma once
 #define SDL_MAIN_HANDLED
-#define VERSION "v0.5.0 Alpha"
+#define VERSION "v0.6.0 Alpha"
 #ifdef SDL_Path
 #include SDL_Path
 #else
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #endif
-#include "Key.hpp"
 
 class List;
 class Camera;
@@ -14,6 +13,7 @@ class Screen;
 class Scene;
 class SceneMngr;
 class RenderPipeline;
+class Key;
 struct Vector2;
 
 class Game

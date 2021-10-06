@@ -3,6 +3,7 @@
 #include "Ludkerno.hpp"
 #include "GameCode/PlatformScene.hpp"
 #include "GameCode/Cena.hpp"
+#include "GameCode/TileScene.hpp"
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 #endif
@@ -37,7 +38,7 @@ int main()
     frameTime = SDL_GetTicks();
     //Uint32 lastframe = SDL_GetTicks();
     game = new Game();
-    Game::sceneMngr.insertScene(new cena);
+    Game::sceneMngr.insertScene(new TileScene);
     //Interpreter::ReadRPC();
     game->EngineInit("Ludkerno", 854, 480);
     #ifdef __EMSCRIPTEN__

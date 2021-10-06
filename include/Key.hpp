@@ -43,7 +43,15 @@ public:
         keycode.ACTION = pressed[ACTION];
         keycode.START = pressed[START];
         keycode.QUIT = pressed[QUIT];
-        SDL_GetGlobalMouseState(&keycode.MouseX, &keycode.MouseY);
+        SDL_PumpEvents();
+        int windowX, windowY;
+        SDL_GetWindowSize(Game::window, &windowX, &windowY);
+        //SDL_GetWindowPosition(Game::window, &windowX, &windowY);
+        //keycode.MouseX = SDL_MouseMotionEvent().x;
+        //keycode.MouseY = SDL_MouseMotionEvent().y;
+        SDL_GetMouseState(&keycode.MouseX, &keycode.MouseY);
+        keycode.MouseX = (float)keycode.MouseX / (float)windowX * (float)Game::WindowSize.X;
+        keycode.MouseY = (float)keycode.MouseY / (float)windowY * (float)Game::WindowSize.Y;
 
         /*if (event.type == SDL_KEYDOWN)
         {

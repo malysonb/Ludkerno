@@ -41,7 +41,7 @@ void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_of
     m_mySprite = getComponent<Sprite>();
     m_mySprite->Base = this;
     m_mySprite->Init(texturePath, Size_x, Size_y, n_ofAnimations);
-    m_mySprite->SetupAnimation(0, 1, 500);
+    m_mySprite->SetupAnimation(0, 0, 500);
     m_mySprite->destRect.x = static_cast<int>(transform->position.X) - static_cast<int>(m_mySprite->OriginPoint.X);
     m_mySprite->destRect.y = static_cast<int>(transform->position.Y) - static_cast<int>(m_mySprite->OriginPoint.Y);
     m_mySprite->destRect.h = m_mySprite->srcRect.h * static_cast<int>(transform->scale.Y);

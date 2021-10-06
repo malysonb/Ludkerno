@@ -7,6 +7,7 @@
 #include "../include/Scene.hpp"
 #include "../include/Entity.hpp"
 #include "../include/Camera.hpp"
+#include "../include/Key.hpp"
 #include "../include/EntityMNGR.hpp"
 #include "../include/ComponentList.hpp"
 #include "../include/Screen.hpp"

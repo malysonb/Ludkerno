@@ -20,10 +20,13 @@ struct Vector2
     float Length();
     float DotProduct(Vector2 *vector2);
     Vector2 Direction();
+    static Vector2 Direction(Vector2 *vector2);
     Vector2 Normal();
 
     Vector2 operator+(Vector2& vector2);
+    Vector2 operator+(Vector2* vector2);
     Vector2 operator-(Vector2& vector2);
+    Vector2 operator-(Vector2* vector2);
     Vector2 operator/(Vector2& vector2);
     Vector2 operator/(float value);
     Vector2 operator*(float value);
