@@ -12,6 +12,9 @@ private:
     float m_parallax = 1;
     bool canDraw = false;
 public:
+
+    ~TileLayer();
+
     /**
      * @brief Load a map buffer to the Layer
      * 

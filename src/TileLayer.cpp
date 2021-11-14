@@ -66,3 +66,8 @@ float TileLayer::getParallax()
 {
     return m_parallax;
 }
+
+TileLayer::~TileLayer()
+{
+    
+}

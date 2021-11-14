@@ -27,28 +27,37 @@ void gameloop()
         Game::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Game::FrameRate;
         Game::FrameRate == 0 ? Game::FrameRate++ : Game::FrameRate;
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
 }
-
-int main()
+extern "C"
 {
-    frameTime = SDL_GetTicks();
-    //Uint32 lastframe = SDL_GetTicks();
-    game = new Game();
-    Game::sceneMngr.insertScene(new TileScene);
-    //Interpreter::ReadRPC();
-    game->EngineInit("Ludkerno", 854, 480);
-    #ifdef __EMSCRIPTEN__
-    emscripten_set_main_loop(gameloop, 0, 1);
-    #else
+    int SDL_main(int argc, char **argv)
+    {
+        std::cout << "Loaded " << argc << "Arguments: ";
+        for (int i = 0; i < argc; i++)
+        {
+            std::cout << i << " - " << argv[i] << std::endl;
+        }
+        
+        SDL_SetMainReady();
+        frameTime = SDL_GetTicks();
+        //Uint32 lastframe = SDL_GetTicks();
+        game = new Game();
+        Game::sceneMngr.insertScene(new TileScene);
+        //Interpreter::ReadRPC();
+        game->EngineInit("Ludkerno", 854, 480);
+#ifdef __EMSCRIPTEN__
+        emscripten_set_main_loop(gameloop, 0, 1);
+#else
         while (game->IsRunning())
         {
             gameloop();
         }
-    #endif
-    game->Clear();
-    return 0;
+#endif
+        game->Clear();
+        return 0;
+    }
 }

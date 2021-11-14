@@ -16,7 +16,7 @@ private:
 
 public:
     Poligonal(/* args */){}
-    ~Poligonal();
+    ~Poligonal(){}
 
     void Init(Vector2 *poligon, int num)
     {
@@ -51,7 +51,6 @@ public:
             Vector2 middle = next + point; // Going around the shape
             middle = middle / 2;
             Vector2 mouse (Game::key.keycode.MouseX, Game::key.keycode.MouseY);
-            Vector2 difference = middle - mouse;
             middle = middle - tam;
             SDL_SetRenderDrawColor(Game::renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
             SDL_RenderDrawLine(Game::renderer,

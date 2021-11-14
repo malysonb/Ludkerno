@@ -31,7 +31,7 @@ public:
     Sprite()
     {
     }
-    ~Sprite()
+    ~Sprite() override
     {
         delete [] sheet_Dimension;
     }

@@ -17,6 +17,8 @@ class Component
 public:
     bool Active = false;
     void Init();
+    virtual ~Component()
+    {}
     virtual void Update() = 0;
     virtual void Render() = 0;
     virtual const char* GetName() = 0;

@@ -11,7 +11,7 @@ bool comparaLayer(Object2D *obj1, Object2D *obj2){
 void RenderPipeline::Render()
 {
     std::sort(m_pipeline.begin(), m_pipeline.end(), comparaLayer);
-    for (int i = 0; i < m_pipeline.size(); ++i)
+    for (std::size_t i = 0; i < m_pipeline.size(); ++i)
     {
         m_pipeline[i]->Render();
     }
@@ -24,7 +24,7 @@ void RenderPipeline::add2Pipeline(Object2D *obj)
 
 void RenderPipeline::remove(Object2D *obj)
 {
-    for (int i = 0; i < m_pipeline.size(); ++i)
+    for (std::size_t i = 0; i < m_pipeline.size(); ++i)
     {
         if(m_pipeline[i] == obj){
             m_pipeline.erase(m_pipeline.begin() + i);

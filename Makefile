@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -pedantic -std=c++17 -g  -lSDLmain -lSDL2 -lSDL_image
-LDFLAGS = 
+CXXFLAGS = -Wall -Werror -Wextra -pedantic -std=c++17 -g  $(shell pkg-config --cflags sdl2 sdl2_image)
+LDFLAGS = $(shell pkg-config --libs sdl2 sdl2_image)
 
 SRC = main.cpp \
 	./src/*.cpp\
@@ -12,7 +12,7 @@ INCLUDE = ./RadiPako/include
 all: $(EXEC)
 
 $(EXEC): $(OBJ)
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o $@ $(OBJ) $(LBLIBS) -I$(INCLUDE)
+	$(CXX) -o $@ $(OBJ) $(LBLIBS) -I$(INCLUDE) $(CXXFLAGS) $(LDFLAGS)
 
 clean:
 	rm -rf $(OBJ) $(EXEC)

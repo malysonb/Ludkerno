@@ -1,5 +1,5 @@
 #pragma once
-#define SDL_MAIN_HANDLED
+
 #define VERSION "v0.6.0 Alpha"
 #ifdef SDL_Path
 #include SDL_Path

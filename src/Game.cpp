@@ -65,7 +65,7 @@ void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
         //SDL_RenderSetScale(renderer, 2, 2);
         SDL_RenderSetLogicalSize(renderer, Lx, Ly);
         WindowSize = {426, 240};
-        SDL_SetMainReady();
+        //SDL_SetMainReady();
         if (window)
         {
             Debug::log("Window created!", Debug::INFO);
