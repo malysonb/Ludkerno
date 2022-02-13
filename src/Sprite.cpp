@@ -99,5 +99,5 @@ void Sprite::flipHorizontally(bool isFlipped)
 
 void Sprite::Render()
 {
-    SDL_RenderCopyEx(Game::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
+    SDL_RenderCopyEx(Ludkerno::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
 }

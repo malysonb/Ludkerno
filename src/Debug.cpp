@@ -12,13 +12,13 @@ void Debug::log(const char *message, Level level = Debug::INFO)
             std::cout << "WARN: " << message << std::endl;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING,
                                      "WARNING!",
-                                     message, Game::window);
+                                     message, Ludkerno::window);
             break;
         case Debug::ERROR:
             std::cout << "ERROR: " << message << std::endl;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
                                      "ERROR!",
-                                     message, Game::window);
+                                     message, Ludkerno::window);
             break;
         default:
             break;
@@ -37,13 +37,13 @@ void Debug::log(std::string message, Level level = Debug::INFO)
             std::cout << "WARN: " << message << std::endl;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING,
                                      "WARNING!",
-                                     message.c_str(), Game::window);
+                                     message.c_str(), Ludkerno::window);
             break;
         case Debug::ERROR:
             std::cout << "ERROR: " << message << std::endl;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
                                      "ERROR!",
-                                     message.c_str(), Game::window);
+                                     message.c_str(), Ludkerno::window);
             break;
         default:
             break;

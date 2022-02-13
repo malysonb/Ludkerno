@@ -1,8 +1,10 @@
 #pragma once
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 
 class Key
 {
+private:
+    
 public:
     enum Control
     {
@@ -45,81 +47,19 @@ public:
         keycode.QUIT = pressed[QUIT];
         SDL_PumpEvents();
         int windowX, windowY;
-        SDL_GetWindowSize(Game::window, &windowX, &windowY);
-        //SDL_GetWindowPosition(Game::window, &windowX, &windowY);
-        //keycode.MouseX = SDL_MouseMotionEvent().x;
-        //keycode.MouseY = SDL_MouseMotionEvent().y;
+        SDL_GetWindowSize(Ludkerno::window, &windowX, &windowY);
         SDL_GetMouseState(&keycode.MouseX, &keycode.MouseY);
-        keycode.MouseX = (float)keycode.MouseX / (float)windowX * (float)Game::WindowSize.X;
-        keycode.MouseY = (float)keycode.MouseY / (float)windowY * (float)Game::WindowSize.Y;
-
-        /*if (event.type == SDL_KEYDOWN)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case UP:
-                keycode.UP = true;
-                break;
-            case DOWN:
-                keycode.DOWN = true;
-                break;
-            case LEFT:
-                keycode.LEFT = true;
-                break;
-            case RIGHT:
-                keycode.RIGHT = true;
-                break;
-            case START:
-                keycode.START = true;
-                break;
-            case ACTION:
-                keycode.ACTION = true;
-                break;
-            case QUIT:
-                keycode.QUIT = true;
-                break;
-            default:
-                break;
-            }
-        }
-        if (event.type == SDL_KEYUP)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case UP:
-                keycode.UP = false;
-                break;
-            case DOWN:
-                keycode.DOWN = false;
-                break;
-            case LEFT:
-                keycode.LEFT = false;
-                break;
-            case RIGHT:
-                keycode.RIGHT = false;
-                break;
-            case START:
-                keycode.START = false;
-                break;
-            case ACTION:
-                keycode.ACTION = false;
-                break;
-            case QUIT:
-                keycode.QUIT = false;
-                break;
-            default:
-                break;
-            }
-        }*/
-        if(keycode.RIGHT == true)
+        keycode.MouseX = (float)keycode.MouseX / (float)windowX * (float)Ludkerno::WindowSize.X;
+        keycode.MouseY = (float)keycode.MouseY / (float)windowY * (float)Ludkerno::WindowSize.Y;
+        if (keycode.RIGHT == true)
         {
             keycode.X_Axis = 1;
         }
-        else if(keycode.LEFT == true)
+        else if (keycode.LEFT == true)
         {
             keycode.X_Axis = -1;
         }
-        else if(keycode.LEFT == true && keycode.RIGHT == true)
+        else if (keycode.LEFT == true && keycode.RIGHT == true)
         {
             keycode.X_Axis = 0;
         }
@@ -128,15 +68,15 @@ public:
             keycode.X_Axis = 0;
         }
 
-        if(keycode.UP == true)
+        if (keycode.UP == true)
         {
             keycode.Y_Axis = -1;
         }
-        else if(keycode.DOWN == true)
+        else if (keycode.DOWN == true)
         {
             keycode.Y_Axis = 1;
         }
-        else if(keycode.UP == true && keycode.DOWN == true)
+        else if (keycode.UP == true && keycode.DOWN == true)
         {
             keycode.Y_Axis = 0;
         }

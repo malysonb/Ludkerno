@@ -1,4 +1,4 @@
-#include "../include/Game.hpp"
+#include "../include/Ludkerno.hpp"
 #include "../include/Camera.hpp"
 #include "../include/Scene.hpp"
 #include "../include/TextureMngr.hpp"
@@ -19,6 +19,6 @@ TileLayer *Scene::CreateLayer(int sX, int sY, int *MapCode){
     TileLayer *newLayer = new TileLayer();
     newLayer->LoadMap(sX, sY, MapCode);
     this->layers.push_back(newLayer);
-    Game::renderPipeline.add2Pipeline(newLayer);
+    Ludkerno::renderPipeline.add2Pipeline(newLayer);
     return newLayer;
 }

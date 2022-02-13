@@ -17,7 +17,26 @@ Entity *Obj::GetEntity()
     return object;
 }
 
-Entity *List::Add()
+EntityMngr *EntityMngr::instance_ = nullptr;
+
+EntityMngr::EntityMngr()
+{
+}
+
+EntityMngr::~EntityMngr()
+{
+}
+
+EntityMngr *EntityMngr::GetInstance()
+{
+    if (instance_ == nullptr)
+    {
+        instance_ = new EntityMngr();
+    }
+    return instance_;
+}
+
+Entity *EntityMngr::Add()
 {
     Obj *temp = new Obj(IDs);
     SceneEntities.reserve(1);
@@ -27,7 +46,7 @@ Entity *List::Add()
     return temp->object;
 }
 
-void List::RemoveID(int id)
+void EntityMngr::RemoveID(int id)
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
@@ -36,14 +55,14 @@ void List::RemoveID(int id)
             Obj *objtemp = SceneEntities[i];
             SceneEntities.erase(SceneEntities.begin() + i);
             Length--;
-            if(objtemp)
+            if (objtemp)
                 delete objtemp;
             return;
         }
     }
 }
 
-Obj *List::RemoveIndex(int index)
+Obj *EntityMngr::RemoveIndex(int index)
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
@@ -58,12 +77,12 @@ Obj *List::RemoveIndex(int index)
     return nullptr;
 }
 
-void List::Clear()
+void EntityMngr::Clear()
 {
-    while(SceneEntities.size() > 0)
+    while (SceneEntities.size() > 0)
     {
-        Obj* a = this->RemoveIndex(SceneEntities.size()-1);
-        if(a)
+        Obj *a = this->RemoveIndex(SceneEntities.size() - 1);
+        if (a)
             delete a;
         std::cout << "Size: " << SceneEntities.size() << std::endl;
     }
@@ -72,7 +91,7 @@ void List::Clear()
     IDs = 0;
 }
 
-void List::Update()
+void EntityMngr::Update()
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
@@ -80,7 +99,7 @@ void List::Update()
     }
 }
 
-void List::Render()
+void EntityMngr::Render()
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
@@ -88,7 +107,7 @@ void List::Render()
     }
 }
 
-Entity *List::GetByID(int id)
+Entity *EntityMngr::GetByID(int id)
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {

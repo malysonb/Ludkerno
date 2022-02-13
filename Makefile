@@ -16,3 +16,6 @@ $(EXEC): $(OBJ)
 
 clean:
 	rm -rf $(OBJ) $(EXEC)
+
+objectify:
+	$(CXX) -c $(SRC=objects/%.o)

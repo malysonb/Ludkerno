@@ -24,7 +24,7 @@ public:
     void Update()
     {
         float G = gravity, M = mass;
-        ForceY += (G*M) * Game::DeltaTime/30;
+        ForceY += (G*M) * Ludkerno::DeltaTime/30;
         ForceY >= V_Limit ? ForceY = V_Limit : ForceY;
         if(!forceApplied)
         {

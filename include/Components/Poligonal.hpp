@@ -1,5 +1,5 @@
 #pragma once
-#include "../Game.hpp"
+#include "../Ludkerno.hpp"
 #include "../Component.hpp"
 #include "../Vector2.hpp"
 #include "../Transform.hpp"
@@ -16,6 +16,7 @@ private:
 
 public:
     Poligonal(/* args */){}
+    
     ~Poligonal(){}
 
     void Init(Vector2 *poligon, int num)
@@ -50,15 +51,15 @@ public:
             Vector2 point = (shape[i] + actualPos);
             Vector2 middle = next + point; // Going around the shape
             middle = middle / 2;
-            Vector2 mouse (Game::key.keycode.MouseX, Game::key.keycode.MouseY);
+            Vector2 mouse (Ludkerno::key.keycode.MouseX, Ludkerno::key.keycode.MouseY);
             middle = middle - tam;
-            SDL_SetRenderDrawColor(Game::renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
-            SDL_RenderDrawLine(Game::renderer,
+            SDL_SetRenderDrawColor(Ludkerno::renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
+            SDL_RenderDrawLine(Ludkerno::renderer,
                        middle.X, middle.Y,mouse.X,mouse.Y);
             point = point - tam;
             next = next - tam;
-            SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-            SDL_RenderDrawLine(Game::renderer,
+            SDL_SetRenderDrawColor(Ludkerno::renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+            SDL_RenderDrawLine(Ludkerno::renderer,
                        point.X, point.Y, next.X, next.Y);
         }
     }

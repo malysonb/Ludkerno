@@ -5,7 +5,7 @@
  * @date 23/07/2020
  * Component template to you guys make your owns
  */
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Debug.hpp"
 
 class Entity;

@@ -1,4 +1,4 @@
-#include "../include/Game.hpp"
+#include "../include/Ludkerno.hpp"
 #include "../include/TileLayer.hpp"
 #include "../include/Tilemap.hpp"
 #include "../include/Camera.hpp"
@@ -49,8 +49,8 @@ void TileLayer::Render()
                 int y = (id / m_tile->SheetH);
                 src.x = m_tile->TileX * x;
                 src.y = m_tile->TileY * y;
-                dest.x = col * dest.w - static_cast<int>(Game::camera->relativePosition.X);
-                dest.y = row * dest.h - static_cast<int>(Game::camera->relativePosition.Y);
+                dest.x = col * dest.w - static_cast<int>(Ludkerno::camera->relativePosition.X);
+                dest.y = row * dest.h - static_cast<int>(Ludkerno::camera->relativePosition.Y);
                 TextureMngr::Draw(m_tile->GetTileTexture(), src, dest);
             }
         }

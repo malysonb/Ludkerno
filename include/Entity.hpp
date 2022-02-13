@@ -5,7 +5,7 @@
  * @date 23/07/2020
  * A simple entity code with ECS.
  */
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Object2D.hpp"
 #include "Components/Sprite.hpp"
 #include "Transform.hpp"

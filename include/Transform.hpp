@@ -4,7 +4,7 @@
  * @version 1.0
  * Transform code for every entity.
  */
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Component.hpp"
 #include "Vector2.hpp"
 
@@ -36,7 +36,7 @@ public:
     void Update()
     {
         position = position + velocity;
-        position = position - Game::camVelocity;
+        position = position - Ludkerno::camVelocity;
     }
 
     void Render()
@@ -50,14 +50,14 @@ public:
     {
         position.X = XA;
         position.Y = YA;
-        position = position - Game::matrix;
+        position = position - Ludkerno::matrix;
     }
 
     Vector2 GetPosition()
     {
         Vector2 temp;
-        temp.X = position.X - Game::matrix.X;
-        temp.Y = position.Y - Game::matrix.Y;
+        temp.X = position.X - Ludkerno::matrix.X;
+        temp.Y = position.Y - Ludkerno::matrix.Y;
         return temp;
     }
     Vector2 GetScreenPosition()

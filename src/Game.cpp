@@ -2,7 +2,7 @@
 #include <time.h>
 #include <string>
 #include <chrono>
-#include "../include/Game.hpp"
+#include "../include/Ludkerno.hpp"
 #include "../include/Debug.hpp"
 #include "../include/Scene.hpp"
 #include "../include/Entity.hpp"
@@ -15,34 +15,55 @@
 #include "../include/SceneMngr.hpp"
 #include "../include/RenderPipeline.hpp"
 
-float Game::FrameRate = 1;
-float Game::DeltaTime = 1;
+const int FPS = 60;
+const int frameDelay = 1000 / FPS;
+Uint32 frameStart;
+int frameTime = SDL_GetTicks();
 
-SDL_Window *Game::window = nullptr;
-SDL_Renderer *Game::renderer = nullptr;
-SDL_Event Game::Event;
-List Game::EntityManager;
-SceneMngr Game::sceneMngr;
-Key Game::key;
-Camera *Game::camera = nullptr;
-Vector2 Game::matrix;
-Vector2 Game::camVelocity;
-Vector2 Game::WindowSize;
-Screen Game::screen;
+float Ludkerno::FrameRate = 1;
+float Ludkerno::DeltaTime = 1;
+
+Ludkerno *Ludkerno::instance_ = nullptr;
+bool Ludkerno::Running_ = false;
+
+SDL_Window *Ludkerno::window = nullptr;
+SDL_Renderer *Ludkerno::renderer = nullptr;
+SDL_Event Ludkerno::Event;
+Key Ludkerno::key;
+Camera *Ludkerno::camera = nullptr;
+Vector2 Ludkerno::matrix;
+Vector2 Ludkerno::camVelocity;
+Vector2 Ludkerno::WindowSize;
+Screen Ludkerno::screen;
 CollisionSystem collisionSystem;
-RenderPipeline Game::renderPipeline;
-
+RenderPipeline Ludkerno::renderPipeline;
 
 Scene *ActualScene;
 
 bool notStarted = true;
 
-Scene *Game::GetScene()
+
+Ludkerno::Ludkerno()
+{
+}
+
+Ludkerno *Ludkerno::GetInstance()
+{
+    if (instance_ == nullptr)
+    {
+        Debug::log("Ludkerno is not instantiated.", Debug::ERROR);
+        Running_ = false;
+        return nullptr;
+    }
+    return instance_;
+}
+
+Scene *Ludkerno::GetScene()
 {
     return ActualScene;
 }
 
-void Game::LoadScene(Scene *scene)
+void Ludkerno::LoadScene(Scene *scene)
 {
     if (scene == NULL)
     {
@@ -53,8 +74,12 @@ void Game::LoadScene(Scene *scene)
     Debug::log("Loaded a new scene!", Debug::INFO);
 }
 
-void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
+void Ludkerno::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
 {
+    if (instance_ == nullptr)
+    {
+        instance_ = new Ludkerno();
+    }
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
@@ -69,14 +94,14 @@ void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
         if (window)
         {
             Debug::log("Window created!", Debug::INFO);
-            Running = true;
+            Running_ = true;
         }
         else
             Debug::log("Can't to create a window!", Debug::ERROR);
         if (renderer)
         {
             Debug::log("Render initialized", Debug::INFO);
-            Running = true;
+            Running_ = true;
         }
         else
             Debug::log("Can't to initialize a scene render!", Debug::ERROR);
@@ -84,8 +109,9 @@ void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
     else
     {
         Debug::log(SDL_GetError(), Debug::ERROR);
-        Game::Clear();
+        Ludkerno::Clear();
     }
+    frameTime = SDL_GetTicks();
     camera = new Camera();
     camera->Init();
     matrix = Vector2::Identity;
@@ -95,18 +121,18 @@ void Game::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
 #ifdef Release
 
 #endif
-    LoadScene(sceneMngr.GetScene(0));
+    LoadScene(SceneMngr::GetInstance()->GetScene(0));
     //Loop();
 }
 
-void Game::HandleEvents()
+void Ludkerno::HandleEvents()
 {
     SDL_PollEvent(&Event);
     key.UpdateInputs();
     switch (Event.type)
     {
     case SDL_QUIT:
-        Running = false;
+        Running_ = false;
         break;
     case SDL_MOUSEBUTTONDOWN:
         switch (Event.button.button)
@@ -135,18 +161,18 @@ void Game::HandleEvents()
     }
 }
 
-void Game::Update()
+void Ludkerno::Update()
 {
     DeltaTime = 30 / FrameRate <= 1 ? 1 : 30 / FrameRate;
     if (ActualScene == nullptr)
     {
         Debug::log("No scene loaded!", Debug::Level::ERROR);
-        Running = false;
+        Running_ = false;
         return;
     }
     if (notStarted)
     {
-        Game::EntityManager.Clear();
+        EntityMngr::GetInstance()->Clear();
         renderPipeline.Clear();
         ActualScene->Setup();
         notStarted = false;
@@ -155,11 +181,11 @@ void Game::Update()
     ActualScene->Update();
     camera->Update();
     camVelocity = camera->relativeVelocity;
-    EntityManager.Update();
+    EntityMngr::GetInstance()->Update();
     collisionSystem.Update();
 }
 
-void Game::Render()
+void Ludkerno::Render()
 {
     //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
@@ -170,7 +196,7 @@ void Game::Render()
     SDL_RenderPresent(renderer);
 }
 
-void Game::Clear()
+void Ludkerno::Clear()
 {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
@@ -178,4 +204,30 @@ void Game::Clear()
     Debug::log("Subsystem finalized!", Debug::INFO);
 }
 
-bool Game::IsRunning() { return Running; }
+bool Ludkerno::IsRunning() { return Running_; }
+
+Uint32 Ludkerno::GetCurrentTicks()
+{
+    return SDL_GetTicks();
+}
+
+void Ludkerno::Loop()
+{
+    try
+    {
+        while (Ludkerno::Running_)
+        {
+            frameStart = SDL_GetTicks();
+            instance_->HandleEvents();
+            instance_->Update();
+            instance_->Render();
+            frameTime = SDL_GetTicks() - frameStart;
+            Ludkerno::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Ludkerno::FrameRate;
+            Ludkerno::FrameRate == 0 ? Ludkerno::FrameRate++ : Ludkerno::FrameRate;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}

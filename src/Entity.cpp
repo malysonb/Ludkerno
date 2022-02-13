@@ -1,4 +1,4 @@
-#include "../include/Game.hpp"
+#include "../include/Ludkerno.hpp"
 #include "../include/Entity.hpp"
 #include "../include/Components/Collider.hpp"
 #include "../include/RenderPipeline.hpp"
@@ -21,7 +21,7 @@ Entity::Entity()
     {
         myComponents[i] = nullptr;
     }
-    Game::renderPipeline.add2Pipeline(this);
+    Ludkerno::renderPipeline.add2Pipeline(this);
 }
 
 Entity::~Entity()
@@ -32,7 +32,7 @@ Entity::~Entity()
         if(myComponents[i])
             delete myComponents[i];
     }
-    Game::renderPipeline.remove(this);
+    Ludkerno::renderPipeline.remove(this);
 }
 
 void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)
@@ -57,7 +57,7 @@ Vector2 Vector2::Identity;
 
 void Entity::Update()
 {
-    //transform->position = transform->position - Game::camVelocity;
+    //transform->position = transform->position - Ludkerno::camVelocity;
     transform->Update();
     //printf("%f\n", transform->velocity.Y);
     for (int i = 0; i < m_NumComponents; i++)
@@ -92,7 +92,7 @@ void Entity::Render()
     }
     if (getComponent<Collider>() != nullptr && getComponent<Collider>()->isColliding)
     {
-        SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
-        SDL_RenderDrawRect(Game::renderer, &m_mySprite->destRect);
+        SDL_SetRenderDrawColor(Ludkerno::renderer, 255, 0, 0, 255);
+        SDL_RenderDrawRect(Ludkerno::renderer, &m_mySprite->destRect);
     }
 }

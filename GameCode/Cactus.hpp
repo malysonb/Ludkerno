@@ -1,5 +1,5 @@
 #pragma once
-#include "../Ludkerno.hpp"
+#include "../LudkernoLib.hpp"
 
 class Cactus : public Component
 {
@@ -18,8 +18,8 @@ class Cactus : public Component
 
     void Update()
     {
-        float S = speed * Game::DeltaTime;
-        //S = S / Game::FrameRate;
+        float S = speed * Ludkerno::DeltaTime;
+        //S = S / Ludkerno::FrameRate;
         Base->transform->velocity.X = S;
     }
     void Render()

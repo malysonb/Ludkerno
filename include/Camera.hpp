@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Transform.hpp"
 #include "Screen.hpp"
 
@@ -15,8 +15,8 @@ public:
 
     void Init()
     {
-        middle.X = static_cast<float>(Game::screen.DynamicHPosition(50));
-        middle.Y = static_cast<float>(Game::screen.DynamicVPosition(50));
+        middle.X = static_cast<float>(Ludkerno::screen.DynamicHPosition(50));
+        middle.Y = static_cast<float>(Ludkerno::screen.DynamicVPosition(50));
     }
     void Update()
     {

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Ludkerno.hpp"
+#include "../LudkernoLib.hpp"
 #include "PlatformerInput.hpp"
 
 int testmap[] = {6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,4,4,4,4,4,4,4,4,4,
@@ -26,7 +26,7 @@ class PlatformScene : public Scene
     {
         TileLayer *layer = CreateLayer(35,15,testmap);
         layer->SetTilemap("./Assets/tileset.png",3,3,16,16);
-        Player = Game::EntityManager.Add();
+        Player = EntityMngr::GetInstance()->Add();
         Player->SetSprite("./Assets/aliisheet.png",16,16,4);
         Player->GetSprite()->SetOrigin(8,16);
         Player->GetSprite()->SetupAnimation(0,1,1000);
@@ -35,10 +35,10 @@ class PlatformScene : public Scene
         Player->AddComponent<PlatformerInput>(Player);
         Player->getComponent<PlatformerInput>()->Init();
         std::cout << Player->toString() << std::endl;
-        Player->transform->SetScreenPosition(Game::screen.DynamicHPosition(50), Game::screen.DynamicVPosition(20));
+        Player->transform->SetScreenPosition(Ludkerno::screen.DynamicHPosition(50), Ludkerno::screen.DynamicVPosition(20));
     }
     void Update()
     {
-        SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(Ludkerno::renderer, 0, 0, 0, 255);
     }
 };

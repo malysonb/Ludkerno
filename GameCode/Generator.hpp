@@ -1,5 +1,5 @@
 #pragma once
-#include "../Ludkerno.hpp"
+#include "../LudkernoLib.hpp"
 #include "Cactus.hpp"
 
 class Generator : public Component
@@ -18,26 +18,26 @@ public:
     void Update()
     {
         m_currenttime = SDL_GetTicks();
-        if (m_currenttime > m_lasttime + (WaitTime * 1/Game::FrameRate))
+        if (m_currenttime > m_lasttime + (WaitTime * 1/Ludkerno::FrameRate))
         {
-            Entity *cactus = Game::EntityManager.Add();
-            cactus->transform->SetScreenPosition(Game::screen.DynamicHPosition(101), Game::screen.DynamicVPosition(50));
+            Entity *cactus = EntityMngr::GetInstance()->Add();
+            cactus->transform->SetScreenPosition(Ludkerno::screen.DynamicHPosition(101), Ludkerno::screen.DynamicVPosition(50));
             cactus->AddComponent<Cactus>(cactus);
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);
             cactus->getComponent<Collider>()->Init();
             int range = Utils::Rand(8,10);
-            float res = (range*100)*static_cast<float>(Game::FrameRate);
+            float res = (range*100)*static_cast<float>(Ludkerno::FrameRate);
             WaitTime = static_cast<int>(res);
             m_lasttime = SDL_GetTicks();
-            for (int i = 0; i < static_cast<int>(Game::EntityManager.SceneEntities.size()); i++)
+            for (int i = 0; i < static_cast<int>(EntityMngr::GetInstance()->SceneEntities.size()); i++)
             {
-                Entity *temp = Game::EntityManager.SceneEntities[i]->object;
+                Entity *temp = EntityMngr::GetInstance()->SceneEntities[i]->object;
                 if (temp != nullptr && temp->getComponent<Cactus>() != nullptr)
                 {
                     if (temp->transform->GetScreenPosition().X < -16)
                     {
-                        Game::EntityManager.RemoveID(temp->ID);
+                        EntityMngr::GetInstance()->RemoveID(temp->ID);
                     }
                 }
             }

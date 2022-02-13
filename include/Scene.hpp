@@ -4,7 +4,7 @@
  * @version 1.0
  * Simple scene template to you make your own scenes.
  */
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Tilemap.hpp"
 #include "TileLayer.hpp"
 #include <vector>

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Ludkerno.hpp"
+#include "../LudkernoLib.hpp"
 #include "Cena.hpp"
 #include "Cactus.hpp"
 #include "Generator.hpp"
@@ -25,22 +25,22 @@ public:
     float ForceJump = -2.2f;
     void Update()
     {
-        if (transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(50))
+        if (transform->GetScreenPosition().Y >= Ludkerno::screen.DynamicVPosition(50))
         {
             able = true;
             onTop = false;
             PF->isOnGround = true;
-            transform->SetScreenPosition(static_cast<int>(transform->GetScreenPosition().X), Game::screen.DynamicVPosition(50));
+            transform->SetScreenPosition(static_cast<int>(transform->GetScreenPosition().X), Ludkerno::screen.DynamicVPosition(50));
         }
         else
         {
             PF->isOnGround = false;
         }
-        if ((Game::key.keycode.UP || Game::key.keycode.LEFT_CLICK) && PF->isOnGround)
+        if ((Ludkerno::key.keycode.UP || Ludkerno::key.keycode.LEFT_CLICK) && PF->isOnGround)
         {
             PF->ApplyForce(ForceJump, Vector2::AY);
         }
-        if (Game::key.keycode.DOWN)
+        if (Ludkerno::key.keycode.DOWN)
         {
             PF->ApplyForce(400, Vector2::AY);
         }
@@ -53,15 +53,15 @@ public:
             Base->GetSprite()->SetupAnimation(0, 0, 500);
             died = true;
         }
-        /*transform->velocity.Y = Game::key.keycode.Y_Axis * 2;
-        transform->velocity.X = Game::key.keycode.X_Axis * 2;
-        if(transform->position.X >= Game::camera->middle.X)
+        /*transform->velocity.Y = Ludkerno::key.keycode.Y_Axis * 2;
+        transform->velocity.X = Ludkerno::key.keycode.X_Axis * 2;
+        if(transform->position.X >= Ludkerno::camera->middle.X)
         {
-            Game::camera->Move(Vector2::AX, transform->velocity.X);
+            Ludkerno::camera->Move(Vector2::AX, transform->velocity.X);
         }
-        if(transform->position.Y >= Game::camera->middle.Y)
+        if(transform->position.Y >= Ludkerno::camera->middle.Y)
         {
-            Game::camera->Move(Vector2::AY, transform->velocity.Y);
+            Ludkerno::camera->Move(Vector2::AY, transform->velocity.Y);
         }*/
     }
 

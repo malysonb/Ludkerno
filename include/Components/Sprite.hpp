@@ -5,7 +5,7 @@
  * @date 23/07/2020
  * "This is my favorite code."
  */
-#include "../Game.hpp"
+#include "../Ludkerno.hpp"
 #include "../Component.hpp"
 #include "../TextureMngr.hpp"
 #include "../Vector2.hpp"

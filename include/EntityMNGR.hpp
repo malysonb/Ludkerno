@@ -1,5 +1,5 @@
 #pragma once
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 #include "Entity.hpp"
 #include <vector>
 
@@ -9,16 +9,26 @@ public:
     Entity *object;
     Obj(int ID);
     ~Obj();
-    Entity* GetEntity();
+    Entity *GetEntity();
 };
 
-class List
+class EntityMngr
 {
-    public:
+private:
+    static EntityMngr *instance_;
+    EntityMngr();
+    ~EntityMngr();
+public:
+
+    //Singleton functions
+    EntityMngr(EntityMngr &other) = delete;
+    void operator=(const EntityMngr&) = delete;
+    static EntityMngr *GetInstance();
+    ///////////////////////////
+
     int Length = 0;
     int IDs = 0;
-    std::vector<Obj*> SceneEntities;
-    //Obj *Start = nullptr, *End = nullptr;
+    std::vector<Obj *> SceneEntities;
     Entity *Add();
     void RemoveID(int id);
     Obj *RemoveIndex(int index);
