@@ -2,7 +2,7 @@
 #include "../include/Debug.hpp"
 #include <sstream>
 
-#include "RadiPako.hpp"
+#include "../RadiPako/include/RadiPako.hpp"
 
 /*#ifdef MSVCcompiler
 #include "../include/RadiPako.h"
