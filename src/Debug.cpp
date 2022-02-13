@@ -19,6 +19,7 @@ void Debug::log(const char *message, Level level = Debug::INFO)
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
                                      "ERROR!",
                                      message, Ludkerno::window);
+            Ludkerno::StopLudkerno();
             break;
         default:
             break;
@@ -44,6 +45,7 @@ void Debug::log(std::string message, Level level = Debug::INFO)
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
                                      "ERROR!",
                                      message.c_str(), Ludkerno::window);
+            Ludkerno::StopLudkerno();
             break;
         default:
             break;

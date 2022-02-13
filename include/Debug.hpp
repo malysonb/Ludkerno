@@ -17,7 +17,7 @@ class Debug
     enum Level{
         INFO, WARN, ERROR
     };
-    static void log(const char*, Level level);
-    static void log(std::string, Level level);
-    static void log(std::string);
+    static void log(const char* m, Level level);
+    static void log(std::string m, Level level);
+    static void log(std::string m);
 };

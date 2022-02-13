@@ -36,7 +36,6 @@ Vector2 Ludkerno::camVelocity;
 Vector2 Ludkerno::WindowSize;
 Screen Ludkerno::screen;
 CollisionSystem collisionSystem;
-RenderPipeline Ludkerno::renderPipeline;
 
 Scene *ActualScene;
 
@@ -173,7 +172,7 @@ void Ludkerno::Update()
     if (notStarted)
     {
         EntityMngr::GetInstance()->Clear();
-        renderPipeline.Clear();
+        RenderPipeline::GetInstance()->Clear();
         ActualScene->Setup();
         notStarted = false;
     }
@@ -192,7 +191,7 @@ void Ludkerno::Render()
     /*if (ActualScene != nullptr)
         ActualScene->DrawMap();
     EntityManager.Render();*/
-    renderPipeline.Render();
+    RenderPipeline::GetInstance()->Render();
     SDL_RenderPresent(renderer);
 }
 
@@ -230,4 +229,8 @@ void Ludkerno::Loop()
     {
         std::cerr << e.what() << '\n';
     }
+}
+
+void Ludkerno::StopLudkerno(){
+    Running_ = false;
 }

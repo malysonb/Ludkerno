@@ -4,17 +4,6 @@
 
 #include "../RadiPako/include/RadiPako.hpp"
 
-/*#ifdef MSVCcompiler
-#include "../include/RadiPako.h"
-#elif GCCcompiler
-extern "C"
-{
-    #include "../include/RadiPako.h"
-}
-#else
-#include "../include/RadiPako.h"
-#endif*/
-
 SDL_Texture* TextureMngr::LoadTexture(const char* filename)
 {
     SDL_Surface* surface = IMG_Load(filename);
@@ -32,14 +21,22 @@ SDL_Texture* TextureMngr::LoadTexture(const char* filename, SDL_Renderer* ren)
 }
 
 
-SDL_Texture* TextureMngr::LoadTexture_RW(const char* filename)
+SDL_Texture* TextureMngr::LoadTexture_RW(const char* filename, const char* package)
 {
     SDL_RWops* src;
-    RadiPako::RPK *rpk_f = RadiPako::LoadRPKFile("./assets.rpk");
-    RadiPako::RPK_File *file = RadiPako::GetFile(rpk_f, filename);
+    RadiPako::RPK *rpk_f = RadiPako::LoadRPKFile(package);
     if(rpk_f == nullptr)
     {
-        Debug::log("This file cant be found!", Debug::Level::ERROR);
+        std::stringstream exception;
+        exception << "The assets.rpk couldn't be found!"; 
+        Debug::log(exception.str(), Debug::Level::ERROR);
+    }
+    RadiPako::RPK_File *file = RadiPako::GetFile(rpk_f, filename);
+    if(file == nullptr)
+    {
+        std::stringstream exception;
+        exception << "The file " << filename << "couldn't be found in assets!"; 
+        Debug::log(exception.str(), Debug::Level::ERROR);
     }
     unsigned char* buff = RadiPako::GetFile_Content_Uchar(file);
     //unsigned char* buff = RPK_GetFile_Uchar("./Assets/Sprites.rpk",filename);

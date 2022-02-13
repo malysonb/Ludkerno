@@ -10,7 +10,7 @@ public:
     void Setup()
     {
         isoTile = EntityMngr::GetInstance()->Add();
-        isoTile->SetSprite("tile_grass.png", 32,32, 1);
+        isoTile->SetSprite(".\\Assets\\tile_grass.png", 32,32, 1);
         isoTile->GetSprite()->SetOrigin(16,16);
         isoTile->transform->SetScreenPosition(Ludkerno::screen.DynamicHPosition(50), Ludkerno::screen.DynamicVPosition(50));
         isoTile->AddComponent<Poligonal>(isoTile);

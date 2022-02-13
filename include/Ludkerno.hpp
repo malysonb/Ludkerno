@@ -52,7 +52,6 @@ public:
     static Camera *camera;
     static SDL_Event Event;
     static SDL_Renderer *renderer;
-    static RenderPipeline renderPipeline;
 
     Ludkerno(Ludkerno &other) = delete;
 
@@ -89,6 +88,8 @@ public:
      * @param scene The Scene class you will load.
      **/
     static void LoadScene(Scene *scene);
+
+    static void StopLudkerno();
 };
 
 /**

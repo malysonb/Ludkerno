@@ -4,6 +4,23 @@
 #include "../include/RenderPipeline.hpp"
 #include "../include/Object2D.hpp"
 
+RenderPipeline* RenderPipeline::instance_ = nullptr;
+
+RenderPipeline::RenderPipeline(){
+
+}
+
+RenderPipeline::~RenderPipeline(){
+
+}
+
+RenderPipeline *RenderPipeline::GetInstance(){
+    if(instance_ == nullptr){
+        instance_ = new RenderPipeline();
+    }
+    return instance_;
+}
+
 bool comparaLayer(Object2D *obj1, Object2D *obj2){
     return obj1->getLayer() < obj2->getLayer();
 }

@@ -19,6 +19,6 @@ TileLayer *Scene::CreateLayer(int sX, int sY, int *MapCode){
     TileLayer *newLayer = new TileLayer();
     newLayer->LoadMap(sX, sY, MapCode);
     this->layers.push_back(newLayer);
-    Ludkerno::renderPipeline.add2Pipeline(newLayer);
+    RenderPipeline::GetInstance()->add2Pipeline(newLayer);
     return newLayer;
 }

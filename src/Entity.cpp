@@ -21,7 +21,7 @@ Entity::Entity()
     {
         myComponents[i] = nullptr;
     }
-    Ludkerno::renderPipeline.add2Pipeline(this);
+    RenderPipeline::GetInstance()->add2Pipeline(this);
 }
 
 Entity::~Entity()
@@ -32,7 +32,7 @@ Entity::~Entity()
         if(myComponents[i])
             delete myComponents[i];
     }
-    Ludkerno::renderPipeline.remove(this);
+    RenderPipeline::GetInstance()->remove(this);
 }
 
 void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)

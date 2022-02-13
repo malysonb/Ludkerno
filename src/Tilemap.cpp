@@ -26,5 +26,5 @@ Tilemap::Tilemap()
 
 void Tilemap::SetTileMapFile(const char *filename)
 {
-    TileTexture = release_v ? TextureMngr::LoadTexture_RW(filename) : TextureMngr::LoadTexture(filename);
+    TileTexture = release_v ? TextureMngr::LoadTexture_RW(filename, "./assets.rpk") : TextureMngr::LoadTexture(filename);
 }
