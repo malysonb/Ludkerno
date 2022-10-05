@@ -10,7 +10,7 @@ class Cactus : public Component
     {
         Active = true;
         int myFrame = Utils::Rand(0,4);
-        Base->SetSprite("./Assets/cactus.png",16,32,4);
+        Base->SetSprite(".\\Assets\\cactus.png",16,32,4);
         Base->getComponent<Sprite>()->SetupAnimation(myFrame,0,500);
         Base->getComponent<Sprite>()->SetAnimation(myFrame);
         Base->getComponent<Sprite>()->OriginPoint = {8, 32};

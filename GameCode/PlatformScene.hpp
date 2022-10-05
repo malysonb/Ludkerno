@@ -25,9 +25,9 @@ class PlatformScene : public Scene
     void Setup()
     {
         TileLayer *layer = CreateLayer(35,15,testmap);
-        layer->SetTilemap("./Assets/tileset.png",3,3,16,16);
+        layer->SetTilemap(".\\Assets\\tileset.png",3,3,16,16);
         Player = EntityMngr::GetInstance()->Add();
-        Player->SetSprite("./Assets/aliisheet.png",16,16,4);
+        Player->SetSprite(".\\Assets\\aliisheet.png",16,16,4);
         Player->GetSprite()->SetOrigin(8,16);
         Player->GetSprite()->SetupAnimation(0,1,1000);
         Player->GetSprite()->SetupAnimation(1,5,50);

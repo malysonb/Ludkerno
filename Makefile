@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -pedantic -std=c++17 -g  $(shell pkg-config --cflags sdl2 sdl2_image)
+CXXFLAGS = -DRelease -Wall -Werror -Wextra -pedantic -std=c++17 -static -g  $(shell pkg-config --cflags sdl2 sdl2_image)
 LDFLAGS = $(shell pkg-config --static --libs sdl2 sdl2_image)
 
 SRC = $(wildcard *.cpp) $(wildcard src/*.cpp) $(wildcard RadiPako/src/*.cpp)
