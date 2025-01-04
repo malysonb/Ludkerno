@@ -4,7 +4,7 @@
  * @version 1.0
  * Simple vector code.
  */
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 
 struct Vector2
 {
@@ -20,10 +20,13 @@ struct Vector2
     float Length();
     float DotProduct(Vector2 *vector2);
     Vector2 Direction();
+    static Vector2 Direction(Vector2 *vector2);
     Vector2 Normal();
 
     Vector2 operator+(Vector2& vector2);
+    Vector2 operator+(Vector2* vector2);
     Vector2 operator-(Vector2& vector2);
+    Vector2 operator-(Vector2* vector2);
     Vector2 operator/(Vector2& vector2);
     Vector2 operator/(float value);
     Vector2 operator*(float value);

@@ -1,5 +1,5 @@
 #pragma once
-#include "Game.hpp"
+#include "Ludkerno.hpp"
 
 class Screen
 {
@@ -7,7 +7,7 @@ private:
 public:
     Vector2 GetWindowSize()
     {
-        return Game::WindowSize;
+        return Ludkerno::WindowSize;
     }
 
     /**
@@ -18,7 +18,7 @@ public:
     **/
     int DynamicHPosition(float Percentage)
     {
-        return static_cast<int>((Percentage * Game::WindowSize.X) / 100.0f);
+        return static_cast<int>((Percentage * Ludkerno::WindowSize.X) / 100.0f);
     }
 
     /**
@@ -29,6 +29,6 @@ public:
     **/
     int DynamicVPosition(float Percentage)
     {
-        return static_cast<int>((Percentage * Game::WindowSize.Y) / 100.0f);
+        return static_cast<int>((Percentage * Ludkerno::WindowSize.Y) / 100.0f);
     }
 };

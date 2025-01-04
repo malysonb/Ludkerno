@@ -11,17 +11,17 @@
 
 void CollisionSystem::Update()
 {
-    for (int x = 0; x < static_cast<int>(Game::EntityManager.SceneEntities.size()); x++)
+    for (int x = 0; x < static_cast<int>(EntityMngr::GetInstance()->SceneEntities.size()); x++)
     {
-        Collider *XCol = Game::EntityManager.SceneEntities[x]->object->getComponent<Collider>();
+        Collider *XCol = EntityMngr::GetInstance()->SceneEntities[x]->object->getComponent<Collider>();
         if (XCol == nullptr)
         {
             continue;
         }
         XCol->isColliding = XCol->isColliding ? false : false;
-        for (int y = 0; y < static_cast<int>(Game::EntityManager.SceneEntities.size()); y++)
+        for (int y = 0; y < static_cast<int>(EntityMngr::GetInstance()->SceneEntities.size()); y++)
         {
-            Collider *YCol = Game::EntityManager.SceneEntities[y]->object->getComponent<Collider>();
+            Collider *YCol = EntityMngr::GetInstance()->SceneEntities[y]->object->getComponent<Collider>();
             if (XCol != nullptr && YCol != nullptr)
             {
                 if ((XCol->Base->ID != YCol->Base->ID))

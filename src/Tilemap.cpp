@@ -16,7 +16,7 @@ Tilemap::Tilemap(const char *filename, int sheets_H, int sheets_V, int tile_X, i
     TileY = tile_Y;
 }
 
-Tilemap::Tilemap(const char *filename)
+Tilemap::Tilemap()
 {
     SheetH = 3;
     SheetV = 3;
@@ -26,5 +26,5 @@ Tilemap::Tilemap(const char *filename)
 
 void Tilemap::SetTileMapFile(const char *filename)
 {
-    TileTexture = release_v ? TextureMngr::LoadTexture_RW(filename) : TextureMngr::LoadTexture(filename);
+    TileTexture = release_v ? TextureMngr::LoadTexture_RW(filename, "./assets.rpk") : TextureMngr::LoadTexture(filename);
 }

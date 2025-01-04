@@ -1,5 +1,5 @@
 #pragma once
-#include "../Ludkerno.hpp"
+#include "../LudkernoLib.hpp"
 #include "../include/Utils.hpp"
 
 class PlatformerInput : public Component
@@ -18,21 +18,21 @@ public:
     }
     void Update()
     {
-        if (Game::key.keycode.RIGHT || Game::key.keycode.LEFT)
+        if (Ludkerno::key.keycode.RIGHT || Ludkerno::key.keycode.LEFT)
         {
             if (Base->GetSprite()->getCurrentAnim() == 0)
             {
                 Base->GetSprite()->SetAnimation(1);
             }
-            if (Game::key.keycode.LEFT && !Game::key.keycode.RIGHT)
+            if (Ludkerno::key.keycode.LEFT && !Ludkerno::key.keycode.RIGHT)
             {
                 Base->GetSprite()->flipHorizontally(true);
-                Base->transform->velocity.X = -2 * Game::DeltaTime;
+                Base->transform->velocity.X = -2 * Ludkerno::DeltaTime;
             }
-            if (Game::key.keycode.RIGHT && !Game::key.keycode.LEFT)
+            if (Ludkerno::key.keycode.RIGHT && !Ludkerno::key.keycode.LEFT)
             {
                 Base->GetSprite()->flipHorizontally(false);
-                Base->transform->velocity.X = 2 * Game::DeltaTime;
+                Base->transform->velocity.X = 2 * Ludkerno::DeltaTime;
             }
         }
         else
@@ -43,25 +43,25 @@ public:
             }
             Base->transform->velocity.X = 0;
         }
-        if (Game::key.keycode.UP && isGrounded)
+        if (Ludkerno::key.keycode.UP && isGrounded)
         {
             Base->getComponent<PlatformPhysics>()->ApplyForce(-3, Vector2::AY);
             isGrounded = false;
             //Base->getComponent<PlatformPhysics>()->isOnGround = false;
         }
-        if (Base->transform->GetScreenPosition().Y >= Game::screen.DynamicVPosition(100))
+        if (Base->transform->GetScreenPosition().Y >= Ludkerno::screen.DynamicVPosition(100))
         {
             isGrounded = true;
             Base->getComponent<PlatformPhysics>()->isOnGround = true;
             Base->transform->velocity.Y = 0;
-            Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Game::screen.DynamicVPosition(100));
+            Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Ludkerno::screen.DynamicVPosition(100));
         }
         bool cap = false;
-        for (int row = 0; row < Game::GetScene()->M_SceneRows; row++)
+        for (int row = 0; row < Ludkerno::GetScene()->layers[0]->rows; row++)
         {
-            for (int col = 0; col < Game::GetScene()->M_SceneCols; col++)
+            for (int col = 0; col < Ludkerno::GetScene()->layers[0]->cols; col++)
             {
-                if (Game::GetScene()->map[row][col] != 4)
+                if (Ludkerno::GetScene()->layers[0]->map[row][col] != 4)
                 {
                     if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().X), (16 * col), (16 * col)+16))
                     {
@@ -83,12 +83,12 @@ public:
         }
         if (Base->transform->velocity.X != 0)
         {
-            if(Base->transform->GetScreenPosition().X >= Game::screen.DynamicHPosition(50))
-                Game::camera->Move(Vector2::AX, Base->transform->velocity.X);
+            if(Base->transform->GetScreenPosition().X >= Ludkerno::screen.DynamicHPosition(50))
+                Ludkerno::camera->Move(Vector2::AX, Base->transform->velocity.X);
         }
         else
         {
-            Game::camera->Move(Vector2::AX, 0);
+            Ludkerno::camera->Move(Vector2::AX, 0);
         }
     }
     void Render()

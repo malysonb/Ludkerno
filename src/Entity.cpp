@@ -1,5 +1,8 @@
+#include "../include/Ludkerno.hpp"
 #include "../include/Entity.hpp"
 #include "../include/Components/Collider.hpp"
+#include "../include/RenderPipeline.hpp"
+#include "../include/Object2D.hpp"
 
 //Sprite *sprite;
 
@@ -18,26 +21,27 @@ Entity::Entity()
     {
         myComponents[i] = nullptr;
     }
-    
+    RenderPipeline::GetInstance()->add2Pipeline(this);
 }
 
 Entity::~Entity()
 {
-    if(transform)
-        delete transform;
+    delete transform;
     for(int i = 0; i < m_NumComponents; i++)
     {
         if(myComponents[i])
             delete myComponents[i];
     }
+    RenderPipeline::GetInstance()->remove(this);
 }
 
 void Entity::SetSprite(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations)
 {
     AddComponent<Sprite>(this);
     m_mySprite = getComponent<Sprite>();
+    m_mySprite->Base = this;
     m_mySprite->Init(texturePath, Size_x, Size_y, n_ofAnimations);
-    m_mySprite->SetupAnimation(0, 1, 500);
+    m_mySprite->SetupAnimation(0, 0, 500);
     m_mySprite->destRect.x = static_cast<int>(transform->position.X) - static_cast<int>(m_mySprite->OriginPoint.X);
     m_mySprite->destRect.y = static_cast<int>(transform->position.Y) - static_cast<int>(m_mySprite->OriginPoint.Y);
     m_mySprite->destRect.h = m_mySprite->srcRect.h * static_cast<int>(transform->scale.Y);
@@ -53,7 +57,7 @@ Vector2 Vector2::Identity;
 
 void Entity::Update()
 {
-    //transform->position = transform->position - Game::camVelocity;
+    //transform->position = transform->position - Ludkerno::camVelocity;
     transform->Update();
     //printf("%f\n", transform->velocity.Y);
     for (int i = 0; i < m_NumComponents; i++)
@@ -88,7 +92,7 @@ void Entity::Render()
     }
     if (getComponent<Collider>() != nullptr && getComponent<Collider>()->isColliding)
     {
-        SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
-        SDL_RenderDrawRect(Game::renderer, &m_mySprite->destRect);
+        SDL_SetRenderDrawColor(Ludkerno::renderer, 255, 0, 0, 255);
+        SDL_RenderDrawRect(Ludkerno::renderer, &m_mySprite->destRect);
     }
 }

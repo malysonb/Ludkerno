@@ -1,6 +1,23 @@
 #include "../include/SceneMngr.hpp"
-#include "../include/Game.hpp"
+#include "../include/Ludkerno.hpp"
 #include "../include/Debug.hpp"
+
+SceneMngr *SceneMngr::instance_ = nullptr;
+
+SceneMngr::SceneMngr(){
+
+}
+
+SceneMngr::~SceneMngr(){
+    
+}
+
+SceneMngr* SceneMngr::GetInstance(){
+    if(instance_ == nullptr){
+        instance_ = new SceneMngr();
+    }
+    return instance_;
+}
 
 /*void SceneMngr::setup(int number_of_scenes)
 {
@@ -8,7 +25,7 @@
 }*/
 void SceneMngr::setScene(int index_of_the_scene)
 {
-    Game::LoadScene(sceneVector[index_of_the_scene]);
+    Ludkerno::LoadScene(sceneVector[index_of_the_scene]);
 }
 void SceneMngr::insertScene(Scene *scene)
 {

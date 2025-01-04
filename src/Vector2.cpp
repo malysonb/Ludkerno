@@ -25,16 +25,28 @@ float Vector2::DotProduct(Vector2 *direction)
 
 Vector2 Vector2::Direction()
 {
-    Vector2 direction;
+    Vector2 direction(0,0);
+    if(this->Length() == 0)
+        return direction;
     direction.X = this->X/this->Length();
     direction.Y = this->Y/this->Length();
     return direction;
 }
 
+Vector2 Vector2::Direction(Vector2 *vector2)
+{
+    Vector2 direction(0,0);
+    if(vector2->Length() == 0)
+        return direction;
+    direction.X = vector2->X/vector2->Length();
+    direction.Y = vector2->Y/vector2->Length();
+    return direction;
+}
+
 Vector2 Vector2::Normal()
 {
-    Vector2 Normal(-this->Y, this->X);
-    return Normal;
+    Vector2 normal(-this->Y, this->X);
+    return normal;
 }
 
 Vector2 Vector2::operator+(Vector2 &vector2)
@@ -44,11 +56,25 @@ Vector2 Vector2::operator+(Vector2 &vector2)
     result.Y = this->Y + vector2.Y;
     return result;
 }
+Vector2 Vector2::operator+(Vector2 *vector2)
+{
+    Vector2 result;
+    result.X = this->X + vector2->X;
+    result.Y = this->Y + vector2->Y;
+    return result;
+}
 Vector2 Vector2::operator-(Vector2 &vector2)
 {
     Vector2 result;
     result.X = this->X - vector2.X;
     result.Y = this->Y - vector2.Y;
+    return result;
+}
+Vector2 Vector2::operator-(Vector2 *vector2)
+{
+    Vector2 result;
+    result.X = this->X - vector2->X;
+    result.Y = this->Y - vector2->Y;
     return result;
 }
 Vector2 Vector2::operator*(float value)

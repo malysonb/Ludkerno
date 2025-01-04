@@ -1,4 +1,5 @@
 #include "../include/Components/Sprite.hpp"
+#include "../include/Entity.hpp"
 
 void Sprite::LoadSpritesheet(SDL_Texture *newSprite)
 {
@@ -45,9 +46,10 @@ void Sprite::Init(const char *texturePath, int Size_x, int Size_y, int n_ofAnima
     m_Point.y = Size_y / 2;
     Debug::log("Initializing Sprite", Debug::INFO);
     if (release_v)
-        LoadSpritesheet(TextureMngr::LoadTexture_RW(texturePath));
+        LoadSpritesheet(TextureMngr::LoadTexture_RW(texturePath, "./assets.rpk"));
     else
         LoadSpritesheet(TextureMngr::LoadTexture(texturePath));
+    baseTransform = Base->transform;
     h_px = Size_y;
     v_px = Size_x;
     n_ofAnims = n_ofAnimations;
@@ -97,5 +99,5 @@ void Sprite::flipHorizontally(bool isFlipped)
 
 void Sprite::Render()
 {
-    SDL_RenderCopyEx(Game::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
+    SDL_RenderCopyEx(Ludkerno::renderer, sprite, &srcRect, &destRect, 0, NULL, flipped);
 }

@@ -1,6 +1,8 @@
 #pragma once
-#include "Game.hpp"
-class Tilemap
+#include "Ludkerno.hpp"
+#include "Object.hpp"
+
+class Tilemap : public Object
 {
     SDL_Texture *TileTexture;
 public:
@@ -9,6 +11,11 @@ public:
      * @param filename receives the spritesheet path.
      **/
     Tilemap(const char *filename);
+
+    /**
+     * Starts Tilemap.
+     **/
+    Tilemap();
 
     /**
      * Starts Tilemap.
