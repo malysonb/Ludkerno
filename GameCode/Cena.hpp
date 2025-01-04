@@ -4,7 +4,7 @@
 #include "Generator.hpp"
 #include "Input.hpp"
 
-class cena : public Scene
+class Cena : public Scene
 {
 private:
 public:
