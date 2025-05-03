@@ -1,4 +1,5 @@
 #include "../include/Debug.hpp"
+#include <sstream>
 
 void Debug::log(const char *message, Level level = Debug::INFO)
 {
@@ -56,4 +57,26 @@ void Debug::log(std::string message)
 {
     if (IN_DEBUG == 1)
         std::cout << "INFO: " << message << std::endl;
+}
+
+template <typename T>
+void Debug::log(T message, Level level)
+{
+    if (IN_DEBUG == 1)
+    {
+        std::ostringstream oss;
+        oss << message;
+        log(oss.str(), level);
+    }
+}
+
+template <typename T>
+void Debug::log(T message)
+{
+    if (IN_DEBUG == 1)
+    {
+        std::ostringstream oss;
+        oss << message;
+        log(oss.str(), Debug::INFO);
+    }
 }

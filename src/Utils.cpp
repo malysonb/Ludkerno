@@ -17,3 +17,8 @@ int Utils::Rand(int min, int max)
     srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
     return rand() % (max - min) + min;
 }
+
+float Utils::Lerp(float start, float end, float percent)
+{
+    return start + (end - start) * percent;
+}

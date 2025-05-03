@@ -5,16 +5,30 @@
  * ONBOARD COMPOENT!!
  */
 #include "../Component.hpp"
+#include "../Vector2.hpp"
 
 class Collider : public Component
 {
 private:
-public:
     SDL_Rect *m_BoxCollider;
     Component *LastCollider = nullptr;
-    bool isColliding = false;
     int ID;
-    int L = 0, R = 0, T = 0, B = 0;
+    
+public:
+    bool isColliding = false;
+    float L, R, T, B;
+    Vector2 colDirection; // Direção da colisão
+
+    // Constructor to initialize Collider with bounds
+    Collider(){
+        L = 0;
+        R = 0;
+        T = 0;
+        B = 0;
+    }
+
+    Collider(float left, float right, float top, float bottom)
+        : L(left), R(right), T(top), B(bottom) {}
 
     void Init();
     void Update();

@@ -21,7 +21,7 @@ public:
         if (m_currenttime > m_lasttime + (WaitTime * 1/Ludkerno::FrameRate))
         {
             Entity *cactus = EntityMngr::GetInstance()->Add();
-            cactus->transform->SetScreenPosition(Ludkerno::screen.DynamicHPosition(101), Ludkerno::screen.DynamicVPosition(50));
+            cactus->transform->SetToScreenPosition(Ludkerno::screen.DynamicHPosition(101), Ludkerno::screen.DynamicVPosition(50));
             cactus->AddComponent<Cactus>(cactus);
             cactus->getComponent<Cactus>()->Init();
             cactus->AddComponent<Collider>(cactus);

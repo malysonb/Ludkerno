@@ -1,6 +1,8 @@
 #include "../include/EntityMNGR.hpp"
 #include "../include/Entity.hpp"
 #include <vector>
+#include <iostream>
+#include <string>
 
 Obj::Obj(int ID)
 {
@@ -43,6 +45,8 @@ Entity *EntityMngr::Add()
     SceneEntities.push_back(temp);
     Length++;
     IDs++;
+    std::string a = "Added a new entity! ID: " + std::to_string(temp->object->ID);
+    Debug::log(a, Debug::INFO);
     return temp->object;
 }
 

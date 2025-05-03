@@ -31,7 +31,7 @@ SDL_Renderer *Ludkerno::renderer = nullptr;
 SDL_Event Ludkerno::Event;
 Key Ludkerno::key;
 Camera *Ludkerno::camera = nullptr;
-Vector2 Ludkerno::matrix;
+Vector2 Ludkerno::matrix; // Representa o ponto zero do mundo.
 Vector2 Ludkerno::camVelocity;
 Vector2 Ludkerno::WindowSize;
 Screen Ludkerno::screen;
@@ -133,28 +133,6 @@ void Ludkerno::HandleEvents()
     case SDL_QUIT:
         Running_ = false;
         break;
-    case SDL_MOUSEBUTTONDOWN:
-        switch (Event.button.button)
-        {
-        case SDL_BUTTON_LEFT:
-            key.keycode.LEFT_CLICK = true;
-            break;
-        case SDL_BUTTON_RIGHT:
-            key.keycode.RIGHT_CLICK = true;
-            break;
-        }
-        break;
-    case SDL_MOUSEBUTTONUP:
-        switch (Event.button.button)
-        {
-        case SDL_BUTTON_LEFT:
-            key.keycode.LEFT_CLICK = false;
-            break;
-        case SDL_BUTTON_RIGHT:
-            key.keycode.RIGHT_CLICK = false;
-            break;
-        }
-        break;
     default:
         break;
     }
@@ -176,21 +154,18 @@ void Ludkerno::Update()
         ActualScene->Setup();
         notStarted = false;
     }
-    matrix = matrix - camera->relativeVelocity;
+    collisionSystem.UpdateWithTiles(ActualScene->layers[0]);
     ActualScene->Update();
     camera->Update();
-    camVelocity = camera->relativeVelocity;
+    matrix = -camera->GetCameraPos(); // Ajustar a matriz para o deslocamento correto
     EntityMngr::GetInstance()->Update();
-    collisionSystem.Update();
+    //collisionSystem.Update();
 }
 
 void Ludkerno::Render()
 {
     //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-    /*if (ActualScene != nullptr)
-        ActualScene->DrawMap();
-    EntityManager.Render();*/
     RenderPipeline::GetInstance()->Render();
     SDL_RenderPresent(renderer);
 }

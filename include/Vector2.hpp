@@ -8,7 +8,7 @@
 
 struct Vector2
 {
-    enum Vector{ AX, AY };
+    enum Vector{ AX, AY }; // Eixos X e Y
 
     float X = 0, Y = 0;
 
@@ -25,6 +25,10 @@ struct Vector2
 
     Vector2 operator+(Vector2& vector2);
     Vector2 operator+(Vector2* vector2);
+    Vector2 operator+(const Vector2 &other) const;
+    Vector2 operator+=(Vector2& vector2);
+    Vector2 operator+=(Vector2* vector2);
+    Vector2 operator+=(const Vector2 &other) const;
     Vector2 operator-(Vector2& vector2);
     Vector2 operator-(Vector2* vector2);
     Vector2 operator/(Vector2& vector2);
@@ -37,5 +41,8 @@ struct Vector2
     bool operator>=(Vector2& vector2);
     bool operator<=(Vector2& vector2);
 
+    Vector2 operator-(); // Declaração do operador unário
+
     static Vector2 Identity;
+    static Vector2 Zero; // Adicionado vetor estático Zero
 };

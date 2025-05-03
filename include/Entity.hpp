@@ -16,12 +16,17 @@ public:
     Entity();
     ~Entity();
 
+    bool debug = false;
+
     void Update();
     void Render();
 
     void SetSprite(const char *TexturePath, int s_x, int s_y, int n_ofAnimations);
     void SetSprite(Sprite sprite);
     void SetPosition(float x, float y);
+    Vector2 GetSpriteSize();
+    
+    void debugEntity();
 
     template <typename newComp>
     void AddComponent(Entity *Owner = nullptr)
@@ -62,6 +67,8 @@ public:
         return nullptr;
     }
     Sprite *GetSprite();
+
+    std::string toString();
 
     Transform *transform = nullptr;
     int ID;

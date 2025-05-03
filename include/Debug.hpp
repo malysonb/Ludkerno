@@ -20,4 +20,8 @@ class Debug
     static void log(const char* m, Level level);
     static void log(std::string m, Level level);
     static void log(std::string m);
+    template <typename T>
+    static void log(T m, Level level);
+    template <typename T>
+    static void log(T m);
 };

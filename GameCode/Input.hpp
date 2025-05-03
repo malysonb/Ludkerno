@@ -30,7 +30,7 @@ public:
             able = true;
             onTop = false;
             PF->isOnGround = true;
-            transform->SetScreenPosition(static_cast<int>(transform->GetScreenPosition().X), Ludkerno::screen.DynamicVPosition(50));
+            transform->SetToScreenPosition(static_cast<int>(transform->GetScreenPosition().X), Ludkerno::screen.DynamicVPosition(50));
         }
         else
         {

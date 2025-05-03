@@ -14,10 +14,10 @@ public:
     void Setup()
     {
         Player = EntityMngr::GetInstance()->Add();
-        Player->SetSprite(".\\Assets\\dino.png", 16, 16, 1);
+        Player->SetSprite("./Assets/dino.png", 16, 16, 1);
         Player->GetSprite()->SetupAnimation(0, 1, 100);
         Player->GetSprite()->OriginPoint = {8, 16};
-        Player->transform->SetScreenPosition(Ludkerno::screen.DynamicHPosition(15), Ludkerno::screen.DynamicVPosition(50));
+        Player->transform->SetToScreenPosition(Ludkerno::screen.DynamicHPosition(15), Ludkerno::screen.DynamicVPosition(50));
         Player->AddComponent<PlatformPhysics>(Player);
         Player->getComponent<PlatformPhysics>()->Init();
         Player->AddComponent<Input>(Player);

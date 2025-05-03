@@ -9,10 +9,9 @@ private:
     /* data */
 public:
     std::string toString(){
-        Object *o = this;
-        unsigned int pointer = (intptr_t) &o;
+        uintptr_t pointer = reinterpret_cast<uintptr_t>(this);
         std::stringstream name;
-        name << typeid(this).name() << "@" << std::to_string(pointer);
+        name << typeid(*this).name() << "@" << "0x" << std::hex << pointer;
         return name.str();
     }
 };

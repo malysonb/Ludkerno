@@ -8,6 +8,7 @@ public:
     bool isGrounded = false;
     int PowerJump = -150;
 
+    // Constructor
     void Init()
     {
         Active = true;
@@ -16,81 +17,75 @@ public:
         Base->getComponent<PlatformPhysics>()->isOnGround = false;
         Base->getComponent<PlatformPhysics>()->mass = 5;
     }
+    // Loop Update
     void Update()
     {
+        PlatformPhysics *phys = Base->getComponent<PlatformPhysics>();
+        Collider *col = Base->getComponent<Collider>();
+        // Movimentação horizontal
         if (Ludkerno::key.keycode.RIGHT || Ludkerno::key.keycode.LEFT)
         {
-            if (Base->GetSprite()->getCurrentAnim() == 0)
+            if (Base->GetSprite()->getCurrentAnim() != 1 && phys->isOnGround)
             {
-                Base->GetSprite()->SetAnimation(1);
+                Base->GetSprite()->SetAnimation(1); // Andando
+            }else if(Base->GetSprite()->getCurrentAnim() != 2 && !phys->isOnGround){
+                Base->GetSprite()->SetAnimation(2); // Idle no ar
             }
             if (Ludkerno::key.keycode.LEFT && !Ludkerno::key.keycode.RIGHT)
             {
-                Base->GetSprite()->flipHorizontally(true);
-                Base->transform->velocity.X = -2 * Ludkerno::DeltaTime;
+                if(col->colDirection.X == 0)
+                    phys->AccelX += -.2f * Ludkerno::DeltaTime; // Aumenta a aceleração
             }
             if (Ludkerno::key.keycode.RIGHT && !Ludkerno::key.keycode.LEFT)
             {
+                if(col->colDirection.X == 0)
+                    phys->AccelX += .2f * Ludkerno::DeltaTime; // Aumenta a aceleração
+            }
+            if(phys->AccelX > 0){
                 Base->GetSprite()->flipHorizontally(false);
-                Base->transform->velocity.X = 2 * Ludkerno::DeltaTime;
+            }
+            if(phys->AccelX < 0){
+                Base->GetSprite()->flipHorizontally(true);
             }
         }
         else
         {
-            if (Base->GetSprite()->getCurrentAnim() == 1)
-            {
-                Base->GetSprite()->SetAnimation(0);
-            }
-            Base->transform->velocity.X = 0;
-        }
-        if (Ludkerno::key.keycode.UP && isGrounded)
-        {
-            Base->getComponent<PlatformPhysics>()->ApplyForce(-3, Vector2::AY);
-            isGrounded = false;
-            //Base->getComponent<PlatformPhysics>()->isOnGround = false;
-        }
-        if (Base->transform->GetScreenPosition().Y >= Ludkerno::screen.DynamicVPosition(100))
-        {
-            isGrounded = true;
-            Base->getComponent<PlatformPhysics>()->isOnGround = true;
-            Base->transform->velocity.Y = 0;
-            Base->transform->SetScreenPosition(static_cast<int>(Base->transform->GetScreenPosition().X), Ludkerno::screen.DynamicVPosition(100));
-        }
-        bool cap = false;
-        for (int row = 0; row < Ludkerno::GetScene()->layers[0]->rows; row++)
-        {
-            for (int col = 0; col < Ludkerno::GetScene()->layers[0]->cols; col++)
-            {
-                if (Ludkerno::GetScene()->layers[0]->map[row][col] != 4)
+            // Desaceleração horizontal
+            if(phys->isOnGround){ // Desaceleração no chão
+                if (Base->GetSprite()->getCurrentAnim() != 0)
                 {
-                    if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().X), (16 * col), (16 * col)+16))
-                    {
-                        if(Utils::IsBetween(static_cast<int>(Base->transform->GetPosition().Y-1), (16 * row), (16 * row)+16))
-                        {
-                            cap = true;
-                            isGrounded = true;
-                            Base->getComponent<PlatformPhysics>()->isOnGround = true;
-                            Base->transform->SetScreenPosition(Base->transform->GetScreenPosition().X, Base->transform->GetScreenPosition().Y - Base->transform->velocity.Y);
-                        }
-                    }
+                    Base->GetSprite()->SetAnimation(0); // Idle
                 }
+                phys->AccelX *= 0.9f;
+            }else{ // Desaceleração no ar
+                if(Base->GetSprite()->getCurrentAnim() != 2)
+                    Base->GetSprite()->SetAnimation(2); // Idle no ar
+                phys->AccelX *= 0.999f; // Aumenta a desaceleração no ar
             }
         }
-        if (!cap)
+
+        // Pulo
+        if (Ludkerno::key.keycode.UP && Base->getComponent<PlatformPhysics>()->isOnGround)
         {
-            isGrounded = false;
-            Base->getComponent<PlatformPhysics>()->isOnGround = false;
+            Base->getComponent<PlatformPhysics>()->ApplyForce(-3, Vector2::AY); // Intensidade do pulo ajustada
         }
-        if (Base->transform->velocity.X != 0)
+
+        Vector2 offset(0,-Ludkerno::screen.DynamicVPosition(20));
+        Ludkerno::camera->Follow(Base->transform, offset, 0.1f);
+
+        // Teletransporte com clique do mouse
+        if (Ludkerno::key.keycode.LEFT_CLICK)
         {
-            if(Base->transform->GetScreenPosition().X >= Ludkerno::screen.DynamicHPosition(50))
-                Ludkerno::camera->Move(Vector2::AX, Base->transform->velocity.X);
+            Base->getComponent<PlatformPhysics>()->AccelY = 0;
+            Base->transform->velocity = Vector2::Zero;
+            Base->transform->SetPosition(Ludkerno::key.keycode.MouseX - Ludkerno::matrix.X, Ludkerno::key.keycode.MouseY - Ludkerno::matrix.Y);
         }
-        else
+        if (Ludkerno::key.keycode.QUIT)
         {
-            Ludkerno::camera->Move(Vector2::AX, 0);
+            Ludkerno::StopLudkerno();
         }
     }
+    // Render
     void Render()
     {
     }

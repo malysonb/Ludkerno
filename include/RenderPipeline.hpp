@@ -14,8 +14,8 @@ public:
     //Singleton
     RenderPipeline(RenderPipeline &other) = delete;
     void operator=(RenderPipeline&) = delete;
-    static RenderPipeline* GetInstance();
-    ///////////////////////////////////////////////
+    static RenderPipeline* GetInstance(); // GetInstance
+    //Render
     void Render();
     void add2Pipeline(Object2D *obj);
     void remove(Object2D *obj);

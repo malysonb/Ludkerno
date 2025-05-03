@@ -35,8 +35,8 @@ public:
 
     void Update()
     {
-        position = position + velocity;
-        position = position - Ludkerno::camVelocity;
+        position = position + velocity; // Atualizar posição global
+        //std::cout << "Global Position: " << position.X << " " << position.Y << std::endl;
     }
 
     void Render()
@@ -50,31 +50,41 @@ public:
     {
         position.X = XA;
         position.Y = YA;
-        position = position - Ludkerno::matrix;
     }
 
     Vector2 GetPosition()
     {
-        Vector2 temp;
-        temp.X = position.X - Ludkerno::matrix.X;
-        temp.Y = position.Y - Ludkerno::matrix.Y;
-        return temp;
+        return position; // Retorna a posição global
     }
+
+    void SetPosition(Vector2 pos)
+    {
+        position.X = pos.X;
+        position.Y = pos.Y;
+    }
+
+    void SetScale(float XA, float YA)
+    {
+        scale.X = XA;
+        scale.Y = YA;
+    }
+
     Vector2 GetScreenPosition()
     {
-        return position;
+        // Calcula a posição relativa à matriz
+        return position + Ludkerno::matrix;
     }
 
-    void SetScreenPosition(int XA, int YA)
+    void SetToScreenPosition(int XA, int YA)
     {
-        position.X = static_cast<float>(XA);
-        position.Y = static_cast<float>(YA);
+        position.X = static_cast<float>(XA) + Ludkerno::matrix.X;
+        position.Y = static_cast<float>(YA) + Ludkerno::matrix.Y;
     }
 
-    void SetScreenPosition(float XA, float YA)
+    void SetToScreenPosition(float XA, float YA)
     {
-        position.X = XA;
-        position.Y = YA;
+        position.X = XA + Ludkerno::matrix.X;
+        position.Y = YA + Ludkerno::matrix.Y;
     }
 
     void SetSize(int XA, int YA)
@@ -82,4 +92,5 @@ public:
         scale.X = static_cast<float>(XA);
         scale.Y = static_cast<float>(YA);
     }
+
 };

@@ -63,6 +63,26 @@ Vector2 Vector2::operator+(Vector2 *vector2)
     result.Y = this->Y + vector2->Y;
     return result;
 }
+Vector2 Vector2::operator+(const Vector2 &other) const
+{
+    return Vector2(X + other.X, Y + other.Y);
+}
+Vector2 Vector2::operator+=(Vector2 &vector2)
+{
+    this->X += vector2.X;
+    this->Y += vector2.Y;
+    return *this;
+}
+Vector2 Vector2::operator+=(Vector2 *vector2)
+{
+    this->X += vector2->X;
+    this->Y += vector2->Y;
+    return *this;
+}
+Vector2 Vector2::operator+=(const Vector2 &other) const
+{
+    return Vector2(X + other.X, Y + other.Y);
+}
 Vector2 Vector2::operator-(Vector2 &vector2)
 {
     Vector2 result;
@@ -102,6 +122,10 @@ void Vector2::operator-=(Vector2 &vector2)
 {
     this->X -= vector2.X;
     this->Y -= vector2.Y;
+}
+
+Vector2 Vector2::operator-() {
+    return Vector2(-this->X, -this->Y); // Inverter os sinais de X e Y
 }
 
 bool Vector2::operator==(Vector2 &vector2)
@@ -152,3 +176,5 @@ bool Vector2::operator<=(Vector2 &vector2)
     else
         return false;
 }
+
+Vector2 Vector2::Zero = Vector2(0, 0); // Definição do vetor estático Zero

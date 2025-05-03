@@ -41,6 +41,11 @@ public:
      */
     void SetTilemap(const char *filename, int sheets_H, int sheets_V, int tile_X = 32, int tile_Y = 32);
 
+    Tilemap* GetTilemap()
+    {
+        return m_tile;
+    }
+
     /**
      * @brief Set the Parallax value
      * 

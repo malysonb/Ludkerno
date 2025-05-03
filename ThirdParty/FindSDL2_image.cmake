@@ -1,7 +1,0 @@
-if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    set(SDL2_image_INCLUDE_DIRS ${thirdparty}/x86/include/SDL2)
-    set(SDL2_image_LIBRARIES ${thirdparty}/x86/lib/libSDL2_image.a)
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(SDL2_image_INCLUDE_DIRS ${thirdparty}/x64/include/SDL2)
-    set(SDL2_image_LIBRARIES ${thirdparty}/x64/lib/libSDL2_image.a)
-endif()
