@@ -101,7 +101,8 @@ void CollisionSystem::UpdateWithTiles(TileLayer *tileLayer)
         }
 
         // Verifica colisão com tiles
-        CheckCollisionWithTiles(entities[x]->object, tileLayer);
+        if(tileLayer != nullptr)
+            CheckCollisionWithTiles(entities[x]->object, tileLayer);
     }
 }
 /**

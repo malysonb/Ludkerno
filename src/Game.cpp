@@ -154,7 +154,12 @@ void Ludkerno::Update()
         ActualScene->Setup();
         notStarted = false;
     }
-    collisionSystem.UpdateWithTiles(ActualScene->layers[0]);
+    if(ActualScene->GetLayerCount() > 0)
+    {
+        collisionSystem.UpdateWithTiles(ActualScene->layers[0]);
+    }else{
+        collisionSystem.UpdateWithTiles(nullptr);
+    }
     ActualScene->Update();
     camera->Update();
     matrix = -camera->GetCameraPos(); // Ajustar a matriz para o deslocamento correto

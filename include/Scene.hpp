@@ -22,6 +22,11 @@ class Scene
 
     virtual void Update() = 0;
 
+    int GetLayerCount()
+    {
+        return layers.size();
+    }
+
     /**
      * @brief Load a map buffer to the Layer
      * 

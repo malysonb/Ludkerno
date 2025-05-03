@@ -1,6 +1,6 @@
 #pragma once
 
-#define VERSION "v0.6.0 Alpha"
+#define VERSION "v0.7.0 Alpha"
 #ifdef SDL_Path
 #include SDL_Path
 #else
