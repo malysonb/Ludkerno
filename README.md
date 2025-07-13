@@ -22,3 +22,4 @@ This source code comes with a little demo game:
 
 [Play online!](https://ludkerno-alii.netlify.app/) the platformer Example.
 ![alii!](/GameCode/Splash/platformer.png)
+![aliiDebug](/GameCode/Splash/debug.png)

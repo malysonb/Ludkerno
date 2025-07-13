@@ -127,15 +127,15 @@ void Entity::debugEntity(){
     getComponent<Text>()->Init("Debug Info", Vector2(0, 0), 8);
     std::stringstream debugStream;
     debugStream << "ID: " << ID << std::endl;
-    debugStream << "Tipo: " << typeid(*this).name() << std::endl;
-    debugStream << "Posição na tela: " << transform->GetScreenPosition().X << " " << transform->GetScreenPosition().Y << std::endl;
-    debugStream << "Posição Global: " << transform->position.X << " " << transform->position.Y << std::endl;
-    debugStream << "Velocidade: " << transform->velocity.X << " " << transform->velocity.Y << std::endl;
+    debugStream << "Type: " << typeid(*this).name() << std::endl;
+    debugStream << "Pos on screen: " << transform->GetScreenPosition().X << " " << transform->GetScreenPosition().Y << std::endl;
+    debugStream << "Pos on world: " << transform->position.X << " " << transform->position.Y << std::endl;
+    debugStream << "Velocity: " << transform->velocity.X << " " << transform->velocity.Y << std::endl;
     debugStream << "Camera: " << Ludkerno::camera->GetCameraPos().X << " " << Ludkerno::camera->GetCameraPos().Y << std::endl;
     debugStream << "Matrix: " << Ludkerno::matrix.X << " " << Ludkerno::matrix.Y << std::endl;
     debugStream << "Sprite size: " << m_mySprite->srcRect.w * transform->scale.X << " " << m_mySprite->srcRect.h * transform->scale.Y << std::endl;
-    debugStream << "Mouse na tela: " << Ludkerno::key.keycode.MouseX << " " << Ludkerno::key.keycode.MouseY << std::endl;
-    debugStream << "Mouse Global: " << Ludkerno::key.keycode.MouseX - Ludkerno::matrix.X << " " << Ludkerno::key.keycode.MouseY - Ludkerno::matrix.Y << std::endl;
+    debugStream << "Mouse on screen: " << Ludkerno::key.keycode.MouseX << " " << Ludkerno::key.keycode.MouseY << std::endl;
+    debugStream << "Mouse on world: " << Ludkerno::key.keycode.MouseX - Ludkerno::matrix.X << " " << Ludkerno::key.keycode.MouseY - Ludkerno::matrix.Y << std::endl;
     if (getComponent<Collider>() != nullptr && getComponent<Collider>()->isColliding)
     {
         debugStream << "colDirection: " << getComponent<Collider>()->colDirection.X << " " << getComponent<Collider>()->colDirection.Y << std::endl;
