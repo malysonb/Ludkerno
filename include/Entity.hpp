@@ -13,7 +13,7 @@
 class Entity : public Object2D
 {
 public:
-    Entity();
+    Entity(int id);
     ~Entity();
 
     bool debug = false;
@@ -25,12 +25,17 @@ public:
     void SetSprite(Sprite sprite);
     void SetPosition(float x, float y);
     Vector2 GetSpriteSize();
-    
+    int GetID() const { return ID; }
+
     void debugEntity();
 
     template <typename newComp>
     void AddComponent(Entity *Owner = nullptr)
     {
+        if(Owner == nullptr)
+        {
+            Owner = this;
+        }
         if (std::is_base_of<Component, newComp>::value)
         {
             if (m_NumComponents < m_MaxComponents)
@@ -38,8 +43,10 @@ public:
                 Component *temp = new newComp();
                 temp->Base = Owner;
                 myComponents[m_NumComponents] = temp;
-                //Debug::log("Added a new component!", Debug::INFO);
+                int initId = m_NumComponents;
                 m_NumComponents++;
+                myComponents[initId]->Init();
+                //Debug::log("Added a new component!", Debug::INFO);
             }
             else
             {
@@ -71,7 +78,6 @@ public:
     std::string toString();
 
     Transform *transform = nullptr;
-    int ID;
 
 private:
     Sprite *m_mySprite;
@@ -80,5 +86,6 @@ private:
     int m_NumComponents = 0;
     int xPos = 0;
     int yPos = 0;
+    int ID;
     SDL_Point *m_Origin;
 };

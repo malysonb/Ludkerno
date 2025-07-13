@@ -1,4 +1,4 @@
-#include "../include/Vector2.hpp"
+#include "Vector2.hpp"
 #include <cmath>
 
 float X = 0, Y = 0;

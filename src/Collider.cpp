@@ -1,5 +1,5 @@
-#include "../include/Components/Collider.hpp"
-#include "../include/Entity.hpp"
+#include "Components/Physics/Collider.hpp"
+#include "Entity.hpp"
 
 void Collider::Init()
 {
@@ -17,7 +17,7 @@ void Collider::Init()
     }
     else
     {
-        Debug::log("you can't to initialize an active component!", Debug::WARN);
+        Debug::log("you can't to initialize an active component!", Debug::ERROR);
     }
 }
 

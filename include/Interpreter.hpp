@@ -2,14 +2,14 @@
 #include "../Ludkerno.hpp"
 #include "RadiPako.hpp"
 /*#ifdef MSVCcompiler
-#include "../include/RadiPako.h"
+#include "RadiPako.h"
 #elif GCCcompiler
 extern "C"
 {
-    #include "../include/RadiPako.h"
+    #include "RadiPako.h"
 }
 #else
-#include "../include/RadiPako.h"
+#include "RadiPako.h"
 #endif*/
 #include <string.h>
 

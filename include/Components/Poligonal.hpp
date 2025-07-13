@@ -38,6 +38,11 @@ public:
         }
     }
 
+    void Init() override
+    {
+        Active = true;
+    }
+
     void Update()
     {
     }

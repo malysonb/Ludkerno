@@ -1,10 +1,11 @@
-#include "../include/Ludkerno.hpp"
-#include "../include/Entity.hpp"
-#include "../include/Components/Collider.hpp"
-#include "../include/RenderPipeline.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Object2D.hpp"
-#include "../include/Key.hpp" // Ensure the definition of Key is included
+#include "Ludkerno.hpp"
+#include "Entity.hpp"
+#include "Components/Physics/Collider.hpp"
+#include "System/RenderPipeline.hpp"
+#include "Camera.hpp"
+#include "Object2D.hpp"
+#include "Key.hpp" // Ensure the definition of Key is included
+#include "Components/Text.hpp"
 
 //Sprite *sprite;
 
@@ -14,8 +15,9 @@
  * @param Size_x or @param Size_y default size of the sprite.
  * @param n_ofAnimations number of rows in the spritesheet.
  */
-Entity::Entity()
+Entity::Entity(int id)
 {
+    ID = id;
     transform = new Transform();
     m_mySprite = nullptr;
     m_Origin = nullptr;
@@ -115,24 +117,36 @@ Vector2 Entity::GetSpriteSize(){
 }
 
 void Entity::debugEntity(){
-    std::system("clear");
-    std::cout << "Posição na tela: " << transform->GetScreenPosition().X << " " << transform->GetScreenPosition().Y << std::endl;
-    std::cout << "Posição Global: " << transform->position.X << " " << transform->position.Y << std::endl;
-    std::cout << "Velocidade: " << transform->velocity.X << " " << transform->velocity.Y << std::endl;
-    std::cout << "Camera:" << Ludkerno::camera->GetCameraPos().X << " " << Ludkerno::camera->GetCameraPos().Y << std::endl;
-    std::cout << "Matrix: " << Ludkerno::matrix.X << " " << Ludkerno::matrix.Y << std::endl;
-    std::cout << "Sprite size: " << m_mySprite->srcRect.w * transform->scale.X << " " << m_mySprite->srcRect.h * transform->scale.Y << std::endl;
-    std::cout << "Mouse na tela: " << Ludkerno::key.keycode.MouseX << " " << Ludkerno::key.keycode.MouseY << std::endl;
-    std::cout << "Mouse Global: " << Ludkerno::key.keycode.MouseX - Ludkerno::matrix.X << " " << Ludkerno::key.keycode.MouseY - Ludkerno::matrix.Y << std::endl;
+    system("clear"); // For Linux and macOS
+    // system("cls"); // Uncomment this line for Windows
+    if(getComponent<Text>() == nullptr)
+        // If the Text component is not already added, add it
+        // This avoids adding multiple Text components on each update
+        // which would lead to memory leaks and performance issues.
+        AddComponent<Text>(this);
+    getComponent<Text>()->Init("Debug Info", Vector2(0, 0), 8);
+    std::stringstream debugStream;
+    debugStream << "ID: " << ID << std::endl;
+    debugStream << "Tipo: " << typeid(*this).name() << std::endl;
+    debugStream << "Posição na tela: " << transform->GetScreenPosition().X << " " << transform->GetScreenPosition().Y << std::endl;
+    debugStream << "Posição Global: " << transform->position.X << " " << transform->position.Y << std::endl;
+    debugStream << "Velocidade: " << transform->velocity.X << " " << transform->velocity.Y << std::endl;
+    debugStream << "Camera: " << Ludkerno::camera->GetCameraPos().X << " " << Ludkerno::camera->GetCameraPos().Y << std::endl;
+    debugStream << "Matrix: " << Ludkerno::matrix.X << " " << Ludkerno::matrix.Y << std::endl;
+    debugStream << "Sprite size: " << m_mySprite->srcRect.w * transform->scale.X << " " << m_mySprite->srcRect.h * transform->scale.Y << std::endl;
+    debugStream << "Mouse na tela: " << Ludkerno::key.keycode.MouseX << " " << Ludkerno::key.keycode.MouseY << std::endl;
+    debugStream << "Mouse Global: " << Ludkerno::key.keycode.MouseX - Ludkerno::matrix.X << " " << Ludkerno::key.keycode.MouseY - Ludkerno::matrix.Y << std::endl;
     if (getComponent<Collider>() != nullptr && getComponent<Collider>()->isColliding)
     {
-        std::cout << "colDirection: " << getComponent<Collider>()->colDirection.X << " " << getComponent<Collider>()->colDirection.Y << std::endl;
+        debugStream << "colDirection: " << getComponent<Collider>()->colDirection.X << " " << getComponent<Collider>()->colDirection.Y << std::endl;
     }
     for (int i = 0; i < m_NumComponents; i++)
     {
         if (myComponents[i]->Active)
-            std::cout << myComponents[i]->GetName() << std::endl;
+            debugStream << myComponents[i]->GetName() << std::endl;
     }
+    getComponent<Text>()->SetText(debugStream.str());
+    //getComponent<Text>()->SetText("Posição na tela: " + std::to_string(transform->GetScreenPosition().X) + " " + std::to_string(transform->GetScreenPosition().Y));
 }
 
 std::string Entity::toString() {

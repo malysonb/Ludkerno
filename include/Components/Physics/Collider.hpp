@@ -2,10 +2,10 @@
 /**
  * @author Malyson Breno de Souza
  * @version 1.0
- * ONBOARD COMPOENT!!
+ * ONBOARD COMPONENT!!
  */
-#include "../Component.hpp"
-#include "../Vector2.hpp"
+#include "Component.hpp"
+#include "Vector2.hpp"
 
 class Collider : public Component
 {

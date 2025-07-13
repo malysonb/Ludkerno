@@ -1,8 +1,8 @@
-#include "../include/Ludkerno.hpp"
-#include "../include/TileLayer.hpp"
-#include "../include/Tilemap.hpp"
-#include "../include/Camera.hpp"
-#include "../include/TextureMngr.hpp"
+#include "Ludkerno.hpp"
+#include "TileLayer.hpp"
+#include "Tilemap.hpp"
+#include "Camera.hpp"
+#include "System/TextureMngr.hpp"
 
 void TileLayer::SetTilemap(const char *filename, int sheets_H, int sheets_V, int tile_X, int tile_Y)
 {

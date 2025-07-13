@@ -1,5 +1,5 @@
-#include "../include/TextureMngr.hpp"
-#include "../include/Debug.hpp"
+#include "System/TextureMngr.hpp"
+#include "System/Debug.hpp"
 #include <sstream>
 
 #include "../RadiPako/include/RadiPako.hpp"

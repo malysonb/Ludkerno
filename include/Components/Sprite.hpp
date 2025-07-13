@@ -5,11 +5,11 @@
  * @date 23/07/2020
  * "This is my favorite code."
  */
-#include "../Ludkerno.hpp"
-#include "../Component.hpp"
-#include "../TextureMngr.hpp"
-#include "../Vector2.hpp"
-#include "../Transform.hpp"
+#include "Ludkerno.hpp"
+#include "Component.hpp"
+#include "System/TextureMngr.hpp"
+#include "Vector2.hpp"
+#include "Transform.hpp"
 
 /**
  * @brief 
@@ -45,6 +45,11 @@ public:
     void SetupAnimation(int animIndex, int finalFrame, int speed);
 
     void Init(const char *texturePath, int Size_x, int Size_y, int n_ofAnimations);
+
+    void Init() override
+    {
+        Active = true;
+    }
 
     void SetOrigin(int x, int y);
 

@@ -2,21 +2,22 @@
 #include <time.h>
 #include <string>
 #include <chrono>
-#include "../include/Ludkerno.hpp"
-#include "../include/Debug.hpp"
-#include "../include/Scene.hpp"
-#include "../include/Entity.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Key.hpp"
-#include "../include/EntityMNGR.hpp"
-#include "../include/ComponentList.hpp"
-#include "../include/Screen.hpp"
-#include "../include/CollisionSystem.hpp"
-#include "../include/SceneMngr.hpp"
-#include "../include/RenderPipeline.hpp"
+#include "Ludkerno.hpp"
+#include "System/Debug.hpp"
+#include "Scene.hpp"
+#include "Entity.hpp"
+#include "Camera.hpp"
+#include "Key.hpp"
+#include "System/EntityMNGR.hpp"
+#include "ComponentList.hpp"
+#include "Screen.hpp"
+#include "System/CollisionSystem.hpp"
+#include "System/SceneMngr.hpp"
+#include "System/RenderPipeline.hpp"
 
+//target FPS
 const int FPS = 60;
-const int frameDelay = 1000 / FPS;
+int frameDelay = 1000 / FPS;
 Uint32 frameStart;
 int frameTime = SDL_GetTicks();
 
@@ -79,6 +80,12 @@ void Ludkerno::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
     {
         instance_ = new Ludkerno();
     }
+    if(SceneMngr::GetInstance()->sceneVector.size() == 0)
+    {
+        Debug::log("No Scene was Loaded!", Debug::ERROR);
+        Running_ = false;
+        return;
+    }
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) == 0)
     {
         Debug::log("Subsystem initialized", Debug::INFO);
@@ -88,7 +95,7 @@ void Ludkerno::EngineInit(const char *title, int Wx, int Wy, int Lx, int Ly)
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         //SDL_RenderSetScale(renderer, 2, 2);
         SDL_RenderSetLogicalSize(renderer, Lx, Ly);
-        WindowSize = {426, 240};
+        WindowSize = {(float)Lx, (float)Ly};
         //SDL_SetMainReady();
         if (window)
         {
@@ -140,7 +147,9 @@ void Ludkerno::HandleEvents()
 
 void Ludkerno::Update()
 {
-    DeltaTime = 30 / FrameRate <= 1 ? 1 : 30 / FrameRate;
+    DeltaTime = 60 / FrameRate <= 1 ? 1 : 60 / FrameRate;
+    //std::string title = "Ludkerno - FPS: " + std::to_string(static_cast<int>(FrameRate)) + " - DeltaTime: " + std::to_string(DeltaTime);
+    //Debug::log(title, Debug::INFO);
     if (ActualScene == nullptr)
     {
         Debug::log("No scene loaded!", Debug::Level::ERROR);
@@ -201,13 +210,24 @@ void Ludkerno::Loop()
             instance_->Update();
             instance_->Render();
             frameTime = SDL_GetTicks() - frameStart;
-            Ludkerno::FrameRate = frameTime != 0 ? 1000 / (frameDelay + frameTime) : Ludkerno::FrameRate;
+            frameDelay = (1000 / FPS) - frameTime;
+            if (frameDelay > 0) {
+                SDL_Delay(frameDelay);
+            }
+            if (frameTime + frameDelay > 0) {
+                Ludkerno::FrameRate = 1000.0f / (frameTime + frameDelay);
+            } else {
+                Ludkerno::FrameRate = 0; // Ou algum valor padrão
+            }
             Ludkerno::FrameRate == 0 ? Ludkerno::FrameRate++ : Ludkerno::FrameRate;
+            //std::string fpsMessage = "FPS: " + std::to_string(static_cast<int>(Ludkerno::FrameRate));
+            //Debug::log(fpsMessage, Debug::INFO);
         }
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        Debug::log("An error occurred during the game loop: " + std::string(e.what()), Debug::ERROR);
     }
 }
 

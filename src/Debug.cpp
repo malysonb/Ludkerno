@@ -1,4 +1,4 @@
-#include "../include/Debug.hpp"
+#include "System/Debug.hpp"
 #include <sstream>
 
 void Debug::log(const char *message, Level level = Debug::INFO)

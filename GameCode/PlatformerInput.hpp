@@ -1,6 +1,6 @@
 #pragma once
 #include "../LudkernoLib.hpp"
-#include "../include/Utils.hpp"
+#include "Utils.hpp"
 
 class PlatformerInput : public Component
 {
@@ -12,10 +12,13 @@ public:
     void Init()
     {
         Active = true;
-        Base->AddComponent<PlatformPhysics>(Base);
-        Base->getComponent<PlatformPhysics>()->Init();
-        Base->getComponent<PlatformPhysics>()->isOnGround = false;
-        Base->getComponent<PlatformPhysics>()->mass = 5;
+        if(Base->getComponent<PlatformPhysics>() == nullptr)
+        {
+            Base->AddComponent<PlatformPhysics>();
+            //Base->getComponent<PlatformPhysics>()->Init();
+            Base->getComponent<PlatformPhysics>()->isOnGround = false;
+            Base->getComponent<PlatformPhysics>()->mass = 5;
+        }
     }
     // Loop Update
     void Update()

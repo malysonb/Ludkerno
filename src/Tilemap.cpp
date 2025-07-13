@@ -1,5 +1,5 @@
-#include "../include/Tilemap.hpp"
-#include "../include/TextureMngr.hpp"
+#include "Tilemap.hpp"
+#include "System/TextureMngr.hpp"
 
 #ifdef Release
     bool release_v = true;

@@ -1,11 +1,11 @@
-#include "../include/Ludkerno.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Scene.hpp"
-#include "../include/TextureMngr.hpp"
-#include "../include/Tilemap.hpp"
-#include "../include/TileLayer.hpp"
-#include "../include/RenderPipeline.hpp"
-#include "../include/Object2D.hpp"
+#include "Ludkerno.hpp"
+#include "Camera.hpp"
+#include "Scene.hpp"
+#include "System/TextureMngr.hpp"
+#include "Tilemap.hpp"
+#include "TileLayer.hpp"
+#include "System/RenderPipeline.hpp"
+#include "Object2D.hpp"
 
 Scene::Scene()
 {

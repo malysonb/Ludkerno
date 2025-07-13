@@ -1,5 +1,5 @@
-#include "../include/Components/Sprite.hpp"
-#include "../include/Entity.hpp"
+#include "Components/Sprite.hpp"
+#include "Entity.hpp"
 
 void Sprite::LoadSpritesheet(SDL_Texture *newSprite)
 {

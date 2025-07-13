@@ -32,7 +32,7 @@ public:
         SDL_SetRenderDrawColor(Ludkerno::renderer, 255, 255, 255, 255);
         if(Ludkerno::key.keycode.LEFT_CLICK)
         {
-            std::cout << isoTile->getComponent<Poligonal>()->isInside(&mousePos);
+            std::cout << isoTile->getComponent<Poligonal>()->isInside(&mousePos) << std::endl;
         }
     }
 };

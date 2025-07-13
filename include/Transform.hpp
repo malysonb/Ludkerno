@@ -31,6 +31,11 @@ public:
         
     }
 
+    void Init() override
+    {
+        Active = true;
+    }
+
     Vector2 position, scale, velocity, Acceleration;
 
     void Update()

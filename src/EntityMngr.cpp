@@ -1,13 +1,12 @@
-#include "../include/EntityMNGR.hpp"
-#include "../include/Entity.hpp"
+#include "System/EntityMNGR.hpp"
+#include "Entity.hpp"
 #include <vector>
 #include <iostream>
 #include <string>
 
 Obj::Obj(int ID)
 {
-    object = new Entity();
-    object->ID = ID;
+    object = new Entity(ID);
 }
 Obj::~Obj()
 {
@@ -45,7 +44,7 @@ Entity *EntityMngr::Add()
     SceneEntities.push_back(temp);
     Length++;
     IDs++;
-    std::string a = "Added a new entity! ID: " + std::to_string(temp->object->ID);
+    std::string a = "Added a new entity! ID: " + std::to_string(temp->object->GetID());
     Debug::log(a, Debug::INFO);
     return temp->object;
 }
@@ -54,7 +53,7 @@ void EntityMngr::RemoveID(int id)
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        if (id == SceneEntities[i]->object->ID)
+        if (id == SceneEntities[i]->object->GetID())
         {
             Obj *objtemp = SceneEntities[i];
             SceneEntities.erase(SceneEntities.begin() + i);
@@ -115,7 +114,7 @@ Entity *EntityMngr::GetByID(int id)
 {
     for (int i = 0; i < static_cast<int>(SceneEntities.size()); i++)
     {
-        if (id == SceneEntities[i]->object->ID)
+        if (id == SceneEntities[i]->object->GetID())
         {
             return SceneEntities[i]->object;
         }

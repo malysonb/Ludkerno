@@ -1,6 +1,7 @@
 #pragma once
-#include "../Component.hpp"
-#include "../Entity.hpp"
+#include "Component.hpp"
+#include "Entity.hpp"
+#include "Collider.hpp"
 #include <algorithm>
 
 class PlatformPhysics : public Component
@@ -16,12 +17,18 @@ public:
 
     ~PlatformPhysics()
     {
-
+        // Destructor
+        // Cleanup if necessary
     }
 
     void Init()
     {
         Active = true;
+        if (Base->getComponent<Collider>() == nullptr)
+        {
+            Base->AddComponent<Collider>();
+            //Base->getComponent<Collider>()->Init();
+        }
     }
     void Update()
     {

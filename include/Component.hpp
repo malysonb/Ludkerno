@@ -6,7 +6,7 @@
  * Component template to you guys make your owns
  */
 #include "Ludkerno.hpp"
-#include "Debug.hpp"
+#include "System/Debug.hpp"
 
 class Entity;
 /**
@@ -14,9 +14,11 @@ class Entity;
  */
 class Component
 {
+protected:
+    Component() = default; // Protected constructor prevents direct instantiation
 public:
     bool Active = false;
-    void Init();
+    virtual void Init() = 0; // Pure virtual function to enforce initialization in derived classes
     virtual ~Component()
     {}
     virtual void Update() = 0;

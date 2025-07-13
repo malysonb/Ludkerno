@@ -1,4 +1,4 @@
-#include "../include/Object2D.hpp"
+#include "Object2D.hpp"
 
 void Object2D::setLayer(int layer)
 {

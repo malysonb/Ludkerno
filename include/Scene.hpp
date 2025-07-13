@@ -36,6 +36,12 @@ class Scene
      */
     TileLayer *CreateLayer(int sX, int sY, int *MapCode);
 
-    private:
+    void setWindowTitle(std::string title)
+    {
+        m_w_title = title;
+        SDL_SetWindowTitle(Ludkerno::window, m_w_title.c_str());
+    }
 
+    private:
+    std::string m_w_title;
 };

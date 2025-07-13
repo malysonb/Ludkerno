@@ -4,12 +4,12 @@
  * @file CollisionSystem.cpp
  * @version 2.0
  */
-#include "../include/CollisionSystem.hpp"
-#include "../include/Entity.hpp"
-#include "../include/EntityMNGR.hpp"
-#include "../include/Components/Collider.hpp"
-#include "../include/TileLayer.hpp"
-#include "../include/Object.hpp"
+#include "System/CollisionSystem.hpp"
+#include "Entity.hpp"
+#include "System/EntityMNGR.hpp"
+#include "Components/Physics/Collider.hpp"
+#include "TileLayer.hpp"
+#include "Object.hpp"
 
 void CollisionSystem::Update()
 {

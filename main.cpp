@@ -27,7 +27,7 @@ extern "C" {
       std::cout << i << " - " << argv[i] << std::endl;
     }
     // Uint32 lastframe = SDL_GetTicks();
-    SceneMngr::GetInstance()->insertScene(new Cena());
+    SceneMngr::GetInstance()->insertScene(new PlatformScene());
     Ludkerno::EngineInit("Ludkerno", 854, 480);
     if (isWeb) {
     

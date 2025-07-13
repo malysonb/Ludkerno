@@ -37,7 +37,7 @@ public:
                 {
                     if (temp->transform->GetScreenPosition().X < -16)
                     {
-                        EntityMngr::GetInstance()->RemoveID(temp->ID);
+                        EntityMngr::GetInstance()->RemoveID(temp->GetID());
                     }
                 }
             }

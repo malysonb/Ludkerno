@@ -1,8 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include "../include/RenderPipeline.hpp"
-#include "../include/Object2D.hpp"
+#include "System/RenderPipeline.hpp"
+#include "Object2D.hpp"
 
 RenderPipeline* RenderPipeline::instance_ = nullptr;
 

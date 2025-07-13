@@ -1,6 +1,6 @@
-#include "../include/SceneMngr.hpp"
-#include "../include/Ludkerno.hpp"
-#include "../include/Debug.hpp"
+#include "System/SceneMngr.hpp"
+#include "Ludkerno.hpp"
+#include "System/Debug.hpp"
 
 SceneMngr *SceneMngr::instance_ = nullptr;
 
